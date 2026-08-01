@@ -1,0 +1,42 @@
+{
+  "protocol_id": "alphaforge_native_reduced_budget_zoo30_parallel_v1_20260727",
+  "frozen_on": "2026-07-27",
+  "classification": "upstream-native reduced-budget configuration; not interchangeable with the canonical zoo_size=100 row",
+  "purpose": "obtain a faster but explicitly budget-qualified AlphaForge native baseline measurement",
+  "source_commit": "d0cfc27df23c60f271bc885fd43027b86b787746",
+  "source_manifest_sha256": "7975DBBE1FA10364F968AF816593A3D9E97080D5D5405844784D7C0202241220",
+  "market": "CSI500",
+  "train_end_year": 2020,
+  "seeds": [0, 1, 2, 3, 4],
+  "zoo_size": 30,
+  "stage1_template": "python train_AFF.py --instruments=csi500 --train_end_year=2020 --seeds=[SEED] --save_name=paper_strict_zoo30_v1 --zoo_size=30 --cuda=GPU",
+  "stage2_template": "python combine_AFF.py --instruments=csi500 --train_end_year=2020 --seeds=[SEED] --save_name=paper_strict_zoo30_v1 --n_factors=10 --window=inf --cuda=GPU",
+  "scheduling": {
+    "unit": "one unchanged upstream process per seed",
+    "parallelism": "seeds may run concurrently on isolated physical GPUs",
+    "preferred_lanes": [
+      "server 186 physical GPUs 0, 2, and 3",
+      "server 134 physical GPU 4 after preservation and termination of the superseded zoo-100 process",
+      "the fifth seed queues behind the first completed shard"
+    ],
+    "scientific_effect": "scheduling only; no within-seed parallelization or search modification"
+  },
+  "preservation": {
+    "superseded_run": "formal_native_csi500_train2020_zoo100_seeds0to4_v15",
+    "rule": "preserve all partial output and logs; do not reuse its candidates, zoo, metrics, or opened outcomes in the zoo-30 analysis"
+  },
+  "fixed_native_parameters": {
+    "corr_thresh": 0.7,
+    "ic_thresh": 0.03,
+    "icir_thresh": 0.1,
+    "generator_epochs": 200,
+    "predictor_epochs": 100,
+    "native_acceptance_logic_unchanged": true,
+    "native_search_logic_unchanged": true,
+    "native_portfolio_logic_unchanged": true
+  },
+  "truth_label": "AlphaForge native, zoo=30 reduced-budget configuration",
+  "reporting_rule": "may be reported as a budget-qualified native AlphaForge row or sensitivity panel; must not be labelled as the canonical zoo=100 result",
+  "no_overwrite": true,
+  "secret_logging_forbidden": true
+}

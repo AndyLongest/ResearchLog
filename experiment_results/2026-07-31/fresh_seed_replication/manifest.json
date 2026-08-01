@@ -1,0 +1,34 @@
+{
+  "README.md": {
+    "bytes": 1901,
+    "sha256": "885c4e822031f4d47bcb093d1b2f2e864f60391d6b144777aae5f715176dd2ee"
+  },
+  "absolute_arm_summary.csv": {
+    "bytes": 1197,
+    "sha256": "a657a7ce95a5285e78b7b87615b7c28bc4c5e284745612693ba830cce912529f"
+  },
+  "absolute_arm_summary_by_model.csv": {
+    "bytes": 1884,
+    "sha256": "5b3a887044005899f19b8beec28a83296b12557199cbe7560d8eecda4139752b"
+  },
+  "artifact_inventory.json": {
+    "bytes": 708,
+    "sha256": "3654dae97ae9b288ebc2855ec32613183e053e5dae32350bab230d3927ccd9b9"
+  },
+  "decision.json": {
+    "bytes": 566,
+    "sha256": "7d0c3b676289de9acace23837a7c0b87fcf47d92bbd9fb6d1a591813a72edba8"
+  },
+  "formal_fresh_seed_replication_v1_validation.json": {
+    "bytes": 209,
+    "sha256": "620bb6eddf557a65fda4524c3ef727e3a8e805f15a7dcb73a25a88c93e506a8f"
+  },
+  "multimarket_fresh_seed_replication_v1.yaml": {
+    "bytes": 3179,
+    "sha256": "818f33d23e4848333a5907a65d8d5a49e73de42035baa4fa996f371543bbd0b8"
+  },
+  "paired_effects.csv": {
+    "bytes": 5801,
+    "sha256": "d29724375c99498e27a89df920955efcd9344c3faafe558a03a738178b9ff192"
+  }
+}

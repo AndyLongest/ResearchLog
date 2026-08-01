@@ -1,0 +1,35 @@
+{
+  "protocol_id": "native-panels-20260731-v3-seed-scope",
+  "status": "deterministic assembly from frozen native outputs",
+  "alphaforge_truth_label": "AlphaForge native, zoo=30 reduced-budget configuration (seeds 1--3)",
+  "alphaforge_eligible_seeds": [
+    1,
+    2,
+    3
+  ],
+  "alphaforge_excluded_preserved_seeds": [
+    0,
+    4
+  ],
+  "common_operating_point": "sm20_rb10_k20_drop2; S&P500 2023-01-03 through 2024-12-30",
+  "non_computable_cells_retained": true,
+  "source_hashes": {
+    "native_gate_panel_v2": "2fc0bd62836f642b72c91d408f0519a46d0bd98e043c886c397697a14b3ce347",
+    "common_evaluator_panel_v2": "9113170c0790dafbdcd7e115490e9d6b26e374d3d4a1f8056bc487cc11e1c4c8",
+    "alphaforge_run_level": "46a2bb2ea8eb20c3b349c6efc0881f39f2af020d0e61f3e5292e2df4c946f48a"
+  },
+  "alphaforge_native_ic": {
+    "mean": 0.035,
+    "normal_95_ci": [
+      0.03273678694477667,
+      0.037263213055223336
+    ]
+  },
+  "alphaforge_native_rankic": {
+    "mean": 0.06033333333333333,
+    "normal_95_ci": [
+      0.05410093055074262,
+      0.06656573611592403
+    ]
+  }
+}
