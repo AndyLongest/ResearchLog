@@ -1,0 +1,73 @@
+protocol_version: multimarket-fresh-seed-replication-1.0.0
+truth_label: paper-aligned three-market retrospective fresh-seed replication
+status: frozen_before_new_seed_generation
+frozen_at: 2026-07-31T18:05:00+08:00
+prior_result_status: multimarket-confirmatory-4.0.0 opened and retained as prior evidence
+interpretation_boundary: locked market outcomes were previously opened; this is not a prospective future-period confirmation
+canonical_pdf: docs/papers/Alpha2_KDD_Project_Draft_20260721.pdf
+scope:
+  markets: [csi500, csi1000, sp500]
+  limitation: fresh proposer seeds on an already observed historical locked period
+  csi1000_launch_rule: no membership before the official October 2014 launch
+models: [gpt-5.4, claude-sonnet-4.6]
+temperature: 0.2
+top_p: 1.0
+max_completion_tokens: 2200
+candidate:
+  type: typed_ast_basis
+  max_ast_nodes: 31
+  max_lookback: 60
+  sparse_terms: 4
+  mutation_std: 0.25
+  uniqueness_required: true
+skill:
+  memory_top_n: 8
+  ema_decay: 0.8
+  evidence_increment_clip: 0.25
+  complexity_penalty: 0.0005
+  turnover_penalty: 0.0005
+  redundancy_penalty: 0.002
+  bandit_temperature: 0.5
+  parent_blend: 0.75
+search:
+  formal_budget: 1000
+  sample_size_basis: 150 primary market-model-seed pairs targeted from the prior RankIC interval width
+  confirmatory_seeds: [2026082101, 2026082102, 2026082103, 2026082104, 2026082105, 2026082106, 2026082107, 2026082108, 2026082109, 2026082110, 2026082111, 2026082112, 2026082113, 2026082114, 2026082115, 2026082116, 2026082117, 2026082118, 2026082119, 2026082120, 2026082121, 2026082122, 2026082123, 2026082124, 2026082125]
+evidence:
+  alpha: 0.05
+  utility_scale: 0.02
+  utility_clip: 1.0
+  betting: mixture
+  lambda_grid: [0.02, 0.05, 0.10, 0.20, 0.35, 0.50]
+  alpha_schedule: adaptive_lineage_reserved_prebirth
+  allocation_information: selected_parent_r_select_only
+  per_birth_cap: 0.005
+  lineage_reserve_fraction: 0.1
+portfolio:
+  primary: dollar_neutral_top_bottom_quintile
+  long_fraction: 0.2
+  short_fraction: 0.2
+  one_day_lag: true
+  cost_bps: 10.0
+rolling_origins:
+  csi500:
+    - {origin: 4, warm_start: 2010, warm_end: 2016, evidence_start: 2017, evidence_end: 2022, locked_start: 2023, locked_end: 2025}
+  sp500:
+    - {origin: 4, warm_start: 2010, warm_end: 2016, evidence_start: 2017, evidence_end: 2022, locked_start: 2023, locked_end: 2025}
+  csi1000:
+    - {origin: 4, warm_start: 2014, warm_end: 2018, evidence_start: 2019, evidence_end: 2022, locked_start: 2023, locked_end: 2025}
+evaluation:
+  primary_joint_claim: [sgg_superiority, locked_rankic_noninferiority, locked_net_sharpe_noninferiority]
+  familywise_alpha: 0.05
+  net_sharpe_noninferiority_margin: 0.20
+  rankic_noninferiority_margin: 0.005
+  bootstrap_repetitions: 10000
+  bootstrap_unit: market_model_seed_pair
+  multiplicity: joint_intersection_union_no_alpha_split
+  secondary_metrics: [annualized_net_return, pearson_ic, icir, max_drawdown, turnover, downside_deviation]
+  sgg_definition: selected_warm_start_rankic_t_minus_locked_rankic_t
+reporting:
+  primary_locked_window: 2023-2025
+  primary_origin: 4
+  prior_v4_and_v3_values_forbidden_from_new_seed_aggregate: true
+  absolute_and_relative_economics_required: true

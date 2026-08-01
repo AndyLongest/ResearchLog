@@ -1,0 +1,18 @@
+{
+  "input_runs": 300,
+  "complete_pairs": 150,
+  "decision_scope": "primary_locked_2023_2025",
+  "margins": {
+    "net_sharpe": 0.2,
+    "rankic": 0.005
+  },
+  "real_market_decision": {
+    "sgg_superiority": true,
+    "locked_net_sharpe_noninferiority": true,
+    "locked_rankic_noninferiority": false,
+    "joint_real_market_pass": false
+  },
+  "truth_label": "paper-aligned three-market retrospective fresh-seed replication",
+  "formal_v3_reused": false,
+  "prospective_status": "retrospective robustness; no post-registration future sample"
+}

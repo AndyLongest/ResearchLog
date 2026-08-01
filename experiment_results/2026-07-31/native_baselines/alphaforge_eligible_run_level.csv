@@ -1,0 +1,4 @@
+seed,native_test_ic,native_test_rank_ic,selected_factors_last_day,metric_matches,stage1_returncode,combine_returncode,truth_label
+1,0.033,0.064,9,694,0,0,"AlphaForge native, zoo=30 reduced-budget configuration"
+2,0.037,0.054,8,644,0,0,"AlphaForge native, zoo=30 reduced-budget configuration"
+3,0.035,0.063,10,611,0,0,"AlphaForge native, zoo=30 reduced-budget configuration"

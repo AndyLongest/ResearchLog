@@ -1,0 +1,27 @@
+{
+  "analysis": "formal_followup_analysis_v1",
+  "outputs": {
+    "README.md": {
+      "bytes": 1788,
+      "sha256": "1f0ae7d626f8470b21cc46074b50d8ee69752fb3b81632c644007f3567606a07"
+    },
+    "matched_family_budget_contrasts.csv": {
+      "bytes": 2438,
+      "sha256": "79eedac105b9dd852df8d0753d1c5c0b96e6d30426a38b18dd6d519299737313"
+    },
+    "matched_family_budget_panel.csv": {
+      "bytes": 2370,
+      "sha256": "051b4528ae55d10a946b1ce0de8e4a89948fd5af2093b12a32de02365acb268a"
+    },
+    "skill_feedback_paired_effects.csv": {
+      "bytes": 2543,
+      "sha256": "71fabdf4e547e35520f96560b95acbc775a81ad614f86b1fd92d46d46f3b1e1a"
+    }
+  },
+  "primary_skill_gate": "alpha2_fixed",
+  "source_hashes": {
+    "alpha2_synthetic_suite\\outputs\\formal_matched_family_budget_power_v1\\table2_summary.csv": "9bf5ef30a97a849f2bcce5d52de95e883e01929d0f8c5fdf965a5a5b27dcf022",
+    "alpha2_synthetic_suite\\outputs\\formal_skill_efficiency_full_v1\\table2_run_level.csv": "1e94d206a785c6b4bf0feec38802487616a159a91af5bfbcecaef5e34cf88571",
+    "alpha2_synthetic_suite\\outputs\\formal_skill_efficiency_no_feedback_v1\\table2_run_level.csv": "ba05bfbbe1aa50d5de9c407a0db491a04a61b60ef22e6b0095cf2a70bf78889b"
+  }
+}
