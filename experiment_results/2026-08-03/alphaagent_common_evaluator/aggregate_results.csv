@@ -1,0 +1,5 @@
+endpoint,estimate,ci_low,ci_high,confidence_level,unit,n_runs
+net_annualized_return,0.046006214023434466,0.02119895001905914,0.0708134780278098,0.95,eligible frozen AlphaAgent trial,16
+net_sharpe,0.23816932185646073,0.10477571580325015,0.37156292790967127,0.95,eligible frozen AlphaAgent trial,16
+max_drawdown,-0.22191763110793017,-0.24045771187636283,-0.2033775503394975,0.95,eligible frozen AlphaAgent trial,16
+turnover,0.10161250224336978,0.09214727313004456,0.11107773135669499,0.95,eligible frozen AlphaAgent trial,16

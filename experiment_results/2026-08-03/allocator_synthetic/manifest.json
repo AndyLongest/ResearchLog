@@ -1,0 +1,34 @@
+{
+  "status": "exploratory_development",
+  "truth_label": "controlled synthetic operationalization",
+  "protocol_sha256": "28376c62c625373d731f590c11599b5d4b04c6a8460470c0bbe84dc3d05dfa52",
+  "base_protocol_sha256": "bf36ee5126494bad875e0d49da6b29da61c576e0844639ca32164b9cfab26e2f",
+  "runner_sha256": "d1b1cd058ea2bcc659b16cd35c2dd93d575cca737371c717b59874f0d698a6c3",
+  "base_seed": 2026080301,
+  "null_repetitions": 400,
+  "signal_repetitions_per_strength": 200,
+  "signal_grid": [
+    0.1,
+    0.2,
+    0.35,
+    0.5
+  ],
+  "workers": 4,
+  "elapsed_seconds": 158.6166067123413,
+  "files": {
+    "protocol.yaml": "28376c62c625373d731f590c11599b5d4b04c6a8460470c0bbe84dc3d05dfa52",
+    "base_protocol.yaml": "bf36ee5126494bad875e0d49da6b29da61c576e0844639ca32164b9cfab26e2f",
+    "allocator_run_level.csv": "c8a42d2a82b2b9a50943dc172d9aef784ef71d546f134f455b588f402a3f120c",
+    "allocator_summary.csv": "581e556931d31bcd6ae11acbc02b50ca4c8b2696c4eb0cabd62fe544e53433c1",
+    "macro_summary.csv": "7f8161da9799f67239cc5a157c2c9712ba8f0de135a75fe7de92fdce0d5c4ebf",
+    "paired_effects.csv": "3148d7a833712123a4f389789bba71983d476cc1502bc1e25cf16f7096dd938d",
+    "allocation_profiles.csv": "0b6ff6abf3a3198792059bc900cf1c871a51edff3a9bb622ec7ff72ef49487e5",
+    "README.md": "7361386bee23b33047bbdc8add921619f33acfc66c11daa38085d882c75ce248",
+    "allocator_comparison.png": "df1bb14503cce938ffcd545408b62b952adcee6a5481d80496b56552857141f7"
+  },
+  "missing_noncomputable_claims": [
+    "real-market FWER",
+    "native-product superiority",
+    "confirmatory allocator superiority on fresh seeds"
+  ]
+}

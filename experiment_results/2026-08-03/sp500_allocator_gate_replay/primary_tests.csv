@@ -1,0 +1,5 @@
+metric,current_mean,new_mean,difference_new_minus_current,ci_low,ci_high,p_raw_two_sided,paired_seed_count,p_holm
+net_annualized_return,0.1144741359941622,0.1144741359941622,0.0,0.0,0.0,1.0,10,1.0
+net_sharpe,0.7241830276137353,0.7241830276137353,0.0,0.0,0.0,1.0,10,1.0
+max_drawdown,-0.1490682473962261,-0.1490682473962261,0.0,0.0,0.0,1.0,10,1.0
+turnover,0.09894211813807488,0.09894211813807488,0.0,0.0,0.0,1.0,10,1.0

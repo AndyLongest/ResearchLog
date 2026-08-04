@@ -1,0 +1,138 @@
+{
+  "runner_version": "common_operating_point_v2",
+  "protocol_id": "common_operating_point_all_baselines_20260801_v1",
+  "system": "AlphaAgent",
+  "truth_label": "AlphaAgent native-compatible",
+  "implementation_status": "upstream-native AlphaAgent proposal output and native-compatible frozen Qlib prediction under the common external evaluator",
+  "locked_outcomes_used_for_factor_selection_or_repair": false,
+  "locked_interval": [
+    "2023-01-03",
+    "2024-12-30"
+  ],
+  "configuration_id": "sm20_rb10_k20_drop2",
+  "score_rows": 250978,
+  "score_dates": 501,
+  "score_instruments": 533,
+  "score_coverage": 0.9320383622997906,
+  "open_coverage": 0.921938487003479,
+  "daily_observations": 500,
+  "primary_cost_bps": 10.0,
+  "primary_results": [
+    {
+      "endpoint": "net_annualized_return",
+      "estimate": 0.07916898676955714,
+      "ci_low": -0.20737697384078102,
+      "ci_high": 0.34225781010010686,
+      "confidence_level": 0.95
+    },
+    {
+      "endpoint": "net_sharpe",
+      "estimate": 0.39085706321515007,
+      "ci_low": -1.0560663819606138,
+      "ci_high": 1.6722610477649098,
+      "confidence_level": 0.95
+    },
+    {
+      "endpoint": "max_drawdown",
+      "estimate": -0.20719993597805597,
+      "ci_low": -0.4487996152805222,
+      "ci_high": -0.12439224039553567,
+      "confidence_level": 0.95
+    },
+    {
+      "endpoint": "turnover",
+      "estimate": 0.08880000561475754,
+      "ci_low": 0.07360000140964985,
+      "ci_high": 0.10260000272244214,
+      "confidence_level": 0.95
+    }
+  ],
+  "all_cost_results": [
+    {
+      "cost_bps": 0.0,
+      "n_days": 500,
+      "gross_annualized_return": 0.10154658729704207,
+      "net_annualized_return": 0.10154658729704207,
+      "net_sharpe": 0.5012067709555588,
+      "compounded_net_return": 0.17453084380094586,
+      "max_drawdown": -0.20111495276391333,
+      "turnover": 0.08880000561475754,
+      "annualized_cost_drag": 0.0,
+      "positive_day_ratio": 0.492
+    },
+    {
+      "cost_bps": 5.0,
+      "n_days": 500,
+      "gross_annualized_return": 0.10154658729704207,
+      "net_annualized_return": 0.0903577870332996,
+      "net_sharpe": 0.4460686509914015,
+      "compounded_net_return": 0.14876804332004312,
+      "max_drawdown": -0.20416227717095203,
+      "turnover": 0.08880000561475754,
+      "annualized_cost_drag": 0.01118880070745945,
+      "positive_day_ratio": 0.488
+    },
+    {
+      "cost_bps": 10.0,
+      "n_days": 500,
+      "gross_annualized_return": 0.10154658729704207,
+      "net_annualized_return": 0.07916898676955714,
+      "net_sharpe": 0.39085706321515007,
+      "compounded_net_return": 0.12355708640555485,
+      "max_drawdown": -0.20719993597805597,
+      "turnover": 0.08880000561475754,
+      "annualized_cost_drag": 0.0223776014149189,
+      "positive_day_ratio": 0.486
+    },
+    {
+      "cost_bps": 20.0,
+      "n_days": 500,
+      "gross_annualized_return": 0.10154658729704207,
+      "net_annualized_return": 0.05679138624207223,
+      "net_sharpe": 0.28030158501085,
+      "compounded_net_return": 0.07474478681778174,
+      "max_drawdown": -0.2132463546420209,
+      "turnover": 0.08880000561475754,
+      "annualized_cost_drag": 0.0447552028298378,
+      "positive_day_ratio": 0.486
+    },
+    {
+      "cost_bps": 30.0,
+      "n_days": 500,
+      "gross_annualized_return": 0.10154658729704207,
+      "net_annualized_return": 0.034413786572684665,
+      "net_sharpe": 0.1697168873320734,
+      "compounded_net_return": 0.028004439408228388,
+      "max_drawdown": -0.21925440362746684,
+      "turnover": 0.08880000561475754,
+      "annualized_cost_drag": 0.0671328042447567,
+      "positive_day_ratio": 0.482
+    },
+    {
+      "cost_bps": 50.0,
+      "n_days": 500,
+      "gross_annualized_return": 0.10154658729704207,
+      "net_annualized_return": -0.010341416374499783,
+      "net_sharpe": -0.05083756591544024,
+      "compounded_net_return": -0.05960049359463093,
+      "max_drawdown": -0.2472053098321494,
+      "turnover": 0.08880000561475754,
+      "annualized_cost_drag": 0.11188800707459451,
+      "positive_day_ratio": 0.474
+    }
+  ],
+  "hashes": {
+    "scores": "06a2f7de6d672e54c2566ce653a090ff8fb258141c540c573eca866cf5564087",
+    "outcomes": "f4cfecded9f9037d378dfecdbcf40ae83951988e58edd0ae769aec2131ea27d5",
+    "protocol": "b88f9ea2748de7a6169b8563faed652eb04c242a2f2d939897fdd3f2078a9d38",
+    "runner": "1039a851e3e3a2a5628c094209cc18473f5a38dca2db2dd842b87cfdcbf15878"
+  },
+  "elapsed_seconds": 0.6318166255950928,
+  "claim_limits": [
+    "Native-gate metrics are not used for cross-system performance ranking.",
+    "Only rows evaluated from frozen scores under this exact operating point are quantitatively compared.",
+    "A non-computable row remains visible and is never replaced by a controlled-style proxy.",
+    "One frozen library does not establish proposer-seed uncertainty or universal product superiority.",
+    "Results from other markets, locked intervals, portfolio rules, or cost assumptions are not pooled into this panel."
+  ]
+}

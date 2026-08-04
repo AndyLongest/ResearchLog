@@ -1,0 +1,23 @@
+{
+  "protocol_id": "native-panels-20260803-v4-alphaagent-exact",
+  "status": "deterministic assembly from frozen formal outputs",
+  "common_operating_point": "sm20_rb10_k20_drop2; S&P500 2023-01-03 through 2024-12-30",
+  "newly_computable_row": "AlphaAgent native-compatible",
+  "alphaagent_eligible_trials": 16,
+  "alphaagent_failed_or_timeout_trials_replaced": false,
+  "non_computable_cells_retained": true,
+  "source_hashes": {
+    "native_gate_panel_v3": "ba7b0e0b4dd17eff96441cf967948037e8fb230623a66a00e7e8d039f5a5ed3f",
+    "common_evaluator_panel_v3": "b2112ffd5b7d4e8144c46766837cc0defc39b168b55b1f76d8d78c546d7c3484",
+    "alphaagent_aggregate_results": "49529529590fbec6aa0c3485a888f83f70fff820d8267cdb1241876f7479c560",
+    "alphaagent_results": "2677ee566ee8e02dc994e3330c8c852cff55fc7be4a8e78f74ff7c1d44bf7369",
+    "alphaagent_manifest": "a4be6cc471e9d7d93dc23b3e34733061b11cc0df86816d2415e111f4647819bc"
+  },
+  "claim_limits": [
+    "The common panel compares only the exact frozen common operating point.",
+    "AlphaAgent uncertainty is across 16 eligible frozen native-compatible trials.",
+    "QuantaAlpha remains a single frozen reduced-budget library.",
+    "AlphaForge, AlphaPROBE, and RD-Agent(Q) remain non-computable until a compatible frozen score object exists.",
+    "Native-gate metrics from incompatible markets or windows are not used for cross-system ranking."
+  ]
+}

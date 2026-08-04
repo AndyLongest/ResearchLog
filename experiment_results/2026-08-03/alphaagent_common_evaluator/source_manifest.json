@@ -1,0 +1,162 @@
+[
+  {
+    "trial": "trial_02",
+    "source_path": "/mnt/SSD3_4TB/zechuan/alpha2_paper_strict_20260724/runs/alphaagent/common_locked_2023_2025_v5/trial_02/workspace/mlruns/823917823432974984/333440fd8cdd495487c5a62a4eea875f/artifacts/pred.pkl",
+    "source_sha256": "4a2c95eaea179847f307854ac09d9dc56eeb706bd5c4e4a5920183cd802f3e54",
+    "score_sha256": "fec2beda47ac1bf6b960fd6f83cdbc762e81588c81682b63a3ac6320bb4722e7",
+    "score_rows": 377073,
+    "score_start": "2023-01-03",
+    "score_end": "2025-12-31",
+    "score_instruments": 551
+  },
+  {
+    "trial": "trial_03",
+    "source_path": "/mnt/SSD3_4TB/zechuan/alpha2_paper_strict_20260724/runs/alphaagent/common_locked_2023_2025_v5/trial_03/workspace/mlruns/531941683516942428/7fb06cf57599424a9e5e0e3bb34a1756/artifacts/pred.pkl",
+    "source_sha256": "e68a8f6cb025a5aea6e8001eabea17dbe1ae75f5cd8ec52198ee2329e8a740b7",
+    "score_sha256": "67db2ef19d964247415b4974fe7ef5866ec25f166270e4815add4d316cb350b5",
+    "score_rows": 377073,
+    "score_start": "2023-01-03",
+    "score_end": "2025-12-31",
+    "score_instruments": 551
+  },
+  {
+    "trial": "trial_04",
+    "source_path": "/mnt/SSD3_4TB/zechuan/alpha2_paper_strict_20260724/runs/alphaagent/common_locked_2023_2025_v5/trial_04/workspace/mlruns/839366936791482671/a77f6b831188483eb015980acf2935d6/artifacts/pred.pkl",
+    "source_sha256": "1e38e49ad4e306aa54a9333193f87c3bfbf8dc253a334116b387ebe2e3bafaaa",
+    "score_sha256": "2a6eb30e5cc121a17d7dfc8708d66c2491304cf0b0c1022cee2bae1c9c627afc",
+    "score_rows": 377073,
+    "score_start": "2023-01-03",
+    "score_end": "2025-12-31",
+    "score_instruments": 551
+  },
+  {
+    "trial": "trial_05",
+    "source_path": "/mnt/SSD3_4TB/zechuan/alpha2_paper_strict_20260724/runs/alphaagent/common_locked_2023_2025_v5/trial_05/workspace/mlruns/104041908325718829/85a773ec9b96425db2deb09d9f1dc340/artifacts/pred.pkl",
+    "source_sha256": "0065e6505ba8b0e8bd8c0476661fa91f75162979984efec65d9e2988fb93fcc3",
+    "score_sha256": "14dcd61f6466c12379f76251c93921398a7c20c10b16c4ec5b3033368d483428",
+    "score_rows": 377073,
+    "score_start": "2023-01-03",
+    "score_end": "2025-12-31",
+    "score_instruments": 551
+  },
+  {
+    "trial": "trial_07",
+    "source_path": "/mnt/SSD3_4TB/zechuan/alpha2_paper_strict_20260724/runs/alphaagent/common_locked_2023_2025_v5/trial_07/workspace/mlruns/634923200908055033/52284c59c1c34d2999fff2c1c67eb81d/artifacts/pred.pkl",
+    "source_sha256": "eea021213847c01b6ea238586412f9661cdb729c4b1a949718af59c2b0f9c624",
+    "score_sha256": "6ae66a216fea2e28f879b1f9d29f8a7f8618dd8f0b0d8e5a4a11e0fab684f4e4",
+    "score_rows": 377073,
+    "score_start": "2023-01-03",
+    "score_end": "2025-12-31",
+    "score_instruments": 551
+  },
+  {
+    "trial": "trial_08",
+    "source_path": "/mnt/SSD3_4TB/zechuan/alpha2_paper_strict_20260724/runs/alphaagent/common_locked_2023_2025_v5/trial_08/workspace/mlruns/288550944999900772/54bfa80ffc4643129d8cce1c52bb1a9f/artifacts/pred.pkl",
+    "source_sha256": "83617628c9573fe304cb0be7d77601dcdb16cab3dd5496af348dd95ab5a4baab",
+    "score_sha256": "448a573bf54f7b835bcabc0c56143d6ca565be55c7be34a19799f82571b057cb",
+    "score_rows": 377073,
+    "score_start": "2023-01-03",
+    "score_end": "2025-12-31",
+    "score_instruments": 551
+  },
+  {
+    "trial": "trial_09",
+    "source_path": "/mnt/SSD3_4TB/zechuan/alpha2_paper_strict_20260724/runs/alphaagent/common_locked_2023_2025_v5/trial_09/workspace/mlruns/213814703130528543/a754135fadf7460eba928cbdfaa62ec0/artifacts/pred.pkl",
+    "source_sha256": "0f4ab90145d840115dbaa9fd38dc0e1fdc69edb9c61f51045adff6a525d3f070",
+    "score_sha256": "2f749e455d9044a71970ea631b4d82799c154740b1afb396310646bae9a95e06",
+    "score_rows": 377073,
+    "score_start": "2023-01-03",
+    "score_end": "2025-12-31",
+    "score_instruments": 551
+  },
+  {
+    "trial": "trial_10",
+    "source_path": "/mnt/SSD3_4TB/zechuan/alpha2_paper_strict_20260724/runs/alphaagent/common_locked_2023_2025_v5/trial_10/workspace/mlruns/367361924147838892/94c1301402454046b415ababd00d2051/artifacts/pred.pkl",
+    "source_sha256": "4fae5240578cd6bf461977a2a871f49526e35680c70c77dc5f2d1540f0d6037e",
+    "score_sha256": "a3e61e6ac3320955baee336a1f253ba38633fbe69feb20b1045d94f7ab97419c",
+    "score_rows": 377073,
+    "score_start": "2023-01-03",
+    "score_end": "2025-12-31",
+    "score_instruments": 551
+  },
+  {
+    "trial": "trial_11",
+    "source_path": "/mnt/SSD3_4TB/zechuan/alpha2_paper_strict_20260724/runs/alphaagent/common_locked_2023_2025_v5/trial_11/workspace/mlruns/971181215937402614/998c904db83d4e02871b09af81f5c8b0/artifacts/pred.pkl",
+    "source_sha256": "fa7ce09c739c2a11a6f2181356639ab791134222ec88e31a047d9674d69d4d57",
+    "score_sha256": "a9c61cbb1fba994748f7e1fc904135fde6e20021ab7a9c00a18bf82a55ff8be8",
+    "score_rows": 377073,
+    "score_start": "2023-01-03",
+    "score_end": "2025-12-31",
+    "score_instruments": 551
+  },
+  {
+    "trial": "trial_13",
+    "source_path": "/mnt/SSD3_4TB/zechuan/alpha2_paper_strict_20260724/runs/alphaagent/common_locked_2023_2025_v5/trial_13/workspace/mlruns/576045663592845302/5c6ea59ff7724000b009257b4d96066d/artifacts/pred.pkl",
+    "source_sha256": "7bfc237530095a451c4503a7d20d24c46ec93479cc35ef3b5e536c5a933bd940",
+    "score_sha256": "dadbe5fa64b2351609af2b2bc0112c00ef2bb51dc0862b865dab96a288c04abd",
+    "score_rows": 377073,
+    "score_start": "2023-01-03",
+    "score_end": "2025-12-31",
+    "score_instruments": 551
+  },
+  {
+    "trial": "trial_14",
+    "source_path": "/mnt/SSD3_4TB/zechuan/alpha2_paper_strict_20260724/runs/alphaagent/common_locked_2023_2025_v5/trial_14/workspace/mlruns/750944597870319416/6cf24af0a0e8483c9bcb10d0431f7847/artifacts/pred.pkl",
+    "source_sha256": "cbdd4171795067ee7891539a111266ef014c5762b617116f7d7bed9d536e447b",
+    "score_sha256": "6024bb69a3719988689742c3f5557ed1ccc01f5f997848cebb8d411bdb6753f7",
+    "score_rows": 377073,
+    "score_start": "2023-01-03",
+    "score_end": "2025-12-31",
+    "score_instruments": 551
+  },
+  {
+    "trial": "trial_15",
+    "source_path": "/mnt/SSD3_4TB/zechuan/alpha2_paper_strict_20260724/runs/alphaagent/common_locked_2023_2025_v5/trial_15/workspace/mlruns/756861691446429567/c50edd9ed6a1493ca02207384ba8389f/artifacts/pred.pkl",
+    "source_sha256": "4ffef5ba20f8e526456229860cd0de5c0441949bccd470648162203000fc1b43",
+    "score_sha256": "1fbddda64030058016d8a98172386283dee6b77800610101579f6559eeb4cb6d",
+    "score_rows": 377073,
+    "score_start": "2023-01-03",
+    "score_end": "2025-12-31",
+    "score_instruments": 551
+  },
+  {
+    "trial": "trial_17",
+    "source_path": "/mnt/SSD3_4TB/zechuan/alpha2_paper_strict_20260724/runs/alphaagent/common_locked_2023_2025_v5/trial_17/workspace/mlruns/919535251701262490/84f34ffbfdd4413bbd89aff78ec260b0/artifacts/pred.pkl",
+    "source_sha256": "8add988427aedaa97de3aa9ee1135b0562de17a987c9315149ccb672380707d3",
+    "score_sha256": "06a2f7de6d672e54c2566ce653a090ff8fb258141c540c573eca866cf5564087",
+    "score_rows": 377073,
+    "score_start": "2023-01-03",
+    "score_end": "2025-12-31",
+    "score_instruments": 551
+  },
+  {
+    "trial": "trial_18",
+    "source_path": "/mnt/SSD3_4TB/zechuan/alpha2_paper_strict_20260724/runs/alphaagent/common_locked_2023_2025_v5/trial_18/workspace/mlruns/809032813608762124/1ae08e4f397f460f9f453f3b11fc45cb/artifacts/pred.pkl",
+    "source_sha256": "d61cfc3f8447379a36fc9e64b226c23c37a4da302243d77e2dd48c6c818bb86b",
+    "score_sha256": "9b1fb289265b8a6e839105f3073e4315c22a7bda4ef21ca2af8e604737211e1e",
+    "score_rows": 377073,
+    "score_start": "2023-01-03",
+    "score_end": "2025-12-31",
+    "score_instruments": 551
+  },
+  {
+    "trial": "trial_19",
+    "source_path": "/mnt/SSD3_4TB/zechuan/alpha2_paper_strict_20260724/runs/alphaagent/common_locked_2023_2025_v5/trial_19/workspace/mlruns/242793392243801857/e15b882fd31043cf8398f88dfaf021b8/artifacts/pred.pkl",
+    "source_sha256": "93fbc85feb2d88d3b46d8d1391a151fab9b0f015fa4af3b5e6520b2b492bff8f",
+    "score_sha256": "95997ce0bec827ba0628e8006d1ebc24e342e058f6e2cb388d2434d2a1a86951",
+    "score_rows": 377073,
+    "score_start": "2023-01-03",
+    "score_end": "2025-12-31",
+    "score_instruments": 551
+  },
+  {
+    "trial": "trial_20",
+    "source_path": "/mnt/SSD3_4TB/zechuan/alpha2_paper_strict_20260724/runs/alphaagent/common_locked_2023_2025_v5/trial_20/workspace/mlruns/332994047597636169/e859dddfbbc94a5e8225b46964ad145c/artifacts/pred.pkl",
+    "source_sha256": "5b6608f0ed0c6495b96ef81cff664e4fedae569b98fc3315d851a07623ef3f58",
+    "score_sha256": "b50d59e8f03bc804d4e23fc344ab3e17b597a7434bf999e14522f94b846eb76f",
+    "score_rows": 377073,
+    "score_start": "2023-01-03",
+    "score_end": "2025-12-31",
+    "score_instruments": 551
+  }
+]

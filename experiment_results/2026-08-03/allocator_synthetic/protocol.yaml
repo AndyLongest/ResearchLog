@@ -1,0 +1,35 @@
+protocol_version: 1
+status: exploratory_development
+truth_label: controlled synthetic operationalization
+paper_snapshot: Alpha2_KDD_Project_Draft_20260721.pdf
+base_protocol: protocol.yaml
+base_seed: 2026080301
+alpha: 0.05
+candidate_count: 1000
+rounds: 50
+candidates_per_round: 20
+evidence_horizon: 600
+null_repetitions: 400
+signal_repetitions: 200
+signal_grid: [0.10, 0.20, 0.35, 0.50]
+birth_bins:
+  early_end: 100
+  middle_end: 500
+allocator_parameters:
+  heavy_tail_offset: 1
+  explore_exploit_epsilon: 0.30
+  softmax_temperature: 1.00
+  wallet_exploration_share: 0.30
+  wallet_lineage_penalty: 0.60
+score_stress_modes: [informed, uninformative, inverted]
+primary_score_mode: informed
+primary_metrics:
+  validity_gate: exact_null_fwer
+  performance: macro_average_recall
+  delay: restricted_first_true_end_to_end_delay
+  coverage: planted_component_coverage
+interpretation:
+  - Allocators share candidate streams, truth labels, and evidence paths within each replicate.
+  - Exact-null experiments support FWER claims; planted-signal null labels support controlled precision and recall diagnostics.
+  - This experiment selects an exploratory winner only. Confirmation requires fresh seeds or generators.
+  - No real-market false-positive claim is made.
