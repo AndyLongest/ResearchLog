@@ -1,0 +1,27 @@
+protocol_version: 1
+paper_snapshot: Alpha2_KDD_Project_Draft_20260721.pdf
+base_seed: 20260721
+alpha: 0.05
+n_features: 16
+adaptation_horizon: 252
+locked_horizon: 252
+evidence_horizon: 600
+feature_persistence: 0.80
+cross_feature_correlation: 0.30
+search_depths: [50, 100, 250, 500, 1000]
+inflation_repetitions: 200
+reliability_candidates: 1000
+reliability_rounds: 50
+candidates_per_round: 20
+null_repetitions: 500
+signal_repetitions: 300
+signal_grid: [0.10, 0.20, 0.35, 0.50]
+candidate_noise: 0.35
+exploration_probability: 0.20
+skill_learning_rate: 0.60
+plugin_eta: 1.0
+plugin_lambda_max: 0.95
+adaptive_rho_min: 0.01
+adaptive_rho_max: 0.10
+validity_attack_repetitions: 2000
+

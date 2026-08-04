@@ -1,0 +1,22 @@
+{
+  "alphaforge_eligible_run_level.csv": {
+    "bytes": 378,
+    "sha256": "29adb2c380254331feee38c7e0ad463f4d95aeef2bf4b931e901484c0b34269c"
+  },
+  "common_evaluator_panel.csv": {
+    "bytes": 1929,
+    "sha256": "9d0f39102c34698b07dacf540e3e5fe4e8ce1bbd5c50cbe265a6a35eb0142c35"
+  },
+  "native_gate_panel.csv": {
+    "bytes": 1766,
+    "sha256": "ba7b0e0b4dd17eff96441cf967948037e8fb230623a66a00e7e8d039f5a5ed3f"
+  },
+  "protocol.json": {
+    "bytes": 1424,
+    "sha256": "e6e012a1e496c2e9bfb0540e1eb87096c5b458decff94c750d788cb81c0d2d38"
+  },
+  "README.md": {
+    "bytes": 378,
+    "sha256": "0ea2ff27afe6ff15bb8585bd88636fafce13fbfb2dbfa65e7de9ca38c4592c91"
+  }
+}

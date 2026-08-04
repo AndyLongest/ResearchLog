@@ -1,0 +1,70 @@
+{
+  "runner_version": "alphaagent_v5_common_operating_point_v1",
+  "protocol_id": "common_operating_point_all_baselines_20260801_v1",
+  "system": "AlphaAgent",
+  "truth_label": "AlphaAgent native-compatible",
+  "eligible_trials": [
+    "trial_02",
+    "trial_03",
+    "trial_04",
+    "trial_05",
+    "trial_07",
+    "trial_08",
+    "trial_09",
+    "trial_10",
+    "trial_11",
+    "trial_13",
+    "trial_14",
+    "trial_15",
+    "trial_17",
+    "trial_18",
+    "trial_19",
+    "trial_20"
+  ],
+  "n_runs": 16,
+  "locked_outcomes_used_for_selection_or_repair": false,
+  "aggregate_results": [
+    {
+      "endpoint": "net_annualized_return",
+      "estimate": 0.046006214023434466,
+      "ci_low": 0.02119895001905914,
+      "ci_high": 0.0708134780278098,
+      "confidence_level": 0.95,
+      "unit": "eligible frozen AlphaAgent trial",
+      "n_runs": 16
+    },
+    {
+      "endpoint": "net_sharpe",
+      "estimate": 0.23816932185646073,
+      "ci_low": 0.10477571580325015,
+      "ci_high": 0.37156292790967127,
+      "confidence_level": 0.95,
+      "unit": "eligible frozen AlphaAgent trial",
+      "n_runs": 16
+    },
+    {
+      "endpoint": "max_drawdown",
+      "estimate": -0.22191763110793017,
+      "ci_low": -0.24045771187636283,
+      "ci_high": -0.2033775503394975,
+      "confidence_level": 0.95,
+      "unit": "eligible frozen AlphaAgent trial",
+      "n_runs": 16
+    },
+    {
+      "endpoint": "turnover",
+      "estimate": 0.10161250224336978,
+      "ci_low": 0.09214727313004456,
+      "ci_high": 0.11107773135669499,
+      "confidence_level": 0.95,
+      "unit": "eligible frozen AlphaAgent trial",
+      "n_runs": 16
+    }
+  ],
+  "hashes": {
+    "protocol": "b88f9ea2748de7a6169b8563faed652eb04c242a2f2d939897fdd3f2078a9d38",
+    "outcomes": "f4cfecded9f9037d378dfecdbcf40ae83951988e58edd0ae769aec2131ea27d5",
+    "evaluator": "1039a851e3e3a2a5628c094209cc18473f5a38dca2db2dd842b87cfdcbf15878",
+    "runner": "fdd498c0b69d590d250eb9093d60cc4333c880bb8f86de3d2182aa1ca030b328"
+  }
+}

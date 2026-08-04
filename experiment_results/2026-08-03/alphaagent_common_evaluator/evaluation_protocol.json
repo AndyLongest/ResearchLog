@@ -1,0 +1,129 @@
+{
+  "protocol_id": "common_operating_point_all_baselines_20260801_v1",
+  "status": "frozen before any new cross-baseline locked evaluation",
+  "purpose": "compare frozen native-system scores under one common external locked evaluator",
+  "dataset": {
+    "market": "S&P 500",
+    "membership": "point in time",
+    "locked_interval": [
+      "2023-01-03",
+      "2024-12-30"
+    ],
+    "outcome": "next open to following open",
+    "missing_observations_forward_filled": false,
+    "expected_outcomes_sha256": "f4cfecded9f9037d378dfecdbcf40ae83951988e58edd0ae769aec2131ea27d5"
+  },
+  "locked_interval": [
+    "2023-01-03",
+    "2024-12-30"
+  ],
+  "score_contract": {
+    "columns": [
+      "date",
+      "instrument",
+      "score"
+    ],
+    "frozen_before_locked_outcomes": true,
+    "locked_sign_flip_allowed": false,
+    "locked_repair_allowed": false,
+    "locked_model_selection_allowed": false,
+    "native_upstream_workflow_required": true,
+    "compatibility_adapters_may_change": [
+      "data ingestion",
+      "API wiring",
+      "dependency shims",
+      "logging",
+      "frozen score export"
+    ],
+    "compatibility_adapters_must_not_change": [
+      "proposal",
+      "search",
+      "training",
+      "acceptance",
+      "native factor or model semantics"
+    ]
+  },
+  "portfolio": {
+    "configuration_id": "sm20_rb10_k20_drop2",
+    "score_smoothing_days": 20,
+    "rebalance_days": 10,
+    "topk": 20,
+    "n_drop": 2,
+    "one_trading_day_lag": true,
+    "return_interval": "next open to following open",
+    "cost_bps": [
+      0,
+      5,
+      10,
+      20,
+      30,
+      50
+    ],
+    "primary_cost_bps": 10
+  },
+  "primary_endpoints": [
+    "net_annualized_return",
+    "net_sharpe",
+    "max_drawdown",
+    "turnover"
+  ],
+  "uncertainty": {
+    "method": "moving-block bootstrap over locked daily portfolio observations",
+    "block_length": 20,
+    "replicates": 30000,
+    "seed": 20260726,
+    "system_level_replication": "preserve every eligible frozen native seed; do not replace failures or pool incompatible protocols",
+    "cross_run_method": "mean and two-sided normal 95% interval over eligible frozen native run estimates; use within-run moving-block bootstrap only when exactly one frozen run exists"
+  },
+  "systems": [
+    {
+      "system": "Alpha2",
+      "truth_label": "Alpha2 evidence-credit frozen operationalization",
+      "implementation_status": "frozen Alpha2 evidence-credit operationalization under the common external evaluator",
+      "eligible_scope": "10 fresh predeclared frozen seeds",
+      "current_status": "complete"
+    },
+    {
+      "system": "AlphaAgent",
+      "truth_label": "AlphaAgent native-compatible",
+      "implementation_status": "upstream-native AlphaAgent proposal output and native-compatible frozen Qlib prediction under the common external evaluator",
+      "eligible_scope": "16 eligible common-locked v5 trials; four original failed or timeout trials remain unreplaced",
+      "current_status": "requires exact operating-point score export from frozen v5 predictions"
+    },
+    {
+      "system": "QuantaAlpha",
+      "truth_label": "native QuantaAlpha frozen library common external evaluator",
+      "implementation_status": "native frozen QuantaAlpha factors with a common external portfolio evaluator",
+      "eligible_scope": "one frozen reduced-budget 18-factor library",
+      "current_status": "complete"
+    },
+    {
+      "system": "AlphaForge",
+      "truth_label": "AlphaForge native, zoo=30 reduced-budget configuration (seeds 1--3)",
+      "implementation_status": "upstream-native reduced-budget AlphaForge output pending compatible frozen S&P 500 scoring",
+      "eligible_scope": "seeds 1--3 only; seeds 0 and 4 remain preserved and excluded",
+      "current_status": "requires a frozen S&P 500 score object derived without changing native semantics, or a new prelocked native S&P 500 run"
+    },
+    {
+      "system": "AlphaPROBE",
+      "truth_label": "AlphaPROBE upstream native v18",
+      "implementation_status": "upstream-native AlphaPROBE v18 output pending compatible frozen S&P 500 scoring",
+      "eligible_scope": "five completed formal v18 seeds",
+      "current_status": "requires frozen native factor artifacts and S&P 500 score materialization, or a new prelocked native S&P 500 run"
+    },
+    {
+      "system": "RD-Agent(Q)",
+      "truth_label": "RD-Agent(Q) upstream native v3",
+      "implementation_status": "upstream-native RD-Agent(Q) v3 output pending compatible frozen S&P 500 scoring",
+      "eligible_scope": "five completed formal v3 seeds",
+      "current_status": "requires frozen native factor or model artifacts and an S&P 500 score object; any market-specific upstream change must be labeled adapted-native"
+    }
+  ],
+  "claim_limits": [
+    "Native-gate metrics are not used for cross-system performance ranking.",
+    "Only rows evaluated from frozen scores under this exact operating point are quantitatively compared.",
+    "A non-computable row remains visible and is never replaced by a controlled-style proxy.",
+    "One frozen library does not establish proposer-seed uncertainty or universal product superiority.",
+    "Results from other markets, locked intervals, portfolio rules, or cost assumptions are not pooled into this panel."
+  ]
+}

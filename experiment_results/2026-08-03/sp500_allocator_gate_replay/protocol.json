@@ -1,0 +1,75 @@
+{
+  "protocol_id": "sp500_allocator_gate_replay_v1",
+  "status": "frozen_before_new_allocator_locked_evaluation",
+  "truth_label": "retrospective gate-only allocator replacement on previously observed market outcomes",
+  "purpose": "Determine whether replacing the Alpha2 pre-birth allocator changes the selected frozen factor and improves performance under the exact S&P 500 common operating point.",
+  "source_runs": "alpha2_agent_native/outputs/fresh_sp500_seed_confirmation_v1/runs",
+  "source_protocol": "alpha2_agent_native/outputs/fresh_sp500_seed_confirmation_v1/protocol.yaml",
+  "common_operating_point": "alpha2_native_baselines/configs/common_operating_point_all_baselines_20260801_v1.json",
+  "market": "sp500",
+  "model": "gpt-5.4",
+  "seeds": [
+    2026073001,
+    2026073002,
+    2026073003,
+    2026073004,
+    2026073005,
+    2026073006,
+    2026073007,
+    2026073008,
+    2026073009,
+    2026073010
+  ],
+  "credit_modes": ["evidence", "adaptation"],
+  "primary_credit_mode": "evidence",
+  "candidate_budget": 1000,
+  "family_alpha": 0.05,
+  "arms": ["current_allocator", "explore_exploit_allocator"],
+  "new_allocator": {
+    "round_definition": "birth_year; six chronological evidence rounds 2017--2022",
+    "round_budget": "alpha * log(2) * (1/log(r+1) - 1/log(r+2)) for r starting at 1",
+    "exploration_fraction": 0.30,
+    "softmax_temperature": 1.0,
+    "prebirth_score": "selected-parent skill reliability available before the round evidence",
+    "operationalization_note": "All local candidates in one native Alpha2 round share the same selected parent and therefore the same prebirth score. Softmax is consequently uniform within each round; this replay tests the long-tail round reserve plus exploration floor, not candidate-specific reliability ranking.",
+    "selection_rule": "Select maximum max_log_e among candidates crossing their immutable alpha threshold; if none crosses, select maximum max_log_e among all candidates; candidate_id ascending breaks ties.",
+    "no_alpha_recycling": true
+  },
+  "locked_interval": ["2023-01-03", "2024-12-30"],
+  "portfolio": {
+    "configuration_id": "sm20_rb10_k20_drop2",
+    "score_smoothing_days": 20,
+    "rebalance_days": 10,
+    "topk": 20,
+    "n_drop": 2,
+    "drop_fraction": 0.10,
+    "one_trading_day_lag": true,
+    "return_interval": "next open to following open",
+    "cost_bps": [0, 5, 10, 20, 30, 50],
+    "primary_cost_bps": 10
+  },
+  "primary_endpoints": [
+    "net_annualized_return",
+    "net_sharpe",
+    "max_drawdown",
+    "turnover"
+  ],
+  "primary_comparison": "explore_exploit_allocator minus current_allocator within matched evidence-credit seeds at 10 bps",
+  "multiplicity": "Holm across the complete four-endpoint primary family",
+  "uncertainty": {
+    "paired_seed_bootstrap_replicates": 20000,
+    "seed": 2026080311,
+    "summary_interval": "two-sided normal 95% interval over ten eligible frozen proposer seeds"
+  },
+  "firewall": {
+    "selection_phase_may_use": ["2017--2022 candidate ledger", "pre-birth metadata", "post-birth evidence paths through 2022"],
+    "selection_phase_must_not_use": ["2023--2024 returns", "locked sign selection", "locked repair", "locked model selection"],
+    "evaluation_requires_frozen_selection_manifest": true
+  },
+  "claim_limits": [
+    "This is a retrospective version comparison because the locked market outcomes were previously observed.",
+    "The replay isolates the gate and final-selection effect; the current operationalization does not feed certification decisions into proposer or skill updates.",
+    "Real-market outcomes cannot establish FWER because factor truth is unknown.",
+    "No allocator parameter may be changed after viewing this experiment."
+  ]
+}
