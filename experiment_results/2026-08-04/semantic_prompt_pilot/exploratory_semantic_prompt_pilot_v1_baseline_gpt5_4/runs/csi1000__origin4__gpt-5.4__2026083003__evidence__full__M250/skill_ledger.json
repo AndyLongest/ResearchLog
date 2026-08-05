@@ -1,0 +1,208 @@
+[
+  {
+    "skill_id": "8889d6ec1064904f",
+    "parent_skill_id": null,
+    "skill": {
+      "hypothesis": "In CSI1000 small caps, short-horizon reversal tends to dominate after locally crowded advances, especially when accompanied by elevated trading activity and intraday range. A sparse contrarian signal should therefore short recent winners with stretched price-vs-moving-average gaps and favor names with recent weakness, while avoiding pure illiquidity by only modestly penalizing liquidity proxies.",
+      "grammar": "add(add(mul(a,rank(neg(ret5))),mul(b,rank(neg(ma_gap5)))),add(mul(c,rank(vol5)),add(mul(d,rank(range1)),mul(e,rank(delay_ret5_1)))))",
+      "applicability": "Most predictable in retail-dominated, high-turnover, mean-reverting small-cap regimes with weak medium-term trend persistence and frequent overreaction around short-term price spikes.",
+      "successes": [
+        "Short-term reversal combined with price-extension terms such as neg(ret5) and neg(ma_gap5)",
+        "Augmenting reversal with moderate volume/range confirmation to identify crowded moves",
+        "Using delayed short-window return as a simple persistence-of-overreaction control"
+      ],
+      "failures": [
+        "Strong trend or policy-driven momentum regimes where recent winners continue to outperform",
+        "Low-turnover defensive environments where volume/range spikes are noise rather than crowding",
+        "Severe liquidity stress where reversal loads become dominated by microstructure and execution frictions"
+      ]
+    },
+    "r_use": -0.0009945273761233684,
+    "r_select": -0.00019890547522467364,
+    "r_distill": -0.0009945273761233684,
+    "candidate_id": "ff05cb19ca9bcd3f389d2f420656ea322a674f9d96d18888fc1b39ba0d48432b",
+    "beta": [
+      0.0,
+      0.0,
+      -0.48380602282767365,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.5188867810284066,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.45756118763249465,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.5360279846444476,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "92c0d4f89ff95440",
+    "parent_skill_id": "8889d6ec1064904f",
+    "skill": {
+      "hypothesis": "In CSI1000 small caps, short-horizon overreaction after crowded advances is more likely to mean-revert when price extension, abnormal activity, and intraday stress co-occur. A sparse contrarian composite should therefore short recent winners and stretched names, modestly confirm crowding with volume/range terms, and include a small delayed-return offset to avoid chasing one-day noise.",
+      "grammar": "add(add(add(mul(a,rank(neg(ret5))),mul(b,rank(neg(ma_gap5)))),add(mul(c,rank(vol5)),mul(d,rank(range1)))),add(add(mul(e,rank(delay_ret5_1)),mul(f,rank(neg(mean_ret1_5)))),mul(g,rank(neg(delta_ret5_1)))))",
+      "applicability": "Best in retail-driven, high-turnover CSI1000 regimes with weak 1-3 month trend persistence, frequent short-term overshooting, and active speculative participation; less suitable during broad policy-led momentum or sustained trend phases.",
+      "successes": [
+        "Sparse reversal core built from neg(ret5) plus neg(ma_gap5)",
+        "Crowding confirmation via moderate positive vol5 and range1 exposure",
+        "Noise control through small positive delay_ret5_1 and negative delta_ret5_1 terms"
+      ],
+      "failures": [
+        "Persistent momentum regimes where recent winners keep running",
+        "Low-activity defensive tapes where volume/range spikes do not indicate crowding",
+        "Liquidity-stress episodes where microstructure dominates short-horizon reversal"
+      ]
+    },
+    "r_use": -0.0024877557666047323,
+    "r_select": -0.0012931730542196413,
+    "r_distill": -0.001493228390481364,
+    "candidate_id": "1721e25636dacdf936bfa8809633a768b09597ed783d4add5f6370d1ace52f74",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.4551578513660012,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.5306043496758412,
+      0.0,
+      0.0,
+      0.0,
+      0.4485169893432686,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.5568867611242101,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "351fd3d101d10a87",
+    "parent_skill_id": "92c0d4f89ff95440",
+    "skill": {
+      "hypothesis": "In CSI1000 small caps, the most reusable pre-birth pattern is short-horizon mean reversion after crowded short-term advances. A sparse contrarian composite should lean against recent 5-day winners and near-term price extension, while modestly confirming crowding with activity/range stress and using small delay terms to reduce one-day noise chasing.",
+      "grammar": "add(add(add(mul(a,rank(neg(ret5))),mul(b,rank(neg(ma_gap5)))),add(mul(c,rank(vol5)),mul(d,rank(range1)))),add(add(mul(e,rank(delay_ret5_1)),mul(f,rank(neg(mean_ret1_5)))),mul(g,rank(neg(delta_ret5_1)))))",
+      "applicability": "Best in retail-driven, high-turnover, weak-trend CSI1000 regimes where short-term overshooting and crowded speculative bursts are common; less suitable in persistent policy-led momentum, defensive low-activity tapes, or liquidity-stress episodes.",
+      "successes": [
+        "Sparse reversal core centered on neg(ret5) and neg(ma_gap5)",
+        "Moderate positive vol5 and range1 terms as crowding confirmation rather than primary drivers",
+        "Small positive delay_ret5_1 and negative delta_ret5_1 terms to avoid reacting to pure one-day noise"
+      ],
+      "failures": [
+        "Persistent momentum regimes where recent winners continue to run",
+        "Low-turnover environments where volume/range spikes are not informative about crowding",
+        "Liquidity-stress or microstructure-dominated episodes where reversal signals become unstable"
+      ]
+    },
+    "r_use": -0.0048208223879081195,
+    "r_select": -0.0029543690908654095,
+    "r_distill": -0.003079680816544069,
+    "candidate_id": "0b196717ab36be5e1ca56e0b30b3647ffc8d947c8f57b61bc9510f5a70d398b9",
+    "beta": [
+      0.0,
+      0.0,
+      0.3226144781943865,
+      0.3232190317596181,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.7654840325669108,
+      0.45330293607348215
+    ]
+  },
+  {
+    "skill_id": "54ff760579519872",
+    "parent_skill_id": "351fd3d101d10a87",
+    "skill": {
+      "hypothesis": "In CSI1000 small caps, the most reusable pre-birth pattern is short-horizon mean reversion after crowded short-term advances. Expected alpha comes from fading recent 5-day winners and names stretched above short moving averages, with modest confirmation from elevated activity and intraday stress; small delayed-return controls help avoid reacting to pure one-day noise. A slight liquidity penalty is included to reduce fragile illiquid reversals.",
+      "grammar": "add(add(add(mul(a,rank(neg(ret5))),mul(b,rank(neg(ma_gap5)))),add(mul(c,rank(vol5)),mul(d,rank(range1)))),add(add(add(mul(e,rank(delay_ret5_1)),mul(f,rank(neg(mean_ret1_5)))),mul(g,rank(neg(delta_ret5_1)))),mul(h,rank(neg(liquidity20)))))",
+      "applicability": "Best in retail-driven, high-turnover, weak-trend CSI1000 regimes where short-term overshooting and crowded speculative bursts are common; less suitable in persistent policy-led momentum, defensive low-activity tapes, or liquidity-stress episodes.",
+      "successes": [
+        "Sparse reversal core centered on neg(ret5) and neg(ma_gap5)",
+        "Moderate positive vol5 and range1 terms as crowding confirmation rather than primary drivers",
+        "Small positive delay_ret5_1, negative mean_ret1_5, and negative delta_ret5_1 terms to reduce one-day noise chasing",
+        "Light negative liquidity20 exposure to avoid the weakest illiquid names while preserving the reversal structure"
+      ],
+      "failures": [
+        "Persistent momentum regimes where recent winners continue to run",
+        "Low-turnover environments where volume/range spikes are not informative about crowding",
+        "Liquidity-stress or microstructure-dominated episodes where reversal signals become unstable",
+        "Broad trend-following phases where contrarian short-horizon signals are systematically early"
+      ]
+    },
+    "r_use": -0.0036514640754931197,
+    "r_select": -0.0045869507254251195,
+    "r_distill": -0.0011637083088883874,
+    "candidate_id": "db89dda271b7e378c380aa53b42783e36ad08f0c9b19b1e46c0ee9f9698e8ebe",
+    "beta": [
+      0.0,
+      -0.4012443893996913,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.4222263958738781,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.6634519893578993,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.4696373797087174
+    ]
+  }
+]

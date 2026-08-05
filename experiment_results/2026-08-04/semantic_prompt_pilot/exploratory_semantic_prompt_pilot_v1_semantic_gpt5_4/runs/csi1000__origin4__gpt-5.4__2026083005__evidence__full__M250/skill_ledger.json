@@ -1,0 +1,206 @@
+[
+  {
+    "skill_id": "61454ca1695dc51c",
+    "parent_skill_id": null,
+    "skill": {
+      "hypothesis": "Phenomenon: small-cap A-share short-horizon reversal embedded in noisy medium-horizon trend continuation; Measurement object: recovery/reversal intensity after recent price displacement, moderated by path roughness and liquidity state; Persistence hypothesis: 1-5 day overshooting tends to mean-revert, while smoother 20-60 day moves retain partial persistence unless accompanied by unstable high-range trading.",
+      "grammar": "Construct a reversal-vs-persistence score by combining (i) short-horizon signed displacement level with negative sign, (ii) medium-horizon signed displacement level with smaller positive sign, and (iii) path instability penalties using range/volatility/open-close gap; optionally modulate by a mild liquidity/volume-state term to avoid illiquid extremes. Template: score = -a*short_displacement + b*medium_displacement - c*path_instability + d*tradability_state, where short_displacement can be ret1/ret5/mean_ret1_5 or ma_gap5, medium_displacement can be ret20/ret60/rank_ret20 or ma_gap60, path_instability can be range1/vol5/vol20/open_close/cov_ret_range20, and tradability_state can be liquidity20/volume_z20.",
+      "applicability": "Most applicable in retail-dominated, high-turnover small-cap regimes with frequent short-term overreaction and uneven information diffusion; weaker in strongly policy-driven one-way momentum phases or during broad liquidity shocks when reversal is suppressed.",
+      "successes": [
+        "Negative loading on recent return and short moving-average gap paired with positive loading on 20-60 day trend level.",
+        "Use of range/volatility as a penalty to distinguish smooth persistent trends from unstable spikes.",
+        "Adding a mild positive liquidity term to keep the signal implementable in thinner small-cap names."
+      ],
+      "failures": [
+        "Fails during synchronized momentum surges where both short- and medium-horizon returns continue trending without mean reversion.",
+        "Fails around event-driven gap moves where overnight information dominates and recent displacement is not an overshoot.",
+        "Degrades in severe liquidity stress or trading-constraint episodes when reversal signals cannot be expressed efficiently."
+      ]
+    },
+    "r_use": -0.00304280643270573,
+    "r_select": -0.0006085612865411459,
+    "r_distill": -0.00304280643270573,
+    "candidate_id": "ff5c2e46bba83e614779e82d663433609f465570eaf668dc19fbe19e41fd277f",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.3570855194087865,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.38436622652208974,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.5714382930385136,
+      0.0,
+      0.0,
+      -0.6310394702290473
+    ]
+  },
+  {
+    "skill_id": "70cf605084bd66cf",
+    "parent_skill_id": "61454ca1695dc51c",
+    "skill": {
+      "hypothesis": "Phenomenon: small-cap short-horizon overshoot with selective medium-horizon continuation; Measurement object: recovery/reversal intensity after recent displacement, filtered by path instability and tradability state; Persistence hypothesis: recent 1-5 day dislocations tend to mean-revert, but smoother 20-60 day directional states persist when not accompanied by unstable high-range trading.",
+      "grammar": "Measure reversal intensity as a signed displacement level opposed by a persistent-state level, then subtract a path/asymmetry instability composite and add a mild tradability filter. Template: score = -a*(ret5 or ma_gap5 or mean_ret1_5) - a2*(ret1 or delta_ret5_1) + b*(ret20 or rank_ret20 or ma_gap60 or signedpow_ret20_half) - c*(vol5 + range1 + open_close + cov_ret_range20 + overnight) + d*(liquidity20 or volume_z20) - e*(max_ret1_20 - min_ret1_20 proxy via opposite signs), with a>b>0 and d small.",
+      "applicability": "Best in CSI1000-like retail-driven small-cap regimes with frequent short-term overreaction, noisy breakouts, and partial continuation only for smoother medium-horizon states; weaker in broad one-way momentum or event-gap regimes.",
+      "successes": [
+        "Negative short-displacement loadings combined with smaller positive medium-horizon state loadings.",
+        "Instability penalty built from volatility/range/open-close/covariance terms to separate smooth trends from fragile spikes.",
+        "Small positive tradability term to avoid the least implementable illiquid names."
+      ],
+      "failures": [
+        "Momentum cascades where recent gains continue despite appearing overextended.",
+        "Information shocks dominated by overnight repricing where reversal framing misclassifies genuine state change.",
+        "Liquidity-stress episodes where tradability and price impact overwhelm reversal tendencies."
+      ]
+    },
+    "r_use": -0.0035894693994062603,
+    "r_select": -0.003152139026045836,
+    "r_distill": -0.0005466629667005302,
+    "candidate_id": "8dd0c3441f5c8d208e1a624a8d4eabd8947a1d0d9410effa254d0dfd46208a69",
+    "beta": [
+      0.0,
+      0.0,
+      0.43195792339521305,
+      0.0,
+      0.0,
+      0.5317907404329036,
+      0.44840416112152287,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.5740598131682993,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "e83eb976dca7c2c5",
+    "parent_skill_id": "70cf605084bd66cf",
+    "skill": {
+      "hypothesis": "Phenomenon: small-cap short-horizon overshoot with selective medium-horizon continuation; Measurement object: recovery/reversal intensity after recent signed displacement, opposed by a smoother persistent-state trend level and penalized by unstable path/asymmetry trading state; Persistence hypothesis: 1-5 day dislocations in CSI1000 tend to mean-revert, while smoother 20-60 day directional states retain weak persistence unless accompanied by high range/volatility/gap instability.",
+      "grammar": "Reusable measurement transformation: score = reversal_level(short signed displacement) + persistence_level(smoother medium-horizon displacement) - instability_state(path roughness and gap asymmetry) + mild_tradability_state. Concretely, use negative loadings on ret5/ma_gap5/mean_ret1_5 with a smaller negative ret1 or delta_ret5_1 term; add smaller positive loadings on ret20/rank_ret20/signedpow_ret20_half/ma_gap60; subtract magnitude/path terms such as vol5, range1, open_close, overnight, cov_ret_range20; add a small positive liquidity20 or volume_z20 term.",
+      "applicability": "Most predictable in CSI1000-style retail-driven small-cap regimes with frequent short-term overreaction, noisy breakouts, and partial continuation only for smoother medium-horizon states; weaker in synchronized one-way momentum, event-gap repricing, or liquidity-stress regimes.",
+      "successes": [
+        "Short-horizon signed displacement is measured as a reversal level rather than a pure volatility proxy, using ret5/ma_gap5/mean_ret1_5 with dominant negative weights.",
+        "Medium-horizon continuation is kept weaker and smoother via ret20/rank_ret20/signedpow_ret20_half/ma_gap60, separating persistent state from recent overshoot.",
+        "Path instability is explicitly penalized through range/volatility/open-close/overnight/cov_ret_range20 so fragile spikes are downweighted even when medium-horizon trend is positive."
+      ],
+      "failures": [
+        "Momentum cascades where recent gains continue despite appearing overextended, causing the reversal level to fight a genuine trend acceleration.",
+        "Overnight information shocks where gap repricing reflects new fundamentals rather than transient overshoot, so instability penalties do not rescue the signal.",
+        "Liquidity-stress or trading-constraint episodes where tradability and impact dominate the expected recovery/reversal mechanism."
+      ]
+    },
+    "r_use": -0.0033260381461428677,
+    "r_select": -0.003536783148753582,
+    "r_distill": -9.900230086872484e-06,
+    "candidate_id": "7302931537c2be6adca2b7fa71971e4bf98ca0909e4cfabb73dfff0cbd711f56",
+    "beta": [
+      0.0,
+      0.0,
+      0.452132728975618,
+      -0.4906961571459251,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.5925261207974152,
+      0.45133809159437105,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "8d5ae1f466fa0b09",
+    "parent_skill_id": "e83eb976dca7c2c5",
+    "skill": {
+      "hypothesis": "Phenomenon: CSI1000 small-cap names exhibit short-horizon overshoot followed by partial recovery, while only smoother medium-horizon directional states persist; Measurement object: recovery/reversal level after recent signed displacement, opposed by a persistent-state trend level and penalized by unstable path/asymmetry state; Persistence hypothesis: 1-5 day displacement tends to mean-revert, but 20-60 day state persists weakly when realized through smoother, more tradable paths rather than gap- and range-dominated moves.",
+      "grammar": "Reusable measurement transformation: score = reversal_level(recent signed displacement) + persistence_level(smoother medium-horizon displacement) - instability_state(path roughness and gap asymmetry) + mild_tradability_state - exhaustion_path(extreme recent one-day outcome asymmetry). Implement as dominant negative loadings on ret5, ma_gap5, mean_ret1_5, with smaller negative ret1 and delta_ret5_1; add smaller positive loadings on ret20, rank_ret20, signedpow_ret20_half, ma_gap60, ret60; subtract vol5, vol20, range1, open_close, overnight, cov_ret_range20; add small positive liquidity20 and volume_z20; penalize max_ret1_20 and offset slightly with min_ret1_20 to distinguish upside exhaustion from downside washout.",
+      "applicability": "Most applicable in retail-driven CSI1000 regimes with frequent short-term overreaction, noisy breakouts, and only weak continuation for smoother 20-60 day states; weaker in synchronized momentum surges, event-driven overnight repricing, or liquidity-stress episodes where reversal is suppressed or implementation frictions dominate.",
+      "successes": [
+        "Revises the measurement object toward recovery/reversal level after recent signed displacement rather than adding more generic volatility terms.",
+        "Separates persistent state from instability by keeping medium-horizon trend terms positive but clearly smaller than short-horizon reversal terms.",
+        "Uses path/asymmetry penalties and upside-exhaustion asymmetry via max_ret1_20 versus min_ret1_20 to downweight fragile spikes while allowing downside washout recovery."
+      ],
+      "failures": [
+        "Fails in momentum cascades where recent positive displacement is not overshoot but the start of a stronger continuation regime.",
+        "Fails when overnight gaps reflect genuine information incorporation, making gap and range instability penalties misclassify true state change.",
+        "Degrades in severe liquidity stress or trading-constraint episodes where tradability and impact dominate the expected recovery mechanism."
+      ]
+    },
+    "r_use": 0.0018692284490744889,
+    "r_select": -0.0022869848270993965,
+    "r_distill": 0.005195266595217357,
+    "candidate_id": "cd039a38e1ebf2a5c10ae4d7336325705c6e8e5c312e9a6589e16f55585932cc",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      -0.42763931292232227,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.35564899987385795,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.433938686036447,
+      0.7087563923471946,
+      0.0,
+      0.0
+    ]
+  }
+]

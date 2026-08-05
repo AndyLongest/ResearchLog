@@ -1,0 +1,206 @@
+[
+  {
+    "skill_id": "dac242f806c8518b",
+    "parent_skill_id": null,
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon reversal with medium-horizon drift in small-cap equities; Measurement object: persistent state formed by recent return displacement and its recovery/asymmetry relative to volatility and trading activity; Persistence hypothesis: sharp short-term moves accompanied by unstable path features tend to mean-revert, while smoother medium-horizon accumulation persists weakly.",
+      "grammar": "Combine (i) short-horizon displacement level with negative sign, (ii) recovery/reversal proxy via delayed and differenced multi-day returns, and (iii) path-instability penalties from range/open-close/overnight and recent volatility; optionally retain a weak medium-horizon state term and a light liquidity interaction to separate transient shocks from persistent trends.",
+      "applicability": "More predictable in retail-dominated, high-turnover small-cap regimes with noisy short-term overreaction and limited trend durability; weaker in strongly policy-driven momentum bursts.",
+      "successes": [
+        "Negative loading on recent 1-5 day return levels combined with negative loading on delay/delta of 5-day return to capture reversal after abrupt displacement.",
+        "Use of path/asymmetry controls (range1, open_close, overnight, max/min recent daily return) to distinguish unstable jumps from smoother persistent moves.",
+        "Keep medium-horizon state sparse and weakly positive (ret20/ret60, rank_ret20) rather than extending windows mechanically."
+      ],
+      "failures": [
+        "Can fail during broad speculative momentum phases where short-term continuation dominates reversal.",
+        "Can fail after structural regime shifts or policy shocks when overnight gaps encode genuine information rather than transitory imbalance.",
+        "May underperform in very illiquid names where measured reversal proxies are dominated by trading frictions instead of mispricing."
+      ]
+    },
+    "r_use": -0.004104960275208286,
+    "r_select": -0.0008209920550416571,
+    "r_distill": -0.004104960275208286,
+    "candidate_id": "4449de7a911960dc64e22a10310034ff92980222b719cb05fea987953bd50633",
+    "beta": [
+      -0.42218129371233715,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.5297437498892197,
+      -0.38343401245243225,
+      0.0,
+      -0.6277840972717559,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "2fd045010b4fc20c",
+    "parent_skill_id": "dac242f806c8518b",
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon overreaction with weak medium-horizon drift in small-cap equities; Measurement object: persistent state formed by recent return displacement, its recovery/reversal signature, and path instability under elevated trading activity; Persistence hypothesis: large recent displacements with unstable paths and reversal-like follow-through tend to mean-revert over the next horizon, while smoother medium-horizon accumulation persists only weakly.",
+      "grammar": "Measure a reversal state by combining negative short-horizon displacement levels with negative recovery/reversal transforms on multi-day returns (delay and delta), then penalize unstable path/asymmetry using range, open-close, overnight, recent volatility, and recent extreme daily-return markers; retain only a weak medium-horizon state term and a light liquidity/activity separator to distinguish transient shocks from persistent drift.",
+      "applicability": "More predictable in CSI1000-like small-cap, retail-heavy, high-turnover regimes where short-term price pressure and noisy jumps are common; weaker during coordinated speculative momentum or policy-led continuation bursts.",
+      "successes": [
+        "Negative loading on recent displacement measures (ret1, ret5, mean_ret1_5, ma_gap5) to capture reversal after sharp moves.",
+        "Use delayed and differenced 5-day return terms as recovery/reversal proxies rather than only extending lookback windows.",
+        "Penalize unstable path states with range1, open_close, overnight, volatility, and max/min recent daily-return markers while keeping medium-horizon drift sparse and weakly positive."
+      ],
+      "failures": [
+        "Fails when short-horizon continuation dominates, especially in broad speculative momentum phases.",
+        "Fails after regime or policy shocks when gaps and path instability reflect durable information rather than transitory imbalance.",
+        "Can weaken in very illiquid tails where reversal measurements are contaminated by trading frictions and price discreteness."
+      ]
+    },
+    "r_use": -0.004346507714866774,
+    "r_select": -0.004153269763139984,
+    "r_distill": -0.0002415474396584875,
+    "candidate_id": "3d4987845dd80834b35abad2089e223c9c6ee25f474155683ed0194737af2618",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.48773206709327305,
+      0.0,
+      0.0,
+      0.0,
+      0.4205105063729424,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.5627432729020065,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.5182743998717595,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "5ef62a98a0a283d3",
+    "parent_skill_id": "2fd045010b4fc20c",
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon overreaction and noisy jump unwinds in CSI1000 small caps with only weak medium-horizon continuation; Measurement object: persistent reversal state measured from recent displacement level, recovery/reversal progression, and path instability under elevated activity; Persistence hypothesis: large recent advances or shocks that also exhibit unstable path/asymmetry and weak recovery structure tend to mean-revert over the next horizon, while smoother medium-horizon accumulation persists only weakly.",
+      "grammar": "Construct a reversal-state measure by negatively weighting short-horizon displacement levels, then add negative recovery/reversal transforms using delayed and differenced multi-day returns; penalize unstable path/asymmetry with range, open-close, overnight, short-volatility, and recent extreme-return markers, while keeping medium-horizon trend state sparse and weakly positive and using only a light activity/liquidity separator.",
+      "applicability": "Most applicable in retail-heavy, high-turnover CSI1000 regimes where short-term price pressure, gap moves, and noisy jumps are frequent; less reliable during coordinated momentum surges or information-driven continuation regimes.",
+      "successes": [
+        "Negative recent displacement block (ret1, ret5, mean_ret1_5, ma_gap5) for direct overreaction measurement rather than merely lengthening windows.",
+        "Recovery/reversal block (delay_ret5_1, delta_ret5_1) to distinguish persistent reversal state from simple low-level returns.",
+        "Path-instability filter using range1, open_close, overnight, vol5/20, and max/min recent daily-return markers to separate noisy shocks from smoother drift."
+      ],
+      "failures": [
+        "Fails when short-horizon continuation dominates, especially in broad speculative momentum phases.",
+        "Fails after policy or structural information shocks when gaps and volatility reflect durable repricing rather than transitory imbalance.",
+        "Weakens in the most illiquid tail where reversal-state measurements are distorted by trading frictions and price discreteness."
+      ]
+    },
+    "r_use": -0.004299859322874285,
+    "r_select": -0.004337178036468276,
+    "r_distill": -7.412532783675468e-05,
+    "candidate_id": "6bf60dd1d28d9cb8a96a3c336c9460315029b484fdb62eee92c7cdeb18839817",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.37416468654001345,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.4601530399686529,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.7003533388783661,
+      -0.39719663628478163,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "7903a0051ce631cf",
+    "parent_skill_id": "5ef62a98a0a283d3",
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon overreaction and noisy jump unwinds in CSI1000 small caps, with only weak residual medium-horizon drift; Measurement object: persistent reversal state measured as recent displacement level plus incomplete recovery/reversal progression, conditioned by path instability/asymmetry and light activity separation; Persistence hypothesis: names with large recent advances or shocks that have not cleanly recovered and that exhibit unstable gap/range structure are more likely to mean-revert over the next horizon, while smoother medium-horizon accumulation persists only weakly.",
+      "grammar": "Build a reversal-state signal by summing: (1) negative recent displacement levels, (2) negative recovery/reversal transforms using delayed and differenced multi-day returns to detect incomplete unwind, and (3) negative path-instability/asymmetry penalties from gap, range, short volatility, and recent extreme-return state; then retain only a sparse weak positive medium-horizon drift term and a light liquidity/activity separator.",
+      "applicability": "Most applicable in retail-heavy, high-turnover CSI1000 regimes where short-term price pressure, gap-driven moves, and noisy jumps are frequent; less reliable during coordinated momentum surges, policy-led repricing, or durable information shocks.",
+      "successes": [
+        "Negative displacement-level block using ret1, ret5, mean_ret1_5, and ma_gap5 to directly measure overextension rather than merely changing lookback length.",
+        "Recovery/reversal progression block using delay_ret5_1 and delta_ret5_1 to distinguish persistent reversal state from simple low recent returns.",
+        "Path-instability penalty using range1, open_close, overnight, vol5/20, and max/min recent daily-return markers to separate noisy shocks from smoother drift."
+      ],
+      "failures": [
+        "Fails when short-horizon continuation dominates, especially in broad speculative momentum phases.",
+        "Fails after policy or structural information shocks when gaps and volatility reflect durable repricing rather than transitory imbalance.",
+        "Weakens in the most illiquid tail where reversal-state measurements are distorted by trading frictions and price discreteness."
+      ]
+    },
+    "r_use": 6.547178596587495e-05,
+    "r_select": -0.003426793101106253,
+    "r_distill": 0.00436533110884016,
+    "candidate_id": "0ba98d01df1dd0af41e51cef6c9f1671511ede065748f50b9d3d0b74abaf4193",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.6327893125052567,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.42019031623681674,
+      0.0,
+      -0.4334193213972708,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.4849386311271334,
+      0.0,
+      0.0
+    ]
+  }
+]

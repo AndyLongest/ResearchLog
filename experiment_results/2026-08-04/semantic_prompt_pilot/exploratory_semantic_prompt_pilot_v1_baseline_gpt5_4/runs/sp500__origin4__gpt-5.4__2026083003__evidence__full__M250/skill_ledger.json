@@ -1,0 +1,308 @@
+[
+  {
+    "skill_id": "037eeacf9f9b86a6",
+    "parent_skill_id": null,
+    "skill": {
+      "hypothesis": "Short-horizon reversal within medium-horizon overextension: in large-cap equities, recent winners with stretched moving-average gaps and elevated realized volatility tend to mean-revert, especially when the move is not supported by improving liquidity. The mechanism is temporary demand pressure and position crowding fading faster than fundamentals update.",
+      "grammar": "add(add(mul(a,rank(neg(ret5))),mul(b,rank(neg(ma_gap20)))),add(mul(c,rank(neg(ret20))),add(mul(d,rank(vol20)),mul(e,rank(min_ret1_20)))))",
+      "applicability": "Most predictable in diversified, liquid large-cap universes during non-crisis, range-bound or choppy regimes where short-term flows dominate and trend persistence is weaker; less reliable in strong momentum-led macro breakouts.",
+      "successes": [
+        "Combine negative recent returns with negative medium-horizon price-extension terms to express reversal after overreaction.",
+        "Use volatility/range as a conditioning amplifier rather than the sole signal.",
+        "Keep the template sparse and rank-based for cross-sectional robustness in broad equity universes."
+      ],
+      "failures": [
+        "Fails in persistent momentum regimes where earnings/macro news creates genuine trend continuation.",
+        "Fails during crisis deleveraging when high volatility reflects information shocks rather than temporary dislocation.",
+        "Weak when applied to illiquid tails where microstructure noise dominates simple reversal patterns."
+      ]
+    },
+    "r_use": -0.002806258082955008,
+    "r_select": -0.0005612516165910015,
+    "r_distill": -0.002806258082955008,
+    "candidate_id": "aa581db4198ce2e057fc6e77d7bb7b663ad9b4608b4f41c198b983830170ed99",
+    "beta": [
+      0.0,
+      -0.50709255283711,
+      -0.6197797868009122,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.45074893585520887,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.3944053188733078,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "bb7123faacf04822",
+    "parent_skill_id": "037eeacf9f9b86a6",
+    "skill": {
+      "hypothesis": "In S&P 500 large caps, short-horizon mean reversion is stronger when a name is medium-horizon overextended, realized volatility is elevated, and trading activity/liquidity do not confirm the move. The mechanism is temporary flow-driven price pressure and crowding that unwind after stretched advances or declines, especially in choppy non-breakout regimes.",
+      "grammar": "add(add(mul(a,rank(neg(ret5))),mul(b,rank(neg(ma_gap20)))),add(mul(c,rank(neg(ret20))),add(mul(d,rank(vol20)),add(mul(e,rank(min_ret1_20)),mul(f,rank(neg(liquidity20)))))))",
+      "applicability": "Best in diversified, liquid, non-crisis S&P 500 regimes with range-bound or rotational tape and weaker trend persistence; less reliable during strong macro/earnings momentum breakouts or crisis information shocks.",
+      "successes": [
+        "Sparse rank-based reversal plus medium-horizon extension template.",
+        "Use vol20 as an amplifier of overreaction rather than a standalone directional bet.",
+        "Penalize moves accompanied by stronger liquidity/volume confirmation to target unsupported dislocations."
+      ],
+      "failures": [
+        "Persistent momentum regimes with genuine information-driven continuation.",
+        "Crisis deleveraging where volatility proxies news intensity, not temporary mispricing.",
+        "Very calm low-dispersion tapes where reversal edge is too weak after costs."
+      ]
+    },
+    "r_use": -0.0032720884168568267,
+    "r_select": -0.002899424149735372,
+    "r_distill": -0.0004658303339018185,
+    "candidate_id": "e888ccc12c5a83e87b680e3f97ee031ef035521b3fdb93ae83a1507bfa740499",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.5482567831827572,
+      0.0,
+      0.4104816544283302,
+      0.0,
+      0.0,
+      0.0,
+      -0.576856858683576,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.44514657772647537
+    ]
+  },
+  {
+    "skill_id": "f6209267e116a8ff",
+    "parent_skill_id": "bb7123faacf04822",
+    "skill": {
+      "hypothesis": "In S&P 500 large caps, short-horizon mean reversion is most likely after medium-horizon price overextension when realized volatility is elevated and liquidity does not confirm the move. The mechanism is temporary flow-driven pressure and crowding that unwind in choppy, non-breakout regimes.",
+      "grammar": "add(add(mul(a,rank(neg(ret5))),mul(b,rank(neg(ma_gap20)))),add(mul(c,rank(neg(ret20))),add(mul(d,rank(vol20)),add(mul(e,rank(min_ret1_20)),mul(f,rank(neg(liquidity20)))))))",
+      "applicability": "Best in diversified, liquid, range-bound or rotational S&P 500 regimes with weaker trend persistence; less reliable during strong information-driven momentum, macro breakouts, or crisis deleveraging.",
+      "successes": [
+        "Sparse rank-based reversal combined with medium-horizon extension.",
+        "Use vol20 as an amplifier of overreaction rather than a standalone directional signal.",
+        "Penalize moves with stronger liquidity confirmation to isolate unsupported dislocations."
+      ],
+      "failures": [
+        "Persistent momentum regimes with genuine information-driven continuation.",
+        "Crisis regimes where volatility proxies news intensity rather than temporary mispricing.",
+        "Very calm low-dispersion tapes where reversal edge is too weak after costs."
+      ]
+    },
+    "r_use": -0.0014054353224899918,
+    "r_select": -0.0028987577979834598,
+    "r_distill": 0.0016337379274159254,
+    "candidate_id": "3c140d2d0f62eb3ecc4d1ca5db6698d55ce03d7b55afee6d9bb7bcd38dc58fe8",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.6375995018521279,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.4536256138668022,
+      0.3342012994514636,
+      0.0,
+      0.0,
+      0.0,
+      -0.5253571824262407,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "2b4ee9a3f18b718f",
+    "parent_skill_id": "bb7123faacf04822",
+    "skill": {
+      "hypothesis": "In S&P 500 large caps, short-horizon mean reversion is more likely when recent and medium-horizon returns are stretched, the price is extended versus its 20-day trend, realized volatility is elevated, and liquidity does not confirm the move. The mechanism is temporary flow-driven overreaction and crowding that unwind in choppy, non-breakout regimes.",
+      "grammar": "add(add(mul(a,rank(neg(ret5))),mul(b,rank(neg(ma_gap20)))),add(mul(c,rank(neg(ret20))),add(mul(d,rank(vol20)),add(mul(e,rank(min_ret1_20)),mul(f,rank(neg(liquidity20)))))))",
+      "applicability": "Best in diversified, liquid, range-bound or rotational S&P 500 regimes with weaker trend persistence; less reliable during strong information-driven momentum, macro breakouts, crisis deleveraging, or very calm low-dispersion tapes.",
+      "successes": [
+        "Sparse rank-based reversal combined with medium-horizon extension.",
+        "Use vol20 as an amplifier of overreaction rather than a standalone directional signal.",
+        "Penalize moves with stronger liquidity confirmation to isolate unsupported dislocations."
+      ],
+      "failures": [
+        "Persistent momentum regimes with genuine information-driven continuation.",
+        "Crisis regimes where volatility proxies news intensity rather than temporary mispricing.",
+        "Very calm low-dispersion tapes where reversal edge is too weak after costs."
+      ]
+    },
+    "r_use": -0.002338460179079544,
+    "r_select": -0.0030853627693013704,
+    "r_distill": 0.0004677979038754643,
+    "candidate_id": "59e22f4a9678a07927aa5f691add0ef5951cf45a65df7c8bcfab2b8fa7ea3729",
+    "beta": [
+      0.0,
+      0.0,
+      0.48896725287489556,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.504793636990363,
+      0.0,
+      0.5282293097645249,
+      0.0,
+      0.0,
+      0.0,
+      -0.47651674259748034,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "fea5f4d6d43e8f30",
+    "parent_skill_id": "2b4ee9a3f18b718f",
+    "skill": {
+      "hypothesis": "In S&P 500 large caps, short-horizon mean reversion is more likely after recent and medium-horizon overextension, especially when realized volatility is elevated and liquidity does not confirm the move. The mechanism is temporary flow-driven overreaction and crowding that unwind in choppy, non-breakout regimes.",
+      "grammar": "add(add(mul(a,rank(neg(ret5))),mul(b,rank(neg(ma_gap20)))),add(mul(c,rank(neg(ret20))),add(mul(d,rank(vol20)),add(mul(e,rank(min_ret1_20)),mul(f,rank(neg(liquidity20)))))))",
+      "applicability": "Best in diversified, liquid, range-bound or rotational S&P 500 regimes with weaker trend persistence; less reliable during strong information-driven momentum, macro breakouts, crisis deleveraging, or very calm low-dispersion tapes.",
+      "successes": [
+        "Sparse rank-based reversal combined with medium-horizon extension.",
+        "Use vol20 as an amplifier of overreaction rather than a standalone directional signal.",
+        "Penalize moves with stronger liquidity confirmation to isolate unsupported dislocations."
+      ],
+      "failures": [
+        "Persistent momentum regimes with genuine information-driven continuation.",
+        "Crisis regimes where volatility proxies news intensity rather than temporary mispricing.",
+        "Very calm low-dispersion tapes where reversal edge is too weak after costs."
+      ]
+    },
+    "r_use": -0.004525455127568429,
+    "r_select": -0.002775859168777321,
+    "r_distill": -0.0019530959965511534,
+    "candidate_id": "78db2266daf014a16f8e2cbd377837d5367caab1c0fe6127d92d65eb53aee5c8",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.4457376910217745,
+      0.35326695831287486,
+      0.680234912342598,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.46238601946555913,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "41cda1465124d8d5",
+    "parent_skill_id": "2b4ee9a3f18b718f",
+    "skill": {
+      "hypothesis": "In S&P 500 large caps, short-horizon mean reversion is more likely after recent and medium-horizon overextension, especially when the price is stretched versus its 20-day trend, realized volatility is elevated, and liquidity does not confirm the move. The mechanism is temporary flow-driven overreaction and crowding that unwind in choppy, non-breakout regimes.",
+      "grammar": "add(add(mul(0.32,rank(neg(ret5))),mul(0.27,rank(neg(ma_gap20)))),add(mul(0.18,rank(neg(ret20))),add(mul(0.16,rank(vol20)),add(mul(0.14,rank(min_ret1_20)),mul(0.11,rank(neg(liquidity20)))))))",
+      "applicability": "Best in diversified, liquid, range-bound or rotational S&P 500 regimes with weaker trend persistence; less reliable during strong information-driven momentum, macro breakouts, crisis deleveraging, or very calm low-dispersion tapes.",
+      "successes": [
+        "Sparse rank-based reversal combined with medium-horizon extension.",
+        "Use vol20 as an amplifier of overreaction rather than a standalone directional signal.",
+        "Penalize moves with stronger liquidity confirmation to isolate unsupported dislocations."
+      ],
+      "failures": [
+        "Persistent momentum regimes with genuine information-driven continuation.",
+        "Crisis regimes where volatility proxies news intensity rather than temporary mispricing.",
+        "Very calm low-dispersion tapes where reversal edge is too weak after costs."
+      ]
+    },
+    "r_use": -0.0037861192337800002,
+    "r_select": -0.002627991990019635,
+    "r_distill": -0.000979861150824992,
+    "candidate_id": "9a48157c171a3cddae133e643eb8cde6d07db18608618ad45a702e851e2457a1",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.46603320706045354,
+      0.0,
+      0.7923876717642259,
+      0.0,
+      0.0,
+      0.2651475977296035,
+      0.0,
+      0.0,
+      -0.2909150717498808,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  }
+]

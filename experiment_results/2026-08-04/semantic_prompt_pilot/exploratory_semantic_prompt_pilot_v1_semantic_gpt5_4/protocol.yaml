@@ -1,0 +1,68 @@
+protocol_version: multimarket-semantic-prompt-pilot-semantic-1.0.0
+truth_label: exploratory retrospective semantic-prompt pilot - semantic-measurement arm
+status: frozen_before_outcome_generation
+frozen_at: 2026-08-04T00:00:00+08:00
+canonical_pdf: docs/papers/Alpha2_KDD_Project_Draft_20260721.pdf
+interpretation_boundary: exploratory prompt ablation on already-opened historical locked outcomes; not prospective confirmation
+scope:
+  markets: [csi500, csi1000, sp500]
+  limitation: existing 26-feature daily typed basis cannot express true intraday event-arrival or recovery measurements
+  csi1000_launch_rule: no membership before the official October 2014 launch
+models: [gpt-5.4, claude-sonnet-4.6]
+temperature: 0.2
+top_p: 1.0
+max_completion_tokens: 2200
+prompt:
+  variant: semantic_measurement
+  paired_comparator: baseline
+candidate:
+  type: typed_ast_basis
+  max_ast_nodes: 31
+  max_lookback: 60
+  sparse_terms: 4
+  mutation_std: 0.25
+  uniqueness_required: true
+skill:
+  memory_top_n: 8
+  ema_decay: 0.8
+  evidence_increment_clip: 0.25
+  complexity_penalty: 0.0005
+  turnover_penalty: 0.0005
+  redundancy_penalty: 0.002
+  bandit_temperature: 0.5
+  parent_blend: 0.75
+search:
+  formal_budget: 250
+  confirmatory_seeds: [2026083001, 2026083002, 2026083003, 2026083004, 2026083005]
+evidence:
+  alpha: 0.05
+  utility_scale: 0.02
+  utility_clip: 1.0
+  betting: mixture
+  lambda_grid: [0.02, 0.05, 0.10, 0.20, 0.35, 0.50]
+  alpha_schedule: adaptive_lineage_reserved_prebirth
+  allocation_information: selected_parent_r_select_only
+  per_birth_cap: 0.005
+  lineage_reserve_fraction: 0.1
+portfolio:
+  primary: dollar_neutral_top_bottom_quintile
+  long_fraction: 0.2
+  short_fraction: 0.2
+  one_day_lag: true
+  cost_bps: 10.0
+rolling_origins:
+  csi500:
+    - {origin: 4, warm_start: 2010, warm_end: 2016, evidence_start: 2017, evidence_end: 2022, locked_start: 2023, locked_end: 2025}
+  sp500:
+    - {origin: 4, warm_start: 2010, warm_end: 2016, evidence_start: 2017, evidence_end: 2022, locked_start: 2023, locked_end: 2025}
+  csi1000:
+    - {origin: 4, warm_start: 2014, warm_end: 2018, evidence_start: 2019, evidence_end: 2022, locked_start: 2023, locked_end: 2025}
+evaluation:
+  primary_metric: paired_locked_rankic_semantic_minus_baseline
+  secondary_metrics: [sgg, locked_net_sharpe, certified_count, mean_redundancy, feature_coverage, parse_fallbacks, prompt_tokens]
+  confidence_interval: paired_t_95
+  unit: market_model_seed_pair
+reporting:
+  primary_locked_window: 2023-2025
+  exploratory_only: true
+  full_metric_family_required: true

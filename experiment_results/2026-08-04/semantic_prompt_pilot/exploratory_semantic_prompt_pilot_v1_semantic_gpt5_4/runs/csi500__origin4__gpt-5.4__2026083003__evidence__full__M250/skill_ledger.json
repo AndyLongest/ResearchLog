@@ -1,0 +1,308 @@
+[
+  {
+    "skill_id": "f14f8196e0372cc3",
+    "parent_skill_id": null,
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon reversal embedded within medium-horizon overextension and stress; Measurement object: persistent state combining signed return level, local path asymmetry, and stress magnitude rather than a pure one-day shock; Persistence hypothesis: in csi500-like small/mid-cap universes, recent losers with compressed continuation and elevated trading/range stress are more likely to mean-revert over subsequent horizons, while crowded winners tend to fade.",
+      "grammar": "Construct a reversal-state score by combining (i) signed medium-window return level, (ii) short-window delayed/recent return contrast as a recovery-vs-continuation proxy, and (iii) stress confirmation from range/volatility/extreme-return statistics; favor negative exposure to persistent positive trend states and positive exposure to recent downside extremes when accompanied by decelerating continuation.",
+      "applicability": "Most applicable in noisy, retail-dominated, mean-reverting cross-sections with limited long-trend persistence; weaker in strong benchmark-driven momentum regimes or during broad macro trend breaks.",
+      "successes": [
+        "Use medium-horizon signed return level (ret20, rank_ret20, signedpow_ret20_half) as the core overextension measure, then confirm with short-horizon reversal-state terms (delay_ret5_1 positive, delta_ret5_1 negative).",
+        "Add path/stress modifiers through min/max/quantile of daily returns and range/volatility terms to distinguish exhausted selloffs from smooth trends.",
+        "Keep liquidity and volume terms secondary, using them only as confirmation of crowding/stress rather than the primary signal."
+      ],
+      "failures": [
+        "Fails when momentum persistence dominates mean reversion, especially in strong policy/liquidity-driven rallies or crashes where overextension continues.",
+        "Fails when downside extremes reflect genuine information repricing rather than temporary dislocation, so positive loading on recent losers becomes a value trap.",
+        "Weakens in very low-dispersion regimes where range/volatility/extreme-return measurements carry little cross-sectional information."
+      ]
+    },
+    "r_use": -0.004088912405206424,
+    "r_select": -0.0008177824810412847,
+    "r_distill": -0.004088912405206424,
+    "candidate_id": "089a1a667f092242fd8acc678b1cda4d3151dbdaa64de170c354ea431cb17158",
+    "beta": [
+      0.0,
+      -0.5152152255913548,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.45993784752801037,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.4156495847975304,
+      0.591815740233217,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "4a6d8f1ebd106ea9",
+    "parent_skill_id": "f14f8196e0372cc3",
+    "skill": {
+      "hypothesis": "Phenomenon: medium-horizon overextension with short-horizon recovery after stress in csi500 small/mid caps; Measurement object: persistent reversal state combining signed return level, recovery-vs-continuation contrast, and downside-stress asymmetry rather than a pure recent-shock magnitude; Persistence hypothesis: names with negative medium-horizon state or exhausted downside paths, especially when recent continuation is decelerating, are more likely to mean-revert over subsequent horizons than smooth recent winners.",
+      "grammar": "Build a reversal-state measurement by summing three typed components: (1) signed medium-horizon level via negative loading on ret20/rank_ret20/signedpow_ret20_half with optional weaker ret60 confirmation; (2) recovery-versus-continuation state via positive delay_ret5_1 and negative delta_ret5_1 to reward bounce after prior weakness and penalize fresh acceleration; (3) downside-stress asymmetry via positive min_ret1_20 and quantile_ret1_20, negative max_ret1_20, with light confirmation from vol20/cov_ret_range20/volume_z20/liquidity20. This template measures persistent state and path asymmetry, not isolated shocks.",
+      "applicability": "Predictable in noisy mean-reverting small/mid-cap cross-sections where medium-window winners are crowded and recent downside stress often overshoots fundamentals; weaker in broad persistent momentum or information-repricing regimes.",
+      "successes": [
+        "Center the construction on measurement-level state variables: medium-horizon signed level plus short-horizon recovery/continuation contrast.",
+        "Use downside-tail path terms (min_ret1_20, quantile_ret1_20) instead of adding more raw return windows, preserving sparse interpretability.",
+        "Keep trading-activity and stress terms as weak confirmation so the signal remains primarily a reversal-state measure."
+      ],
+      "failures": [
+        "Fails when medium-horizon trend persistence dominates and negative ret20 exposure fights genuine momentum.",
+        "Fails when downside extremes are fundamental repricing, making positive exposure to stressed losers a trap.",
+        "Weakens when cross-sectional stress dispersion is low, so path-asymmetry and stress confirmations add little information."
+      ]
+    },
+    "r_use": -0.0033778790977189894,
+    "r_select": -0.003946705743708937,
+    "r_distill": 0.0007110333074874346,
+    "candidate_id": "99c334c60d9ae469119da1b273a39194edfa3967149ca59a4997bf5a37213d6b",
+    "beta": [
+      0.0,
+      -0.52493738647487,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.48434632905835606,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.48282052768099415,
+      0.5066889695449014,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "e84f8a1913da776f",
+    "parent_skill_id": "4a6d8f1ebd106ea9",
+    "skill": {
+      "hypothesis": "Phenomenon: medium-horizon overextension with short-horizon recovery after downside stress in csi500 small/mid caps; Measurement object: persistent reversal state combining signed medium-horizon return level, recovery-versus-continuation contrast, and downside-path asymmetry with light stress/crowding confirmation; Persistence hypothesis: names with stretched positive 20-day state or exhausted downside paths, especially when recent continuation is decelerating and a bounce is emerging, are more likely to mean-revert over subsequent horizons than smooth recent winners.",
+      "grammar": "Measure a reversal state as a sparse sum of three reusable components: negative signed medium-horizon level {ret20, rank_ret20, signedpow_ret20_half, weak ret60/ma_gap20 confirmation}; positive recovery-versus-continuation contrast {delay_ret5_1 minus delta_ret5_1, with light negative ret5/mean_ret1_5}; positive downside-path asymmetry {min_ret1_20 plus quantile_ret1_20 minus max_ret1_20}, then add weak stress/crowding confirmation {vol20, cov_ret_range20, volume_z20, liquidity20}.",
+      "applicability": "Best in noisy, retail-dominated, mean-reverting csi500 cross-sections where medium-window winners are crowded and downside stress often overshoots fundamentals; weaker in persistent momentum, broad information-repricing, or low-dispersion regimes.",
+      "successes": [
+        "Center the signal on persistent state measurement: medium-horizon signed level plus short-horizon recovery-versus-continuation contrast.",
+        "Use downside-path asymmetry through min/quantile/max daily return terms to distinguish exhausted selloffs from smooth trends.",
+        "Keep volatility, range-volume coupling, and activity terms as weak confirmation so the factor remains sparse and interpretable."
+      ],
+      "failures": [
+        "Fails when genuine momentum persistence dominates and negative medium-horizon trend exposure fights continuing winners.",
+        "Fails when downside extremes reflect fundamental repricing, turning stressed losers into value traps rather than reversal candidates.",
+        "Weakens when cross-sectional stress dispersion and crowding variation are low, reducing the information in asymmetry and confirmation terms."
+      ]
+    },
+    "r_use": -0.001853272647067129,
+    "r_select": -0.0030729578075886174,
+    "r_distill": 0.0018801231043955777,
+    "candidate_id": "69bd71f307dffbc6cd4ff240d49da121749c1940cd9deb7995912b8af60d361a",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.5786921095800143,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.4501911951276587,
+      0.48448723797686616,
+      -0.47719539643306536,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "3a2c39d32af6f8fc",
+    "parent_skill_id": "4a6d8f1ebd106ea9",
+    "skill": {
+      "hypothesis": "Phenomenon: medium-horizon overextension with short-horizon recovery after downside stress in csi500 small/mid caps; Measurement object: persistent reversal state combining signed medium-horizon level, recovery-versus-continuation contrast, and downside-path asymmetry with light crowding/stress confirmation; Persistence hypothesis: names with stretched positive 20-day state or exhausted downside paths, especially when recent continuation is decelerating and prior weakness is starting to bounce, are more likely to mean-revert over subsequent horizons than smooth recent winners.",
+      "grammar": "Construct a sparse reversal-state measurement as the sum of three typed components: (1) signed medium-horizon level using negative ret20, rank_ret20, and signedpow_ret20_half with weak ret60 and ma_gap20 confirmation; (2) recovery-versus-continuation state using positive delay_ret5_1 and negative delta_ret5_1, with light negative ret5 and mean_ret1_5 to avoid chasing fresh weakness; (3) downside-path asymmetry using positive min_ret1_20 and quantile_ret1_20 against negative max_ret1_20, then add weak stress/crowding confirmation from vol20, cov_ret_range20, volume_z20, and liquidity20. This is a persistent-state and path-asymmetry transformation, not a pure shock-magnitude measure.",
+      "applicability": "Best in noisy, retail-dominated, mean-reverting csi500 cross-sections where medium-window winners are crowded and downside stress often overshoots fundamentals; weaker in persistent momentum, broad information-repricing, or low-dispersion regimes.",
+      "successes": [
+        "Emphasize a measurement-level revision toward persistent reversal state rather than adding more short windows.",
+        "Use recovery-versus-continuation contrast through delay_ret5_1 minus delta_ret5_1 as the core short-horizon state transition measure.",
+        "Keep stress and activity variables as weak confirmation so the construction stays sparse and interpretable."
+      ],
+      "failures": [
+        "Fails when genuine medium-horizon momentum persistence dominates and negative ret20 exposure fights continuing winners.",
+        "Fails when downside extremes reflect fundamental repricing, making positive loading on stressed losers a value trap.",
+        "Weakens when cross-sectional dispersion in stress and crowding is low, reducing information in asymmetry and confirmation terms."
+      ]
+    },
+    "r_use": -0.004928671547217684,
+    "r_select": -0.0036880375876187283,
+    "r_distill": -0.0015507924494986948,
+    "candidate_id": "732785d6d4e636152ca03993f32005b5074d208407c1ea4025dad1a863be6be8",
+    "beta": [
+      0.0,
+      -0.5702637680013766,
+      0.0,
+      0.3410402286433588,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.6363461025448232,
+      0.0,
+      0.0,
+      0.0,
+      0.3918602239673877
+    ]
+  },
+  {
+    "skill_id": "88ec83fbdc13e1e7",
+    "parent_skill_id": "4a6d8f1ebd106ea9",
+    "skill": {
+      "hypothesis": "Phenomenon: medium-horizon overextension with short-horizon recovery after downside stress in csi500 small/mid caps; Measurement object: persistent reversal state combining signed medium-horizon return level, recovery-versus-continuation contrast, and downside-path asymmetry with light stress/crowding confirmation; Persistence hypothesis: names with stretched positive 20-day state or exhausted downside paths, especially when recent continuation is decelerating and prior weakness is starting to bounce, are more likely to mean-revert over subsequent horizons than smooth recent winners.",
+      "grammar": "Construct a sparse reversal-state measurement as the sum of three typed components: (1) signed medium-horizon level using negative ret20, rank_ret20, and signedpow_ret20_half with weak ret60 and ma_gap20 confirmation; (2) recovery-versus-continuation state using positive delay_ret5_1 and negative delta_ret5_1, with light negative ret5 and mean_ret1_5; (3) downside-path asymmetry using positive min_ret1_20 and quantile_ret1_20 against negative max_ret1_20, then add weak stress/crowding confirmation from vol20, cov_ret_range20, volume_z20, and liquidity20. This is a persistent-state and path-asymmetry transformation, not a pure shock-magnitude measure.",
+      "applicability": "Best in noisy, retail-dominated, mean-reverting csi500 cross-sections where medium-window winners are crowded and downside stress often overshoots fundamentals; weaker in persistent momentum, broad information-repricing, or low-dispersion regimes.",
+      "successes": [
+        "Emphasize a measurement-level revision toward persistent reversal state rather than adding more short windows.",
+        "Use recovery-versus-continuation contrast through delay_ret5_1 minus delta_ret5_1 as the core short-horizon state transition measure.",
+        "Keep stress and activity variables as weak confirmation so the construction stays sparse and interpretable."
+      ],
+      "failures": [
+        "Fails when genuine medium-horizon momentum persistence dominates and negative ret20 exposure fights continuing winners.",
+        "Fails when downside extremes reflect fundamental repricing, making positive loading on stressed losers a value trap.",
+        "Weakens when cross-sectional dispersion in stress and crowding is low, reducing information in asymmetry and confirmation terms."
+      ]
+    },
+    "r_use": -0.003973150950837823,
+    "r_select": -0.0034969334683427563,
+    "r_distill": -0.0002397551993751166,
+    "candidate_id": "eafeecef2d5e214e7a8dfc47b94e3987ff124eb9c9d491cee525f79092c28d22",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.4476345366738097,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.49122261417840796,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.4854184694047052,
+      0.0,
+      -0.568060361631885,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "fe1708eab64a8f20",
+    "parent_skill_id": "4a6d8f1ebd106ea9",
+    "skill": {
+      "hypothesis": "Phenomenon: medium-horizon overextension with short-horizon recovery after downside stress in csi500 small/mid caps; Measurement object: persistent reversal state combining signed medium-horizon level, recovery-versus-continuation contrast, and downside-path asymmetry with light crowding/stress confirmation; Persistence hypothesis: names with stretched positive 20-day state or exhausted downside paths, especially when recent continuation is decelerating and prior weakness is starting to bounce, are more likely to mean-revert over subsequent horizons than smooth recent winners.",
+      "grammar": "Construct a sparse reversal-state measurement as a sum of typed components: negative signed medium-horizon level {ret20, rank_ret20, signedpow_ret20_half, weak ret60 and ma_gap20 confirmation}; positive recovery-versus-continuation state {delay_ret5_1 minus delta_ret5_1, with light negative ret5 and mean_ret1_5}; positive downside-path asymmetry {min_ret1_20 plus quantile_ret1_20 minus max_ret1_20}; then add weak stress/crowding confirmation {vol20, cov_ret_range20, volume_z20, liquidity20}. This reusable transformation measures persistent state and path asymmetry rather than isolated shock magnitude.",
+      "applicability": "Best in noisy, retail-dominated, mean-reverting csi500 cross-sections where medium-window winners are crowded and downside stress often overshoots fundamentals; weaker in persistent momentum, broad information-repricing, or low-dispersion regimes.",
+      "successes": [
+        "Center the construction on persistent reversal state instead of adding more raw short-window shocks.",
+        "Use recovery-versus-continuation contrast through delay_ret5_1 minus delta_ret5_1 as the main short-horizon state-transition measure.",
+        "Use downside-tail path terms min_ret1_20, quantile_ret1_20, and max_ret1_20 to capture exhausted selloffs while keeping activity variables secondary."
+      ],
+      "failures": [
+        "Fails when genuine medium-horizon momentum persistence dominates and negative ret20 exposure fights continuing winners.",
+        "Fails when downside extremes reflect fundamental repricing, making stressed losers value traps rather than reversal candidates.",
+        "Weakens when cross-sectional dispersion in stress and crowding is low, reducing information in asymmetry and confirmation terms."
+      ]
+    },
+    "r_use": -0.0003425776177677731,
+    "r_select": -0.0027708188017287463,
+    "r_distill": 0.0036305733330700505,
+    "candidate_id": "100057ae42e198cf8f7b1b7e9a046a8577af57fba8c765968e10c0fe568454ac",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      -0.36858467480510587,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.2344206505304888,
+      0.0,
+      0.0,
+      -0.8341464556216833,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.3367372665409337,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  }
+]

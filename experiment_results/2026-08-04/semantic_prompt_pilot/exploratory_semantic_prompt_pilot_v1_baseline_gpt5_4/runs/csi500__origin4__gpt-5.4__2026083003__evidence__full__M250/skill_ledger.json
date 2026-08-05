@@ -1,0 +1,294 @@
+[
+  {
+    "skill_id": "d2ecb2c824d13cb0",
+    "parent_skill_id": null,
+    "skill": {
+      "hypothesis": "In CSI500-like small/mid-cap universes, short-horizon price extensions accompanied by elevated intraday stress and only modest liquidity support tend to mean-revert as attention and inventory imbalances normalize. A sparse contrarian signal should therefore load negatively on recent returns, short-term moving-average gaps, and range, while allowing a small positive tilt to liquidity to avoid the weakest names.",
+      "grammar": "add(add(mul(a,mean_ret1_5),mul(b,ma_gap5)),add(mul(c,range1),mul(d,liquidity20))) with sign pattern a<0, b<0, c<0, d>0 and |d|<|a|,|b|",
+      "applicability": "Most predictable in choppy, non-trending, liquidity-adequate small/mid-cap regimes after short-term overreaction; weaker during strong momentum-led trend persistence or event-driven repricing.",
+      "successes": [
+        "Sparse short-term reversal construction: negative recent-return term plus negative price-extension term plus negative stress/range term, lightly filtered by positive liquidity support."
+      ],
+      "failures": [
+        "Breaks down in persistent momentum regimes, post-news drift, limit-driven dislocations, or when liquidity deterioration dominates and apparent reversals are value traps."
+      ]
+    },
+    "r_use": -0.003888839864565857,
+    "r_select": -0.0007777679729131712,
+    "r_distill": -0.003888839864565857,
+    "candidate_id": "24c5a0157e4f42c19ee1f855b1895aa2071b1b4adf8e946f010532e8b95dea67",
+    "beta": [
+      0.0,
+      -0.42108220336634283,
+      0.0,
+      0.41450609922128906,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.7149328508149495,
+      0.0,
+      0.0,
+      -0.3738254813975445,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "34495d19c70d34b5",
+    "parent_skill_id": "d2ecb2c824d13cb0",
+    "skill": {
+      "hypothesis": "In CSI500-like small/mid-cap stocks, short-horizon overreaction is more likely to reverse when recent gains coincide with price extension and elevated intraday stress, provided baseline liquidity is not too weak. A sparse contrarian composite should therefore penalize recent average returns, short-term moving-average gap, and daily range, while keeping only a small positive liquidity tilt as a tradability filter.",
+      "grammar": "add(add(mul(a,mean_ret1_5),mul(b,ma_gap5)),add(mul(c,range1),mul(d,liquidity20))) with a<0, b<0, c<0, d>0, and |d|<|a|,|b|,|c|",
+      "applicability": "Best suited to choppy, non-trending, liquidity-adequate CSI500 regimes where short-term attention and inventory imbalances mean-revert; less reliable during strong momentum persistence, event-driven repricing, or severe liquidity stress.",
+      "successes": [
+        "Sparse short-term reversal pattern combining negative recent-return, negative extension, and negative intraday-stress terms with a light positive liquidity filter.",
+        "Interpretable four-term construction aligned to small/mid-cap mean-reversion behavior without relying on longer-horizon or highly collinear features."
+      ],
+      "failures": [
+        "Underperforms in persistent trend or post-news drift regimes where recent strength continues rather than reverses.",
+        "Can misfire in illiquidity shocks or limit-driven dislocations where elevated range reflects fundamental repricing instead of temporary overreaction."
+      ]
+    },
+    "r_use": -0.0004893495721281396,
+    "r_select": -0.003208941806078314,
+    "r_distill": 0.0033994902924377175,
+    "candidate_id": "0694b7c79815bcc04576ab91d12f1525e162235c5d11e86d6d087a76b44d5fc3",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.45204510726756275,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.2999787214280667,
+      0.0,
+      0.0,
+      0.0,
+      -0.7545270053999178,
+      0.36926546793339937,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "07a2886594c19fec",
+    "parent_skill_id": "34495d19c70d34b5",
+    "skill": {
+      "hypothesis": "In CSI500 small/mid-cap stocks, short-horizon overreaction tends to reverse when recent gains coincide with short-term price extension and elevated intraday stress, while a modest positive liquidity tilt helps avoid the weakest tradability names. The expected effect is a sparse contrarian composite with dominant negative loads on recent average return, short moving-average gap, and daily range, plus a smaller positive liquidity filter.",
+      "grammar": "add(add(mul(-0.56,mean_ret1_5),mul(-0.43,ma_gap5)),add(mul(-0.31,range1),mul(0.12,liquidity20)))",
+      "applicability": "Choppy, non-trending, liquidity-adequate CSI500 regimes where attention and inventory imbalances mean-revert over short horizons; less reliable in strong momentum persistence, post-news drift, or severe liquidity-stress regimes.",
+      "successes": [
+        "Sparse four-term short-term reversal construction using mean_ret1_5, ma_gap5, range1, and liquidity20 with sign pattern ---+.",
+        "Interpretable contrarian pattern aligned with prior CSI500 small/mid-cap behavior: penalize recent strength, extension, and stress while lightly favoring tradability."
+      ],
+      "failures": [
+        "Underperforms during persistent trend or event-driven repricing when recent strength continues instead of reversing.",
+        "Can fail in illiquidity shocks or limit-driven dislocations where high range reflects fundamental repricing and liquidity filter is insufficient."
+      ]
+    },
+    "r_use": -0.003676124570544373,
+    "r_select": -0.001126704571811386,
+    "r_distill": -0.0014870298521973747,
+    "candidate_id": "b4809e560745d78e2e6708eeefe7f2cbc0d33cf94ed2a100d50de51e99499804",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.5531698710277848,
+      -0.44474828093335933,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.4513444008914945,
+      -0.5408237163603531,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "4448ff9565693cfb",
+    "parent_skill_id": "34495d19c70d34b5",
+    "skill": {
+      "hypothesis": "In CSI500-like small/mid-cap stocks, short-horizon overreaction is more likely to reverse when recent gains coincide with short-term price extension and elevated intraday stress, while a modest positive liquidity tilt helps avoid the weakest tradability names. The expected effect is a sparse contrarian composite with dominant negative loads on recent average return, short moving-average gap, and daily range, plus a smaller positive liquidity filter.",
+      "grammar": "add(add(mul(-0.56,mean_ret1_5),mul(-0.43,ma_gap5)),add(mul(-0.31,range1),mul(0.12,liquidity20)))",
+      "applicability": "Best suited to choppy, non-trending, liquidity-adequate CSI500 regimes where attention and inventory imbalances mean-revert over short horizons; less reliable during strong momentum persistence, post-news drift, event-driven repricing, or severe liquidity stress.",
+      "successes": [
+        "Sparse four-term short-term reversal construction using mean_ret1_5, ma_gap5, range1, and liquidity20 with sign pattern ---+.",
+        "Interpretable contrarian pattern aligned with CSI500 small/mid-cap behavior: penalize recent strength, extension, and stress while lightly favoring tradability."
+      ],
+      "failures": [
+        "Underperforms during persistent trend regimes when recent strength continues instead of reversing.",
+        "Can fail in illiquidity shocks or limit-driven dislocations where high range reflects fundamental repricing and the liquidity filter is insufficient."
+      ]
+    },
+    "r_use": -0.0016190748541046983,
+    "r_select": -0.0007152946285234514,
+    "r_distill": 0.0020570497164396745,
+    "candidate_id": "d7643a6d697387e7d8c0ec4b1a6b861cc278fb499379d988110728f30e0a270f",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.4517322416184664,
+      0.0,
+      0.0,
+      0.0,
+      -0.41297093609856494,
+      0.6747083150193087,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.4125065786918263,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "ee4d250e4f9533b2",
+    "parent_skill_id": "34495d19c70d34b5",
+    "skill": {
+      "hypothesis": "In CSI500 small/mid-cap stocks, short-horizon overreaction often mean-reverts when recent gains coincide with short-term price extension and elevated intraday stress, while a modest positive liquidity tilt helps avoid the weakest tradability names. A sparse contrarian composite should therefore penalize recent average returns, short moving-average gap, and daily range, with only a small positive liquidity filter.",
+      "grammar": "add(add(mul(-0.53,mean_ret1_5),mul(-0.41,ma_gap5)),add(mul(-0.28,range1),mul(0.11,liquidity20)))",
+      "applicability": "Choppy, non-trending, liquidity-adequate CSI500 regimes where attention and inventory imbalances mean-revert over short horizons; less reliable during strong momentum persistence, post-news drift, event-driven repricing, or severe liquidity stress.",
+      "successes": [
+        "Sparse four-term short-term reversal construction with sign pattern ---+ using mean_ret1_5, ma_gap5, range1, and liquidity20.",
+        "Interpretable CSI500 small/mid-cap contrarian pattern: penalize recent strength, extension, and stress while lightly favoring tradability."
+      ],
+      "failures": [
+        "Underperforms in persistent trend regimes when recent strength continues instead of reversing.",
+        "Can fail in illiquidity shocks or limit-driven dislocations where elevated range reflects fundamental repricing and the liquidity filter is insufficient."
+      ]
+    },
+    "r_use": -0.0027351656231422348,
+    "r_select": -0.0009385127823309585,
+    "r_distill": -8.756591081769899e-05,
+    "candidate_id": "dee9525514455fcd7da10b9b0f62315c5a53dea0a697d0d0b231a1547007475a",
+    "beta": [
+      0.0,
+      0.0,
+      0.44562990693942367,
+      0.0,
+      0.0,
+      -0.48720778832045314,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.42723336942428414,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.6176683617374507,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "a5dd80a5847a6742",
+    "parent_skill_id": "34495d19c70d34b5",
+    "skill": {
+      "hypothesis": "In CSI500-like small/mid-cap stocks, short-horizon overreaction is more likely to mean-revert when recent gains coincide with short-term price extension and elevated intraday stress, while a modest positive liquidity tilt helps avoid the weakest tradability names. A sparse contrarian composite should therefore load negatively on recent average return, short moving-average gap, and daily range, with only a small positive liquidity filter.",
+      "grammar": "add(add(mul(-0.55,mean_ret1_5),mul(-0.42,ma_gap5)),add(mul(-0.29,range1),mul(0.10,liquidity20)))",
+      "applicability": "Best suited to choppy, non-trending, liquidity-adequate CSI500 regimes where attention and inventory imbalances mean-revert over short horizons; less reliable during strong momentum persistence, post-news drift, event-driven repricing, or severe liquidity stress.",
+      "successes": [
+        "Sparse four-term short-term reversal construction with sign pattern ---+ using mean_ret1_5, ma_gap5, range1, and liquidity20.",
+        "Interpretable contrarian pattern for CSI500 small/mid-caps: penalize recent strength, extension, and intraday stress while lightly favoring tradability."
+      ],
+      "failures": [
+        "Underperforms in persistent trend regimes when recent strength continues instead of reversing.",
+        "Can fail in illiquidity shocks or limit-driven dislocations where elevated range reflects fundamental repricing and the liquidity filter is insufficient."
+      ]
+    },
+    "r_use": -0.0014212875436693264,
+    "r_select": -0.0006757371664363769,
+    "r_distill": 0.0013138780794729084,
+    "candidate_id": "908b7cb9b26ed590237ebbf1e219a2a42bb984da99bca598099a27dc3162f461",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      -0.3541548872753834,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.3970880001890059,
+      0.0,
+      0.0,
+      -0.7861637406260887,
+      0.0,
+      0.0,
+      -0.31439148978566867,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  }
+]

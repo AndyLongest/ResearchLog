@@ -1,0 +1,308 @@
+[
+  {
+    "skill_id": "3b1f5634601a5de0",
+    "parent_skill_id": null,
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon reversal after transitory price pressure and range expansion, with mild medium-horizon continuation; Measurement object: recovery/reversal intensity from recent return path and dislocation from short moving-average state, moderated by shock magnitude proxies; Persistence hypothesis: 1-5 day shocks partially mean-revert over the next horizon, while slower 20-60 day drift can persist weakly in broad liquid equities.",
+      "grammar": "Combine (i) short-horizon path/reversal terms with negative sign, using recent returns, delayed multi-day returns, and short moving-average gap as recovery-state measures; (ii) shock-magnitude controls from range/overnight/open-close and local extrema to identify transitory dislocations; and (iii) weak positive medium-horizon state terms from 20-60 day trend/rank measures. Template: alpha = -a1*recent_path - a2*short_state_gap - a3*shock_magnitude + b1*medium_state + b2*capitulation_floor + small liquidity/volume interaction terms.",
+      "applicability": "Broad, liquid large-cap universe in non-crisis regimes where short-term flows overshoot fundamentals and microstructure frictions fade over several days; less reliable during strong macro trend breaks or volatility regime shifts.",
+      "successes": [
+        "Negative loading on ret1/ret5/delay_ret5_1/delta_ret5_1/mean_ret1_5 to capture recovery after recent pressure.",
+        "Negative loading on ma_gap5 and range/overnight/open_close to measure dislocation magnitude rather than pure trend.",
+        "Positive loading on min_ret1_20 and mild positive ret20/ret60/rank_ret20 to separate capitulation-rebound from medium-term drift."
+      ],
+      "failures": [
+        "Can fail in momentum-dominated tape where short-term continuation overwhelms reversal, especially during earnings/macro shock cascades.",
+        "Can misfire when elevated range and overnight gaps reflect genuine information repricing rather than temporary pressure.",
+        "Weak medium-horizon continuation sleeve may conflict with sharp regime reversals, reducing net signal sparsity benefits."
+      ]
+    },
+    "r_use": -0.004529464582430771,
+    "r_select": -0.0009058929164861539,
+    "r_distill": -0.004529464582430771,
+    "candidate_id": "11a1f5c41365950c3b98f25661ebdb1a1290aaf88725a78b31bc2ff71280c4d1",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.4707633067945337,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.4932070264393387,
+      0.0,
+      -0.5632061404132677,
+      0.0,
+      -0.4668271430064152,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "9e94c892d19245dd",
+    "parent_skill_id": "3b1f5634601a5de0",
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon rebound after transient pressure episodes in large-cap equities, with only weak background medium-horizon drift; Measurement object: recovery/reversal intensity measured from recent return path plus contemporaneous dislocation magnitude/asymmetry, while preserving a small persistent-state sleeve from slower trend rank and capitulation floor; Persistence hypothesis: 1-5 day pressure shocks that arrive with expanded trading-range and gap dislocation tend to mean-revert over the next several days unless a stronger medium-horizon state dominates.",
+      "grammar": "Measure recovery/reversal as a signed combination of (1) recent path state: negative load on ret1, ret5, delay_ret5_1, delta_ret5_1, mean_ret1_5; (2) dislocation magnitude/asymmetry: negative load on ma_gap5, range1, overnight, open_close, and mild negative shock-interaction terms such as corr_ret_volume20 and cov_ret_range20; (3) persistent state separator: small positive load on ret20, ret60, rank_ret20, and min_ret1_20. Template: alpha = -PathShort - DislocationShock + SmallPersistentState + SmallLiquidityAdjustment.",
+      "applicability": "Broad liquid S&P 500 names in stable or moderately noisy regimes where short-lived flow pressure and gap/range dislocations fade over days; most applicable when short-term moves look like temporary path overshoot rather than a fresh information trend.",
+      "successes": [
+        "Use recovery-state variables rather than pure volatility levels: recent return path plus short moving-average dislocation.",
+        "Separate transitory shock magnitude from persistent state by pairing negative range/gap terms with small positive medium-horizon trend terms.",
+        "Retain capitulation-floor measurement through positive min_ret1_20 instead of adding more windows or denser interactions."
+      ],
+      "failures": [
+        "Fails when gaps and range expansion reflect durable information repricing, causing continuation instead of rebound.",
+        "Underperforms in strong momentum or crisis tapes where short-horizon continuation dominates reversal.",
+        "Can be too conservative when medium-horizon state is the true driver and short-term dislocation terms over-penalize valid trend entries."
+      ]
+    },
+    "r_use": -0.0023019726023610506,
+    "r_select": -0.004083966186416827,
+    "r_distill": 0.00222749198006972,
+    "candidate_id": "199b9bd9344de45f66a5ddd65f7c23fab74b741b7521b39506c4b196629d4156",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.6034732545906076,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.47435314626645425,
+      -0.3954743713584347,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.504389874223885,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "330ffafae5bc8b3e",
+    "parent_skill_id": "9e94c892d19245dd",
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon rebound after transient pressure and gap/range dislocation in large-cap equities, with weak background medium-horizon drift; Measurement object: recovery/reversal intensity measured as recent negative path state plus contemporaneous dislocation magnitude/asymmetry, separated from a small persistent-state sleeve; Persistence hypothesis: 1-5 day pressure episodes with expanded gap/range and short moving-average dislocation tend to mean-revert over the next several days unless a stronger medium-horizon state dominates.",
+      "grammar": "Reusable recovery-state template: alpha = -(recent path state) -(dislocation magnitude/asymmetry) +(small persistent state) +(small liquidity sleeve), where recent path state is formed from ret1, ret5, delay_ret5_1, delta_ret5_1, mean_ret1_5; dislocation magnitude/asymmetry is formed from ma_gap5, range1, overnight, open_close, with mild shock-context terms corr_ret_volume20 and cov_ret_range20; persistent state is formed from ret20, ret60, rank_ret20, and min_ret1_20. This is a measurement-level transformation from raw returns into reversal intensity conditioned on dislocation rather than a pure volatility or trend level.",
+      "applicability": "Broad liquid S&P 500 names in stable to moderately noisy regimes where short-lived flow pressure and gap/range overshoot are more common than durable information repricing; less applicable in crisis, earnings-shock, or strong momentum continuation tapes.",
+      "successes": [
+        "Sparse construction that measures recovery state directly via negative recent-path terms plus negative dislocation terms.",
+        "Separates transient shock magnitude from persistent drift using only a small medium-horizon sleeve rather than denser interactions.",
+        "Uses capitulation-floor measurement through positive min_ret1_20 to distinguish oversold rebound setups from generic volatility."
+      ],
+      "failures": [
+        "Fails when gap and range expansion reflect durable information repricing, producing continuation instead of rebound.",
+        "Underperforms in strong momentum or crisis regimes where short-horizon continuation dominates reversal.",
+        "Can be too conservative when medium-horizon trend is the true driver and dislocation penalties suppress valid trend-following entries."
+      ]
+    },
+    "r_use": -0.0030716720665307402,
+    "r_select": -0.0024559124951949885,
+    "r_distill": 0.0003440465258651706,
+    "candidate_id": "63fbe1490f9b84618e2e7e0ab880124a297b9add379e872eec49d537cd660ce9",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.5235023000548767,
+      -0.36669407619523586,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.690128797895182,
+      0.0,
+      0.0,
+      0.0,
+      -0.3394157312740929,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "1485e6c80578c077",
+    "parent_skill_id": "9e94c892d19245dd",
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon rebound after transient pressure episodes in large-cap equities, with weak background medium-horizon drift; Measurement object: recovery/reversal intensity measured from recent return path plus contemporaneous dislocation magnitude/asymmetry, separated from a small persistent-state sleeve and a capitulation-floor proxy; Persistence hypothesis: 1-5 day pressure shocks accompanied by gap/range and short moving-average dislocation tend to mean-revert over the next several days unless a stronger medium-horizon state dominates.",
+      "grammar": "Reusable measurement transformation: alpha = -(recent path state) -(dislocation magnitude/asymmetry) +(small persistent state) +(capitulation floor) +(small liquidity sleeve), where recent path state uses ret1, ret5, delay_ret5_1, delta_ret5_1, mean_ret1_5; dislocation magnitude/asymmetry uses ma_gap5, range1, overnight, open_close, with mild shock-context terms corr_ret_volume20 and cov_ret_range20; persistent state uses ret20, ret60, rank_ret20; capitulation floor uses min_ret1_20. This measures recovery/reversal state rather than pure trend or volatility level.",
+      "applicability": "Broad liquid S&P 500 names in stable to moderately noisy regimes where short-lived flow pressure and gap/range overshoot are more common than durable information repricing; less applicable in crisis, earnings-shock, or strong momentum continuation tapes.",
+      "successes": [
+        "Sparse recovery-state construction using negative recent-path terms plus negative dislocation terms.",
+        "Measurement-level separation of transient shock state from persistent drift via a small medium-horizon sleeve.",
+        "Positive min_ret1_20 as a capitulation-floor proxy to distinguish oversold rebound setups from generic volatility."
+      ],
+      "failures": [
+        "Fails when gap and range expansion reflect durable information repricing, producing continuation instead of rebound.",
+        "Underperforms in strong momentum or crisis regimes where short-horizon continuation dominates reversal.",
+        "Can be too conservative when medium-horizon trend is the true driver and dislocation penalties suppress valid trend-following entries."
+      ]
+    },
+    "r_use": -0.0027145628347167985,
+    "r_select": -0.0023844906488322,
+    "r_distill": 0.0003571092318139417,
+    "candidate_id": "634fd56d28cc9ebe2d4f17385d60f3135fe8180fac2e695e71a87011036f8548",
+    "beta": [
+      0.0,
+      0.0,
+      0.4989505910711567,
+      0.0,
+      0.0,
+      -0.5301998678540893,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.4985789793050495,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.47048422842044824,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "ba5621f512fccc92",
+    "parent_skill_id": "9e94c892d19245dd",
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon rebound after transient pressure and gap/range dislocation in large-cap equities, with weak background medium-horizon drift; Measurement object: recovery/reversal intensity measured as recent negative path state plus contemporaneous dislocation magnitude/asymmetry, separated from a small persistent-state sleeve and a capitulation-floor proxy; Persistence hypothesis: 1-5 day pressure episodes with expanded gap/range and short moving-average dislocation tend to mean-revert over the next several days unless a stronger medium-horizon state dominates.",
+      "grammar": "Reusable measurement transformation: alpha = -(recent path state) -(dislocation magnitude/asymmetry) +(small persistent state) +(capitulation floor) +(small liquidity sleeve), where recent path state uses ret1, ret5, delay_ret5_1, delta_ret5_1, mean_ret1_5; dislocation magnitude/asymmetry uses ma_gap5, range1, overnight, open_close, with mild shock-context terms corr_ret_volume20 and cov_ret_range20; persistent state uses ret20, ret60, rank_ret20; capitulation floor uses min_ret1_20. This measures recovery/reversal state rather than pure trend or volatility level.",
+      "applicability": "Broad liquid S&P 500 names in stable to moderately noisy regimes where short-lived flow pressure and gap/range overshoot are more common than durable information repricing; less applicable in crisis, earnings-shock, or strong momentum continuation tapes.",
+      "successes": [
+        "Sparse recovery-state construction using negative recent-path terms plus negative dislocation terms.",
+        "Measurement-level separation of transient shock state from persistent drift via a small medium-horizon sleeve.",
+        "Positive min_ret1_20 as a capitulation-floor proxy to distinguish oversold rebound setups from generic volatility."
+      ],
+      "failures": [
+        "Fails when gap and range expansion reflect durable information repricing, producing continuation instead of rebound.",
+        "Underperforms in strong momentum or crisis regimes where short-horizon continuation dominates reversal.",
+        "Can be too conservative when medium-horizon trend is the true driver and dislocation penalties suppress valid trend-following entries."
+      ]
+    },
+    "r_use": -0.004299589694521022,
+    "r_select": -0.0027014960207930446,
+    "r_distill": -0.0014064722438972524,
+    "candidate_id": "7641424ee762ef2ace69df6f6dc914db61b71af9b16b6b21b5af8d95c01d88c6",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.5371997518680485,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.47227163140129697,
+      -0.5023014382539706,
+      -0.48586952764549585,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "1fbdb8f6920dd4e0",
+    "parent_skill_id": "9e94c892d19245dd",
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon rebound after transient pressure and gap/range dislocation in large-cap equities, with only a weak slower drift sleeve; Measurement object: recovery/reversal intensity measured from recent negative path state plus contemporaneous dislocation magnitude/asymmetry, separated from a small persistent-state component and a capitulation-floor proxy; Persistence hypothesis: 1-5 day pressure episodes accompanied by expanded range, gap, and short moving-average dislocation tend to mean-revert over the next several days unless a stronger medium-horizon trend state dominates.",
+      "grammar": "Reusable measurement transformation: alpha = -(recent path state) -(dislocation magnitude/asymmetry) +(small persistent state) +(capitulation floor) +(small liquidity/volume context), where recent path state is measured by ret1, ret5, delay_ret5_1, delta_ret5_1, mean_ret1_5; dislocation magnitude/asymmetry is measured by ma_gap5, range1, overnight, open_close, with mild shock-context terms corr_ret_volume20 and volume_z5; persistent state is measured by ret20, ret60, rank_ret20; capitulation floor is measured by min_ret1_20. This is a recovery/reversal measurement, not a pure volatility level or pure trend level.",
+      "applicability": "Broad liquid S&P 500 names in stable to moderately noisy regimes where short-lived flow pressure and gap/range overshoot are more common than durable information repricing; less applicable during crisis, earnings-shock, or strong momentum continuation tapes.",
+      "successes": [
+        "Sparse reversal-state construction using negative recent-path terms plus negative dislocation terms.",
+        "Measurement-level separation of transient shock state from persistent drift via a small medium-horizon sleeve.",
+        "Positive min_ret1_20 retained as a capitulation-floor proxy rather than adding denser interactions or extra windows."
+      ],
+      "failures": [
+        "Fails when gap and range expansion reflect durable information repricing, producing continuation instead of rebound.",
+        "Underperforms in strong momentum or crisis regimes where short-horizon continuation dominates reversal.",
+        "Can be too conservative when medium-horizon trend is the true driver and dislocation penalties suppress valid trend-following entries."
+      ]
+    },
+    "r_use": -0.0033715583798442908,
+    "r_select": -0.0025158897578576984,
+    "r_distill": -0.00029988631331355053,
+    "candidate_id": "4456872be30d42d1bb7747aff52ba4fbb400b2dabd04665193c714b6c3bff3af",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.5396035755030025,
+      -0.48748907003746716,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.5233819995988587,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.4441324919371257,
+      0.0
+    ]
+  }
+]

@@ -1,0 +1,320 @@
+[
+  {
+    "skill_id": "f885136d63ba8a29",
+    "parent_skill_id": null,
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon reversal inside a medium-horizon trend with stress-sensitive entry; Measurement object: recovery/reversal intensity relative to persistent state, using recent return acceleration and short-vs-medium moving-average displacement as a normalized pullback proxy; Persistence hypothesis: in SP500 equities, temporary overshoots against an existing medium-horizon state tend to mean-revert over short horizons, while the broader 1-3 month direction persists weakly.",
+      "grammar": "persistent_state = a*ret20 + b*ret60 + c*rank_ret20; pullback_against_state = -(d*delay_ret5_1 + e*delta_ret5_1 + f*mean_ret1_5 + g*ma_gap5 + h*open_close + i*overnight); stress_filter = -(j*vol5 + k*vol20 + l*range1) + m*liquidity20; participation_context = n*volume_z5 + o*volume_z20 + p*corr_ret_volume20; score = persistent_state + pullback_against_state + stress_filter + participation_context + q*min_ret1_20 - r*max_ret1_20",
+      "applicability": "Most predictable in liquid large-cap cross-sections during non-crisis, two-sided markets where medium-horizon dispersion exists and recent pullbacks are not driven by extreme volatility regime breaks.",
+      "successes": [
+        "Combine medium-horizon trend state with short-horizon reversal terms rather than using either in isolation.",
+        "Measure pullback as a recovery/reversal object via return acceleration and MA displacement, not just a different lookback on raw returns.",
+        "Penalize high contemporaneous volatility and wide ranges to avoid catching unstable breakdowns.",
+        "Allow mild positive conditioning on liquidity and recent participation to favor cleaner reversals in tradable names."
+      ],
+      "failures": [
+        "Crisis or crash-onset regimes where short-term weakness reflects genuine state transition rather than temporary overshoot.",
+        "Strong momentum ignition phases where negative overnight/open-close moves continue instead of reverting.",
+        "Low-dispersion, index-driven markets where cross-sectional medium-horizon state is weak.",
+        "Illiquid or event-driven names where volume and range spikes reflect information arrival, overwhelming reversal effects."
+      ]
+    },
+    "r_use": -0.004230675217911543,
+    "r_select": -0.0008461350435823084,
+    "r_distill": -0.004230675217911543,
+    "candidate_id": "703e562064a77fadd3ddb7af21b945f48426e53cc1baa1b26fa86ccb3250bdd0",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.6283580163344952,
+      0.0,
+      -0.4116207186657602,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.4492922764499931,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.48360214804697094,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "88d9855b37fc036b",
+    "parent_skill_id": "f885136d63ba8a29",
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon recovery against a persistent medium-horizon state in large-cap equities; Measurement object: recovery/reversal intensity relative to persistent state, where recent return acceleration and short-vs-medium displacement proxy a temporary overshoot while volatility/range proxy instability; Persistence hypothesis: medium-horizon cross-sectional state persists weakly, but short-lived adverse moves against that state partially mean-revert when not accompanied by regime-break stress.",
+      "grammar": "persistent_state = a*ret20 + b*ret60 + c*rank_ret20 + d*ma_gap20; reversal_intensity_against_state = -(e*delay_ret5_1 + f*delta_ret5_1 + g*mean_ret1_5 + h*ma_gap5 + i*open_close + j*overnight); instability_penalty = -(k*vol5 + l*vol20 + m*range1 + n*cov_ret_range20); participation_quality = o*liquidity20 + p*volume_z5 + q*volume_z20 + r*corr_ret_volume20; path_asymmetry = s*min_ret1_20 - t*max_ret1_20 + u*signedpow_ret20_half; score = persistent_state + reversal_intensity_against_state + instability_penalty + participation_quality + path_asymmetry",
+      "applicability": "Most predictable in liquid SP500 cross-sections during non-crisis, two-sided markets with intact medium-horizon dispersion and recent pullbacks that look like temporary overshoots rather than information-driven breaks.",
+      "successes": [
+        "Use a persistent-state block plus a reversal-intensity block, separating state from temporary deviation.",
+        "Treat recent weakness as a recovery/reversal measurement object via delay/acceleration and short-gap displacement rather than replacing it with another raw return horizon.",
+        "Add an instability penalty from volatility and range so the signal avoids names undergoing genuine regime transition.",
+        "Use path asymmetry through recent downside-vs-upside extremes to prefer recoverable pullbacks over exhausted breakouts."
+      ],
+      "failures": [
+        "Crash-onset or macro shock regimes where short-term weakness signals a true state change.",
+        "Momentum ignition episodes where negative overnight or open-close moves continue instead of reversing.",
+        "Low-dispersion index-led markets where medium-horizon cross-sectional state is too weak to anchor reversal.",
+        "Event-driven names where volume/range spikes reflect new information and overwhelm mean reversion."
+      ]
+    },
+    "r_use": -0.0022061391467292357,
+    "r_select": -0.0038257680036750813,
+    "r_distill": 0.002024536071182307,
+    "candidate_id": "7c64237887f1a2ac29357c34986979ee832de3dea8486567d01dcad49b1175e9",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.55500186779285,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.4607280697904865,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.4691321594760016,
+      0.5095268289295116,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "febbb9ec53f1ad44",
+    "parent_skill_id": "88d9855b37fc036b",
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon recovery against a weakly persistent medium-horizon cross-sectional state in SP500 equities; Measurement object: recovery/reversal intensity relative to persistent state, with recent return acceleration and short-vs-medium displacement measuring temporary overshoot, downside path asymmetry measuring whether weakness was concentrated rather than trend-destructive, and volatility-range covariation measuring regime-break stress; Persistence hypothesis: medium-horizon state persists weakly across large-cap names, while short-lived pullbacks against that state partially mean-revert when stress is moderate and the path of weakness looks like a contained overshoot rather than a broad information reset.",
+      "grammar": "persistent_state = a*ret20 + b*ret60 + c*rank_ret20 + d*ma_gap20; temporary_overshoot = -(e*delay_ret5_1 + f*delta_ret5_1 + g*mean_ret1_5 + h*ma_gap5 + i*open_close + j*overnight); stress_as_regime_break = -(k*vol5 + l*vol20 + m*range1 + n*cov_ret_range20); path_containment = o*min_ret1_20 - p*max_ret1_20 + q*signedpow_ret20_half; tradability_context = r*liquidity20 + s*volume_z20 - t*corr_ret_volume20; score = persistent_state + temporary_overshoot + stress_as_regime_break + path_containment + tradability_context",
+      "applicability": "Most predictable in liquid SP500 cross-sections during non-crisis, two-sided markets with intact medium-horizon dispersion, where recent weakness appears as a contained pullback against an existing state rather than a fresh information-driven repricing.",
+      "successes": [
+        "Separate persistent medium-horizon state from temporary overshoot so the signal measures reversal relative to an anchor rather than raw weakness alone.",
+        "Use path containment via downside extreme, upside extreme, and concave medium-horizon return transform to distinguish recoverable pullbacks from exhausted breakouts or broad trend failure.",
+        "Treat volatility, range, and return-range covariation as a regime-break stress block, improving selectivity against unstable names.",
+        "Favor liquid names and avoid strong positive return-volume coupling, which can indicate information-driven continuation rather than reversal."
+      ],
+      "failures": [
+        "Crash-onset or macro shock regimes where volatility-range stress marks true state transition and short-term weakness keeps propagating.",
+        "Momentum ignition or news continuation episodes where negative open-close or overnight moves are informative rather than transitory.",
+        "Low-dispersion index-led environments where the medium-horizon cross-sectional anchor is too weak to support relative reversal.",
+        "Event-driven names where volume and range behavior reflect new information, making contained-overshoot measurement unreliable."
+      ]
+    },
+    "r_use": -0.002960242861507734,
+    "r_select": -0.0023569598896849356,
+    "r_distill": 0.00025816432081265505,
+    "candidate_id": "dcaac1b96969e37996f4709b66afeadf8469ab1e6baebebdc03b9e01c0648460",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      -0.3562622360054262,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.4393173498217702,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.5968526086100628,
+      0.0,
+      0.569073324745901,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "bfe5d19708269acd",
+    "parent_skill_id": "88d9855b37fc036b",
+    "skill": {
+      "hypothesis": "Phenomenon: contained pullback recovery within a weakly persistent medium-horizon cross-sectional state in SP500 equities; Measurement object: path-containment of recent weakness relative to persistent state, where medium-horizon return/MA level anchor the state, short-horizon acceleration and short-gap displacement measure temporary overshoot, and downside-frequency-style path summaries distinguish recoverable pullbacks from unstable repricing; Persistence hypothesis: the medium-horizon state persists weakly across large-cap names, and recent adverse moves against that state partially mean-revert when the weakness is contained in path shape and not accompanied by regime-break stress.",
+      "grammar": "persistent_state = a*ret20 + b*ret60 + c*rank_ret20 + d*ma_gap20; temporary_overshoot_against_state = -(e*delay_ret5_1 + f*delta_ret5_1 + g*mean_ret1_5 + h*ma_gap5 + i*open_close + j*overnight); regime_break_stress = -(k*vol5 + l*vol20 + m*range1 + n*cov_ret_range20); path_containment = o*min_ret1_20 - p*max_ret1_20 + q*quantile_ret1_20 + r*signedpow_ret20_half; tradability_filter = s*liquidity20 + t*volume_z20 - u*corr_ret_volume20; score = persistent_state + temporary_overshoot_against_state + regime_break_stress + path_containment + tradability_filter",
+      "applicability": "Most applicable in liquid SP500 cross-sections during non-crisis, two-sided markets with intact medium-horizon dispersion, where recent weakness appears as a contained pullback against an existing state rather than a fresh information-driven repricing.",
+      "successes": [
+        "Shift the path block toward containment measurement by adding quantile_ret1_20, making the signal less dependent on single extreme days and more on the distributional shape of recent weakness.",
+        "Keep state and deviation separated: medium-horizon level variables define the anchor, while short-horizon acceleration and gap terms define the temporary overshoot against that anchor.",
+        "Use volatility, range, and return-range covariation strictly as regime-break stress penalties so reversal is only favored when instability is moderate.",
+        "Favor liquid names while penalizing strong positive return-volume coupling, which is more consistent with information-driven continuation than benign pullback recovery."
+      ],
+      "failures": [
+        "Crash-onset or macro shock regimes where path containment breaks and short-term weakness reflects true state transition.",
+        "Momentum ignition or news continuation episodes where negative overnight and open-close moves remain informative and do not mean-revert.",
+        "Low-dispersion index-led markets where the medium-horizon cross-sectional anchor is too weak to support relative recovery.",
+        "Event-driven names where recent return quantiles and extremes are dominated by repricing rather than temporary overshoot."
+      ]
+    },
+    "r_use": -0.0027872827389757403,
+    "r_select": -0.0023223678651785365,
+    "r_distill": 0.00017296012253199388,
+    "candidate_id": "8c8002684b2becb42b9857c679901e1bd5237fb14e29e3991e4606c7990c96d6",
+    "beta": [
+      0.0,
+      -0.579332992657012,
+      0.0,
+      0.0,
+      0.0,
+      -0.41230771857382587,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.46084834540177627,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.5310314786940248,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "121d1959364858df",
+    "parent_skill_id": "88d9855b37fc036b",
+    "skill": {
+      "hypothesis": "Phenomenon: contained pullback recovery within a weakly persistent medium-horizon cross-sectional state in SP500 equities; Measurement object: path-containment of recent weakness relative to persistent state, where medium-horizon return and MA-gap level anchor the state, short-horizon acceleration and short-gap displacement measure temporary overshoot, and distributional downside containment distinguishes recoverable pullbacks from unstable repricing; Persistence hypothesis: medium-horizon state persists weakly across large-cap names, and adverse short-horizon deviations against that state partially mean-revert when stress is moderate and weakness is distributed as a contained pullback rather than a regime break.",
+      "grammar": "persistent_state = a*ret20 + b*ret60 + c*rank_ret20 + d*ma_gap20; temporary_overshoot_against_state = -(e*delay_ret5_1 + f*delta_ret5_1 + g*mean_ret1_5 + h*ma_gap5 + i*open_close + j*overnight); regime_break_stress = -(k*vol5 + l*vol20 + m*range1 + n*cov_ret_range20); path_containment_distribution = o*min_ret1_20 + p*quantile_ret1_20 - q*max_ret1_20 + r*signedpow_ret20_half; tradability_context = s*liquidity20 + t*volume_z20 - u*corr_ret_volume20; score = persistent_state + temporary_overshoot_against_state + regime_break_stress + path_containment_distribution + tradability_context",
+      "applicability": "Most predictable in liquid SP500 cross-sections during non-crisis, two-sided markets with intact medium-horizon dispersion, where recent weakness appears as a contained pullback against an existing state rather than a fresh information-driven repricing.",
+      "successes": [
+        "Revise the path block at the measurement-object level toward distributional containment by emphasizing quantile_ret1_20 alongside min_ret1_20, reducing dependence on a single extreme day.",
+        "Keep persistent state and temporary deviation separated so the signal measures recovery relative to an anchor rather than raw short-term weakness.",
+        "Use volatility, range, and return-range covariation only as regime-break stress penalties, improving selectivity for benign pullbacks.",
+        "Favor liquid names while penalizing positive return-volume coupling, which is more consistent with information-driven continuation than reversal."
+      ],
+      "failures": [
+        "Crash-onset or macro shock regimes where contained-pullback measurement fails because weakness reflects true state transition.",
+        "Momentum ignition or news continuation episodes where negative overnight and open-close moves continue rather than mean-revert.",
+        "Low-dispersion index-led markets where the medium-horizon cross-sectional anchor is too weak to support relative recovery.",
+        "Event-driven names where recent return distribution summaries are dominated by repricing and volume/range behavior reflects new information."
+      ]
+    },
+    "r_use": -0.002884094184035438,
+    "r_select": -0.002341730154190476,
+    "r_distill": -1.0331383793700955e-05,
+    "candidate_id": "bc10f08a6678b61950d2b4161e6fac737079addc7a6dd3d40b921f8816e5b84b",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.48562265763911827,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.5542184323813872,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.50078060342368,
+      0.45412702059099336,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "42115b3f5480460c",
+    "parent_skill_id": "88d9855b37fc036b",
+    "skill": {
+      "hypothesis": "Phenomenon: contained pullback recovery within a weakly persistent medium-horizon cross-sectional state in SP500 equities; Measurement object: distributional downside containment of recent weakness relative to a persistent state, where medium-horizon return and MA-gap define the state, short-horizon acceleration and short-gap displacement measure temporary overshoot, and lower-tail distribution summaries distinguish recoverable pullbacks from unstable repricing; Persistence hypothesis: medium-horizon state persists weakly across large-cap names, and adverse short-horizon deviations against that state partially mean-revert when weakness is broad-but-contained in the lower tail rather than dominated by regime-break stress or information-driven continuation.",
+      "grammar": "persistent_state = a*ret20 + b*ret60 + c*rank_ret20 + d*ma_gap20; temporary_overshoot_against_state = -(e*delay_ret5_1 + f*delta_ret5_1 + g*mean_ret1_5 + h*ma_gap5 + i*open_close + j*overnight); regime_break_stress = -(k*vol5 + l*vol20 + m*range1 + n*cov_ret_range20); lower_tail_containment = o*quantile_ret1_20 + p*min_ret1_20 - q*max_ret1_20 + r*signedpow_ret20_half; tradability_context = s*liquidity20 + t*volume_z20 - u*corr_ret_volume20; score = persistent_state + temporary_overshoot_against_state + regime_break_stress + lower_tail_containment + tradability_context",
+      "applicability": "Most applicable in liquid SP500 cross-sections during non-crisis, two-sided markets with intact medium-horizon dispersion, where recent weakness appears as a contained lower-tail pullback against an existing state rather than a fresh information-driven repricing.",
+      "successes": [
+        "Measurement-level revision from extreme-based path asymmetry toward lower-tail containment using quantile_ret1_20 plus min_ret1_20, reducing dependence on a single outlier day.",
+        "Keeps persistent state separate from temporary deviation, preserving interpretability as recovery relative to an anchor rather than raw short-term weakness.",
+        "Uses volatility, range, and return-range covariation strictly as regime-break stress penalties, improving selectivity for benign pullbacks.",
+        "Adds a modest tradability context through liquidity and medium-horizon participation while penalizing positive return-volume coupling associated with continuation."
+      ],
+      "failures": [
+        "Crash-onset or macro shock regimes where lower-tail weakness reflects true state transition rather than temporary overshoot.",
+        "Momentum ignition or news continuation episodes where negative overnight and open-close moves continue instead of reversing.",
+        "Low-dispersion index-led markets where the medium-horizon cross-sectional anchor is too weak to support relative recovery.",
+        "Event-driven names where lower-tail distribution summaries and volume/range behavior are dominated by repricing from new information."
+      ]
+    },
+    "r_use": -0.0019596712223183595,
+    "r_select": -0.0021568455618470607,
+    "r_distill": 0.0009244229617170786,
+    "candidate_id": "2d9d0327eb6cddc16d8f484d422e6b59c28ac01f3dc9e40fef4df39e1b617ff6",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      -0.5022278700424939,
+      0.0,
+      -0.4844213230514601,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.4832659553638576,
+      -0.5287316566197933,
+      0.0
+    ]
+  }
+]

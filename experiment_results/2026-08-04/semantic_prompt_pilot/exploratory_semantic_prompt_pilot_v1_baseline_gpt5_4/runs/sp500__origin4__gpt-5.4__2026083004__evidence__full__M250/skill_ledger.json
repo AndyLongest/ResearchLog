@@ -1,0 +1,311 @@
+[
+  {
+    "skill_id": "16e77ffcddfbdb93",
+    "parent_skill_id": null,
+    "skill": {
+      "hypothesis": "Short-horizon reversal dominates in large-cap equities when recent price extension is not accompanied by durable trend confirmation; stretched winners with elevated recent volatility and weak moving-average support mean-revert, while recent losers with stabilized trading conditions rebound.",
+      "grammar": "add(add(mul(a,ret5),mul(b,ma_gap20)),add(mul(c,rank_ret20),mul(d,vol20))) with a<0, b<0, c<0, d>0",
+      "applicability": "Most predictable in diversified, liquid large-cap universes during non-crisis, range-bound, or choppy regimes where medium-term trend persistence is weak and short-term overreaction is common.",
+      "successes": [
+        "Negative loading on recent returns combined with negative moving-average-gap exposure and modest positive volatility penalty.",
+        "Sparse linear reversal template using ret5/ret20 plus ma_gap20 as extension controls."
+      ],
+      "failures": [
+        "Strong momentum or macro-trend regimes where winners keep outperforming and reversal signals are persistently early.",
+        "Crisis/liquidity-shock periods with unstable volatility and gap dynamics that overwhelm simple mean-reversion structure."
+      ]
+    },
+    "r_use": -0.003337925150488311,
+    "r_select": -0.000667585030097662,
+    "r_distill": -0.003337925150488311,
+    "candidate_id": "8fa14a17608dd43a5497daef1bd3c85ea7807824885d3b8f01df58eb02bc0466",
+    "beta": [
+      0.0,
+      0.0,
+      -0.7394990824611444,
+      0.0,
+      0.0,
+      0.32632378314595245,
+      -0.361811693547611,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.46448486951099754,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "70af9c29c86182cf",
+    "parent_skill_id": "16e77ffcddfbdb93",
+    "skill": {
+      "hypothesis": "In S&P 500 large caps, short-horizon mean reversion is strongest when recent outperformance reflects price extension rather than durable trend confirmation. Names with high recent returns, elevated distance above medium moving averages, and somewhat unstable volatility tend to mean-revert; recent underperformers with less persistent extension rebound.",
+      "grammar": "add(add(add(mul(a,ret5),mul(b,ma_gap20)),add(mul(c,rank_ret20),mul(d,vol20))),add(mul(e,mean_ret1_5),mul(f,delta_ret5_1))) with a<0, b<0, c<0, d>0, e<0, f<0",
+      "applicability": "Best suited to liquid, diversified large-cap universes in non-crisis, range-bound, rotational, or weak-trend regimes where short-term overreaction dominates medium-horizon momentum.",
+      "successes": [
+        "Sparse reversal core: negative ret5 plus negative ma_gap20 to capture stretched winners and oversold losers.",
+        "Cross-sectional extension control via negative rank_ret20 to fade recent relative outperformers.",
+        "Modest positive vol20 term to penalize unstable names while preserving reversal structure.",
+        "Refinement with negative mean_ret1_5 and negative delta_ret5_1 to target decelerating short-term extensions."
+      ],
+      "failures": [
+        "Persistent momentum or strong macro-trend environments where price extension is trend confirmation rather than overreaction.",
+        "Crisis, gap-driven, or liquidity-shock regimes where volatility and reversal relationships become unstable.",
+        "Very low-dispersion markets where cross-sectional return ranking carries little information."
+      ]
+    },
+    "r_use": -0.002023397782463411,
+    "r_select": -0.003075019676883331,
+    "r_distill": 0.0013145273680248998,
+    "candidate_id": "1072864d1cebf8f8e3b9605646292b449ab524b1444788724aa8e42418544a0f",
+    "beta": [
+      0.0,
+      0.0,
+      -0.41597412429399777,
+      0.0,
+      0.0,
+      0.4962850188944691,
+      -0.6212997645725294,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.441195320103101,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "a93bfbe8a3e25899",
+    "parent_skill_id": "70af9c29c86182cf",
+    "skill": {
+      "hypothesis": "In S&P 500 large caps, short-horizon mean reversion is strongest when recent outperformance reflects price extension rather than durable trend confirmation. Stocks with strong recent returns, elevated distance above the 20-day moving average, and somewhat unstable volatility tend to mean-revert; recent underperformers with decelerating short-term moves rebound.",
+      "grammar": "add(add(add(mul(a,ret5),mul(b,ma_gap20)),add(mul(c,rank_ret20),mul(d,vol20))),add(mul(e,mean_ret1_5),add(mul(f,delta_ret5_1),mul(g,ret1)))) with a<0, b<0, c<0, d>0, e<0, f<0, g<0",
+      "applicability": "Best suited to liquid, diversified large-cap universes in non-crisis, range-bound, rotational, or weak-trend regimes where short-term overreaction dominates medium-horizon momentum.",
+      "successes": [
+        "Sparse reversal core using negative ret5 and negative ma_gap20 to fade stretched winners and support rebound in oversold names.",
+        "Cross-sectional extension control via negative rank_ret20 to lean against recent relative outperformers.",
+        "Modest positive vol20 term to penalize unstable names while preserving the reversal structure.",
+        "Refinement with negative mean_ret1_5, negative delta_ret5_1, and small negative ret1 to target decelerating short-term extensions rather than fresh trend acceleration."
+      ],
+      "failures": [
+        "Persistent momentum or strong macro-trend environments where price extension is trend confirmation rather than overreaction.",
+        "Crisis, gap-driven, or liquidity-shock regimes where volatility and reversal relationships become unstable.",
+        "Very low-dispersion markets where cross-sectional return ranking carries little information."
+      ]
+    },
+    "r_use": -0.0013703307243506622,
+    "r_select": -0.0018927843708408613,
+    "r_distill": 0.0013103307421251987,
+    "candidate_id": "0e8ac97a0d0984b78bbdff3f630e50b9fd2fe50d54b5492141190c1a3290718f",
+    "beta": [
+      0.0,
+      0.0,
+      -0.32964834376204716,
+      0.0,
+      0.0,
+      0.585594242339565,
+      -0.5906448713182153,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.44671018432444387,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "e87443ef903dc1b9",
+    "parent_skill_id": "70af9c29c86182cf",
+    "skill": {
+      "hypothesis": "In S&P 500 large caps, short-horizon mean reversion is most reliable when recent winners appear mechanically stretched versus their medium moving average and recent relative ranking, while modestly elevated volatility flags unstable extensions rather than durable trend confirmation. Decelerating short-term moves are more likely to reverse than fresh accelerations.",
+      "grammar": "add(add(add(mul(a,ret5),mul(b,ma_gap20)),add(mul(c,rank_ret20),mul(d,vol20))),add(mul(e,mean_ret1_5),add(mul(f,delta_ret5_1),mul(g,ret1)))) with a<0, b<0, c<0, d>0, e<0, f<0, g<0",
+      "applicability": "Best suited to liquid, diversified S&P 500 regimes that are range-bound, rotational, or weak-trend, where short-term overreaction dominates and medium-horizon trend persistence is limited.",
+      "successes": [
+        "Sparse reversal core combining negative ret5 and negative ma_gap20 to fade stretched recent winners and support rebound in recent losers.",
+        "Negative rank_ret20 to avoid chasing recent relative outperformers and reinforce cross-sectional mean reversion.",
+        "Small positive vol20 term to penalize unstable extensions without overwhelming the reversal signal.",
+        "Negative mean_ret1_5, delta_ret5_1, and ret1 to emphasize decelerating short-term moves rather than fresh momentum bursts."
+      ],
+      "failures": [
+        "Persistent momentum or strong macro-trend environments where price extension reflects genuine information and trend confirmation.",
+        "Crisis, gap-driven, or liquidity-shock periods where volatility and reversal relationships become unstable.",
+        "Very low-dispersion markets where cross-sectional ranking and extension measures carry limited information."
+      ]
+    },
+    "r_use": -0.0031852420730122477,
+    "r_select": -0.0022557666405731785,
+    "r_distill": -0.0011618442905488367,
+    "candidate_id": "ddabe37f77195fcc34bdfee7b0d8f15baaadbeb6026a098d77901c3b602e61c3",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.4733223804624762,
+      -0.6929314755091434,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.38900916537786934,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.38011019935548934,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "fad5e6c555a8ced8",
+    "parent_skill_id": "70af9c29c86182cf",
+    "skill": {
+      "hypothesis": "In S&P 500 large caps, short-horizon cross-sectional mean reversion is most plausible when recent winners are visibly stretched versus the 20-day trend anchor and recent relative ranking, while mildly elevated medium-horizon volatility marks unstable extension rather than durable information. Decelerating short-term moves are more likely to reverse than fresh accelerations.",
+      "grammar": "add(add(add(mul(a,ret5),mul(b,ma_gap20)),add(mul(c,rank_ret20),mul(d,vol20))),add(mul(e,mean_ret1_5),add(mul(f,delta_ret5_1),mul(g,ret1)))) with a<0, b<0, c<0, d>0, e<0, f<0, g<0",
+      "applicability": "Best suited to liquid, diversified S&P 500 regimes that are range-bound, rotational, or weak-trend, where short-term overreaction dominates and medium-horizon trend persistence is limited; less suitable in strong momentum or crisis regimes.",
+      "successes": [
+        "Sparse reversal core: negative ret5 plus negative ma_gap20 to fade stretched recent winners and support rebound in recent losers.",
+        "Negative rank_ret20 to reinforce cross-sectional mean reversion by avoiding recent relative outperformers.",
+        "Small positive vol20 term to penalize unstable extensions without overwhelming the reversal signal.",
+        "Negative mean_ret1_5, delta_ret5_1, and ret1 to emphasize decelerating short-term moves rather than fresh momentum bursts."
+      ],
+      "failures": [
+        "Persistent momentum or strong macro-trend environments where extension reflects genuine trend confirmation rather than overreaction.",
+        "Crisis, gap-driven, or liquidity-shock periods where volatility and reversal relationships become unstable.",
+        "Very low-dispersion markets where cross-sectional ranking and extension measures carry limited information."
+      ]
+    },
+    "r_use": -0.002142534249369119,
+    "r_select": -0.0020472250758445526,
+    "r_distill": 0.0004617856783687103,
+    "candidate_id": "21f81751dfba11a7c0b957bac1812800461f09eb3234b4d1685076d4578c37ad",
+    "beta": [
+      0.0,
+      0.0,
+      -0.3445425632759758,
+      0.0,
+      0.0,
+      0.6396515863254431,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.36221590745733523,
+      0.0,
+      0.0,
+      0.0,
+      0.583897171244581,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "a9815ecbd516902b",
+    "parent_skill_id": "a93bfbe8a3e25899",
+    "skill": {
+      "hypothesis": "In S&P 500 large caps, the most reusable pre-registered pattern is short-horizon mean reversion after visible price extension: recent winners that are stretched above the 20-day anchor and highly ranked on recent performance tend to reverse, especially when the short-term move is decelerating rather than freshly accelerating; mildly higher 20-day volatility marks unstable extension rather than durable trend confirmation.",
+      "grammar": "add(add(add(mul(a,ret5),mul(b,ma_gap20)),add(mul(c,rank_ret20),mul(d,vol20))),add(mul(e,mean_ret1_5),add(mul(f,delta_ret5_1),mul(g,ret1)))) with a<0, b<0, c<0, d>0, e<0, f<0, g<0",
+      "applicability": "Best suited to liquid, diversified S&P 500 regimes that are range-bound, rotational, or weak-trend, where short-term overreaction dominates and medium-horizon trend persistence is limited; less suitable in persistent momentum, crisis, or liquidity-shock regimes.",
+      "successes": [
+        "Sparse reversal core using negative ret5 and negative ma_gap20 to fade stretched recent winners and support rebound in recent losers.",
+        "Negative rank_ret20 to reinforce cross-sectional mean reversion by avoiding recent relative outperformers.",
+        "Small positive vol20 term to penalize unstable extensions without overwhelming the reversal structure.",
+        "Negative mean_ret1_5, delta_ret5_1, and ret1 to emphasize decelerating short-term moves rather than fresh momentum bursts."
+      ],
+      "failures": [
+        "Persistent momentum or strong macro-trend environments where extension reflects genuine trend confirmation rather than overreaction.",
+        "Crisis, gap-driven, or liquidity-shock periods where volatility and reversal relationships become unstable.",
+        "Very low-dispersion markets where cross-sectional ranking and extension measures carry limited information."
+      ]
+    },
+    "r_use": -0.0030677760117702553,
+    "r_select": -0.0017098197818345806,
+    "r_distill": -0.0009252417624011364,
+    "candidate_id": "fa6da26e01e24277af75109b8c23b604c03ff231477deba4dc80cc327a7735cb",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.49079334292707466,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.5222209979632346,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.4591978632868296,
+      0.0,
+      0.0,
+      -0.524923276467676
+    ]
+  }
+]

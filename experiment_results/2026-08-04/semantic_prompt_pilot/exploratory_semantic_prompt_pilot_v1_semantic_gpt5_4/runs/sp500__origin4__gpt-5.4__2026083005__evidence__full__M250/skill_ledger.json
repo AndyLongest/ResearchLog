@@ -1,0 +1,320 @@
+[
+  {
+    "skill_id": "81a9d1803d462852",
+    "parent_skill_id": null,
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon reversal after transitory price-pressure and volatility expansion, with weaker medium-horizon continuation; Measurement object: recovery/reversal intensity built from recent return shocks, path extremeness, and deviation from local trend, moderated by liquidity; Persistence hypothesis: one-step to one-week dislocations mean-revert, while slower multi-week drift can persist mildly when not accompanied by acute shock signatures.",
+      "grammar": "Construct a reversal-state score by combining (i) short-horizon signed return level terms, (ii) path/asymmetry proxies for recent extremeness or drawup/drawdown within a lookback, and (iii) deviation-from-trend terms; then attenuate with contemporaneous volatility/range and strengthen only modestly with longer-horizon trend-state terms and liquidity. Template: negative weights on recent shock-level and local-trend-gap measurements, positive but smaller weights on longer-horizon persistent-state measurements.",
+      "applicability": "Most applicable in liquid large-cap cross-sections during non-crisis, two-sided markets where short-term flows create temporary dislocations; less reliable in strong momentum regimes, event-driven gaps, or volatility regime breaks.",
+      "successes": [
+        "Use opposing signs across horizons: negative on ret1/ret5 and mean_ret1_5, modest positive on ret20/ret60 to separate recovery from persistent drift.",
+        "Represent path extremeness with max/min/quantile style terms rather than only changing windows, capturing whether recent moves were unusually one-sided.",
+        "Treat ma_gap and delay/delta return terms as recovery-state measurements of overshoot rather than as pure trend indicators.",
+        "Moderate reversal exposure with liquidity and avoid overloading highly collinear volatility windows."
+      ],
+      "failures": [
+        "Fails when short-term price moves reflect genuine information arrival, especially earnings or macro shock repricing, where reversal signals are dominated by continuation.",
+        "Fails in crisis/liquidity-stress regimes when volatility expansion is persistent and not merely transitory.",
+        "Weakens in very strong medium-term momentum environments where local overextension does not mean-revert quickly.",
+        "Can misfire when volume/volatility spikes are structural regime shifts rather than temporary pressure."
+      ]
+    },
+    "r_use": -0.005212804679125782,
+    "r_select": -0.0010425609358251562,
+    "r_distill": -0.005212804679125782,
+    "candidate_id": "fbe909198130453ba257f1c875cc375fda50fed7b1977a69f79cb47e6cc34282",
+    "beta": [
+      -0.6648451696378062,
+      0.0,
+      0.0,
+      0.4432301130918707,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.40629427033421484,
+      0.0,
+      -0.4432301130918707,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "e174c09d58435365",
+    "parent_skill_id": "81a9d1803d462852",
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon reversal after transitory price-pressure and volatility expansion, with weaker medium-horizon continuation; Measurement object: recovery/reversal intensity built from recent return shocks, path extremeness, and deviation from local trend, moderated by liquidity; Persistence hypothesis: one-step to one-week dislocations mean-revert, while slower multi-week drift can persist mildly when not accompanied by acute shock signatures.",
+      "grammar": "Build a recovery-state score by summing negative short-horizon shock-level measurements (recent returns, overnight/open-close, mean recent return), negative local overshoot measurements (short moving-average gap, delayed/delta return change), and negative path-extremeness measurements (recent max/upper-quantile, range/volatility interaction), while offsetting with positive lower-tail exhaustion and modest positive medium-horizon persistent-state measurements (ret20/ret60, rank_ret20, signedpow_ret20_half); lightly scale toward more liquid names.",
+      "applicability": "Most applicable in liquid large-cap cross-sections during non-crisis, two-sided markets where short-term flows create temporary dislocations; less reliable in strong momentum regimes, event-driven gaps, or volatility regime breaks.",
+      "successes": [
+        "Opposing signs across horizons: negative on ret1/ret5/mean_ret1_5 and modest positive on ret20/ret60 to separate recovery from persistent drift.",
+        "Path asymmetry is measured explicitly with max_ret1_20, min_ret1_20, and quantile_ret1_20 rather than only altering windows.",
+        "Recovery-state is captured through ma_gap5, delay_ret5_1, and delta_ret5_1 as overshoot/rebound measurements.",
+        "Volatility and range are used as attenuation terms, with only light liquidity support to avoid collinearity overload."
+      ],
+      "failures": [
+        "Fails when short-term price moves reflect genuine information arrival, especially earnings or macro shock repricing, where reversal signals are dominated by continuation.",
+        "Fails in crisis/liquidity-stress regimes when volatility expansion is persistent and not merely transitory.",
+        "Weakens in very strong medium-term momentum environments where local overextension does not mean-revert quickly.",
+        "Can misfire when volume/volatility spikes are structural regime shifts rather than temporary pressure."
+      ]
+    },
+    "r_use": -0.004943605977856444,
+    "r_select": -0.0051589649388719145,
+    "r_distill": 0.0002691987012693386,
+    "candidate_id": "f94d76caffbc260a52bb8878a017e25ac0bb22116f7fd8608e4ec8f0efd6a46c",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.6638536713365836,
+      -0.4111897319925184,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.4364432118721496,
+      0.0,
+      0.0,
+      0.0,
+      -0.4469212796092641,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "4b0c5e0da8505290",
+    "parent_skill_id": "e174c09d58435365",
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon reversal after temporary price-pressure and local overshoot, with only mild support from slower trend persistence; Measurement object: recovery/reversal intensity measured as a composite of recent shock levels, deviation-from-local-trend, and path asymmetry/exhaustion, attenuated by volatility/range and lightly conditioned on liquidity; Persistence hypothesis: one-day to one-week dislocations tend to mean-revert in liquid large-cap names when recent moves look extreme relative to their local path, while multi-week drift persists only weakly absent acute shock signatures.",
+      "grammar": "Combine negative shock-level measurements (ret1, ret5, mean_ret1_5, overnight, open_close), negative overshoot-state measurements (ma_gap5, ma_gap20, delay_ret5_1, delta_ret5_1), and negative upper-path-extremeness measurements (max_ret1_20, quantile_ret1_20), offset by positive lower-tail exhaustion (min_ret1_20) and modest positive persistent-state measurements (ret20, ret60, rank_ret20, signedpow_ret20_half); attenuate with volatility/range interaction proxies and add only light liquidity support.",
+      "applicability": "Most applicable in liquid S&P 500 cross-sections during non-crisis, two-sided markets where short-term flow-driven dislocations are common and medium-horizon momentum is not overwhelmingly dominant.",
+      "successes": [
+        "Opposing signs across horizons separate recovery/reversal from persistent drift: negative short-horizon shock levels, modest positive medium-horizon state terms.",
+        "Uses measurement-level path asymmetry via max_ret1_20, min_ret1_20, and quantile_ret1_20 rather than merely changing lookback windows.",
+        "Treats ma_gap and delay/delta return terms as overshoot and recovery-state measurements, improving interpretability of reversal construction.",
+        "Keeps volatility/range as attenuation terms and liquidity as a light conditioning variable to avoid excessive collinearity."
+      ],
+      "failures": [
+        "Fails when recent price moves reflect genuine information arrival, such as earnings or macro repricing, where continuation dominates reversal.",
+        "Fails in crisis or liquidity-stress regimes when volatility/range expansion is persistent rather than transitory.",
+        "Weakens in strong medium-term momentum regimes where local overextension does not mean-revert quickly.",
+        "Can misfire when volume or volatility spikes indicate structural regime change instead of temporary price pressure."
+      ]
+    },
+    "r_use": -0.005033059174717228,
+    "r_select": -0.0049614966172286,
+    "r_distill": 4.514615377388537e-05,
+    "candidate_id": "8ad7952042ad89ceaa26271d358a0f94543b6b5f5bc514ce4d36425c767af90e",
+    "beta": [
+      0.0,
+      0.0,
+      -0.43814579266155523,
+      0.0,
+      -0.49967082519421513,
+      0.0,
+      -0.4382715075827195,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.6052069203701159,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "8fde7358619bbd14",
+    "parent_skill_id": "e174c09d58435365",
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon reversal after temporary price-pressure and local overshoot, with only mild support from slower trend persistence; Measurement object: recovery/reversal intensity measured as a composite of recent shock levels, deviation-from-local-trend, and path asymmetry/exhaustion, attenuated by volatility/range and lightly conditioned on liquidity; Persistence hypothesis: one-day to one-week dislocations tend to mean-revert in liquid large-cap names when recent moves look extreme relative to their local path, while multi-week drift persists only weakly absent acute shock signatures.",
+      "grammar": "Construct a recovery-state score by combining negative shock-level measurements (ret1, ret5, mean_ret1_5, overnight, open_close), negative overshoot-state measurements (short moving-average gap plus delayed/delta return change), and negative upper-path-extremeness measurements (recent max and upper-quantile), offset by positive lower-tail exhaustion; then attenuate with volatility/range and return-volume coupling, while adding only modest medium-horizon persistent-state terms and light liquidity support.",
+      "applicability": "Most applicable in liquid S&P 500 cross-sections during non-crisis, two-sided markets where short-term flow-driven dislocations are common and medium-horizon momentum is not overwhelmingly dominant.",
+      "successes": [
+        "Opposing signs across horizons: strong negative short-horizon shock terms with only modest positive ret20/ret60 and rank_ret20 persistent-state support.",
+        "Measurement-level revision emphasizes recovery-state via overshoot and path asymmetry, not merely changing windows.",
+        "Upper-tail extremeness is penalized while lower-tail exhaustion is rewarded, separating rebound candidates from ongoing drift.",
+        "Volatility, range, and return-volume coupling are used as attenuation terms, with liquidity kept light to preserve sparsity and interpretability."
+      ],
+      "failures": [
+        "Fails when short-term moves reflect genuine information arrival, especially earnings or macro repricing, where continuation dominates reversal.",
+        "Fails in crisis or liquidity-stress regimes when volatility/range expansion is persistent rather than transitory.",
+        "Weakens in strong medium-term momentum regimes where local overextension does not mean-revert quickly.",
+        "Can misfire when volume or volatility spikes indicate structural regime change instead of temporary price pressure."
+      ]
+    },
+    "r_use": -0.0027568605401030715,
+    "r_select": -0.0045062568903057685,
+    "r_distill": 0.0022761986346141565,
+    "candidate_id": "c4bcf1094613871c4d6eefcdc9a391fb36b239f0431d2fc6bf88636ed5324f3d",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.4059818054615385,
+      -0.6930166040457362,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.4496134121216565,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.3908382527228191,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "ada82ad9bf259185",
+    "parent_skill_id": "8fde7358619bbd14",
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon reversal after temporary price-pressure and local overshoot, with only mild medium-horizon drift support; Measurement object: recovery/reversal intensity measured as the level of recent shock and overshoot, combined with path asymmetry between upper-tail extremeness and lower-tail exhaustion, then attenuated by volatility/range state; Persistence hypothesis: one-day to one-week dislocations in liquid S&P 500 names tend to mean-revert when recent moves are extreme relative to their local path, while multi-week drift persists only weakly absent fresh shock signatures.",
+      "grammar": "Construct a recovery-state score by summing negative short-horizon shock-level measurements (ret1, ret5, mean_ret1_5, overnight, open_close), negative overshoot-state measurements (ma_gap5, ma_gap20, delay_ret5_1, delta_ret5_1), and negative upper-path-extremeness measurements (max_ret1_20, quantile_ret1_20), offset by positive lower-tail exhaustion (min_ret1_20); then attenuate with volatility/range-state measurements (vol5, vol20, vol60, range1, corr_ret_volume20, cov_ret_range20) and add only modest persistent-state support (ret20, ret60, rank_ret20, signedpow_ret20_half) plus light liquidity conditioning.",
+      "applicability": "Most applicable in liquid S&P 500 cross-sections during non-crisis, two-sided markets where short-term flow-driven dislocations are common and medium-horizon momentum is present but not dominant.",
+      "successes": [
+        "Uses a measurement-level revision centered on path asymmetry: penalize upper-tail extremeness while rewarding lower-tail exhaustion rather than merely changing windows.",
+        "Keeps opposing signs across horizons: strong negative short-horizon shock and overshoot terms with only modest positive medium-horizon persistent-state support.",
+        "Treats ma_gap and delay/delta return terms as overshoot and recovery-state measurements, preserving interpretability and sparsity.",
+        "Uses volatility/range and return-volume coupling strictly as attenuation of reversal confidence, with liquidity only lightly supportive."
+      ],
+      "failures": [
+        "Fails when short-horizon moves reflect genuine information arrival, such as earnings or macro repricing, where continuation dominates reversal.",
+        "Fails in crisis or liquidity-stress regimes when volatility and range expansion are persistent state changes rather than transitory dislocations.",
+        "Weakens in strong medium-horizon momentum regimes where local overextension does not mean-revert quickly.",
+        "Can misfire when elevated volume/volatility indicates structural regime change instead of temporary price pressure."
+      ]
+    },
+    "r_use": -0.0042248594882435125,
+    "r_select": -0.0030504603297311595,
+    "r_distill": 0.0007634730880433233,
+    "candidate_id": "8100f6abdb80426c3eb45f58fb222ffec3649909a212356c6e341c7fc9abcfaa",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.6584515224849767,
+      0.47995350407332193,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.4769083133401878,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.3296129353225891,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "3620f997a966200e",
+    "parent_skill_id": "e174c09d58435365",
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon reversal after temporary price-pressure and local overshoot, with only mild medium-horizon drift support; Measurement object: recovery/reversal intensity measured from recent shock levels, deviation-from-local-trend, and path asymmetry between upper-tail extremeness and lower-tail exhaustion, then attenuated by volatility/range state; Persistence hypothesis: one-day to one-week dislocations in liquid S&P 500 names tend to mean-revert when recent moves are extreme relative to their local path, while multi-week drift persists only weakly absent fresh shock signatures.",
+      "grammar": "Construct a recovery-state score by summing negative short-horizon shock-level measurements (ret1, ret5, mean_ret1_5, overnight, open_close), negative overshoot-state measurements (ma_gap5 with lighter ma_gap20, delay_ret5_1, delta_ret5_1), and negative upper-path-extremeness measurements (max_ret1_20, quantile_ret1_20), offset by positive lower-tail exhaustion (min_ret1_20); then attenuate confidence with volatility/range-state measurements (vol5, vol20, range1, corr_ret_volume20, cov_ret_range20) and add only modest persistent-state support (ret20, ret60, rank_ret20, signedpow_ret20_half) plus light liquidity conditioning.",
+      "applicability": "Most applicable in liquid S&P 500 cross-sections during non-crisis, two-sided markets where short-term flow-driven dislocations are common and medium-horizon momentum is present but not dominant; less reliable in event-driven repricing, crisis/liquidity-stress regimes, or very strong momentum tapes.",
+      "successes": [
+        "Measurement-level emphasis on path asymmetry: penalize upper-tail extremeness while rewarding lower-tail exhaustion rather than merely changing windows.",
+        "Keep strong negative short-horizon shock and overshoot terms, with only modest positive medium-horizon persistent-state support.",
+        "Use volatility/range and return-volume coupling strictly as attenuation of reversal confidence, preserving interpretability.",
+        "Maintain sparsity by zeroing redundant volume and long-window trend-gap terms that do not add distinct measurement objects."
+      ],
+      "failures": [
+        "Fails when short-horizon moves reflect genuine information arrival, such as earnings or macro repricing, where continuation dominates reversal.",
+        "Fails in crisis or liquidity-stress regimes when volatility and range expansion are persistent state changes rather than transitory dislocations.",
+        "Weakens in strong medium-horizon momentum regimes where local overextension does not mean-revert quickly.",
+        "Can misfire when elevated volume/volatility indicates structural regime change instead of temporary price pressure."
+      ]
+    },
+    "r_use": -0.003609314330561794,
+    "r_select": -0.004676747648397513,
+    "r_distill": 0.0013342916472946498,
+    "candidate_id": "b7f930f33d2c7b8b144511434e5da45ab698d9d6a15384394b9f449681ddf996",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      -0.4090136253516335,
+      -0.7884785612883936,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.2815921629607545,
+      0.0,
+      0.0,
+      0.0,
+      -0.3629259792635164,
+      0.0
+    ]
+  }
+]

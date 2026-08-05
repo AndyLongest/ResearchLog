@@ -1,0 +1,206 @@
+[
+  {
+    "skill_id": "03494c4629b0b3da",
+    "parent_skill_id": null,
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon reversal with selective medium-horizon continuation in small-cap equities; Measurement object: persistent state of recent price displacement relative to its own multi-horizon trend, with path stress captured by range and gap variables rather than pure return level alone; Persistence hypothesis: 1-5 day overshoots mean-revert, while smoother 20-60 day drift partially persists unless accompanied by high volatility and wide trading range.",
+      "grammar": "Combine a short-horizon displacement level with a longer-horizon state anchor, then attenuate by contemporaneous path-stress magnitude: negative exposure to fast return/gap measures, mild positive exposure to slower trend-state measures, and additional negative weights on volatility/range proxies to isolate exhausted moves.",
+      "applicability": "Most applicable in retail-dominated, high-turnover small-cap regimes where short-term price pressure creates temporary overshoot but medium-term themes can persist when realized path stress is moderate.",
+      "successes": [
+        "Short-term reversal construction using negative weights on ret1/ret5, mean_ret1_5, delay_ret5_1, and delta_ret5_1.",
+        "State-vs-stress separation by pairing positive ret20/ret60 and ma_gap60 with negative vol/range/open_close/overnight terms.",
+        "Path-aware exhaustion filter using max_ret1_20 negative and min_ret1_20 positive to prefer rebound after downside extremes over chasing upside spikes."
+      ],
+      "failures": [
+        "Can fail during strong momentum cascades when 1-5 day moves are information-driven rather than liquidity-driven.",
+        "Can underperform in low-volatility trend regimes where negative short-term reversal loads fight persistent continuation.",
+        "Can misfire around event clusters when overnight gaps and range expansion reflect durable repricing instead of temporary stress."
+      ]
+    },
+    "r_use": -0.0038099189606089893,
+    "r_select": -0.0007619837921217977,
+    "r_distill": -0.0038099189606089893,
+    "candidate_id": "728028c175db860c3f1cd2d01611606e416840cfc5ac325d422fc41aca562a79",
+    "beta": [
+      -0.4185307851816793,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.5506633735658777,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.5689351158147017,
+      0.0,
+      0.0,
+      0.4448760106604599,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "81725c5ce7061905",
+    "parent_skill_id": "03494c4629b0b3da",
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon reversal after crowded small-cap price displacement, with only weak continuation when medium-horizon trend survives without path stress; Measurement object: recovery/reversal intensity measured as recent displacement relative to a slower trend-state anchor, conditioned on path/asymmetry stress and crowding proxies; Persistence hypothesis: 1-5 day dislocations revert over the next horizon when accompanied by elevated range/volatility and upside extreme path marks, while smoother 20-60 day state persists only modestly.",
+      "grammar": "Measure a fast displacement-versus-slow-state spread, then gate it by path-stress asymmetry: combine negative short-horizon return/gap/delay/delta terms with mild positive slow trend-state terms, and subtract volatility, range, return-volume coupling, and upside-extreme path proxies while adding downside-extreme recovery proxies.",
+      "applicability": "Best in CSI1000-like small-cap regimes with retail flow, frequent short squeezes and liquidity-driven overshoot, where recent moves are better interpreted as temporary displacement unless supported by calm multi-week trend state.",
+      "successes": [
+        "Recovery/reversal construction using negative ret1, ret5, mean_ret1_5, delay_ret5_1, delta_ret5_1, and ma_gap5 against mild positive ret20/ret60 and ma_gap60 state anchors.",
+        "Measurement-level revision from pure return level to displacement-versus-state with explicit path/asymmetry conditioning via max_ret1_20, min_ret1_20, range1, cov_ret_range20, and corr_ret_volume20.",
+        "Crowding attenuation by penalizing vol5/vol20, open_close, overnight, and short-horizon volume z-scores so exhausted bursts are preferred over calm continuation chasing."
+      ],
+      "failures": [
+        "Fails in genuine information-driven momentum cascades where short-horizon displacement is not temporary and upside extremes continue to propagate.",
+        "Underperforms in smooth low-volatility continuation regimes where path-stress filters remove too much of the persistent trend signal.",
+        "Can misclassify broad market panic or policy repricing episodes when downside extremes reflect ongoing state transition rather than recoverable overshoot."
+      ]
+    },
+    "r_use": -0.003439423821493877,
+    "r_select": -0.003735819932785967,
+    "r_distill": 0.0003704951391151124,
+    "candidate_id": "ac027389c59ed32e532c71dbf489eb785e1199b9dfbd79c8eba6b00d277d0d91",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.43498865966249733,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.4474718365740227,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.5846968594076714,
+      0.0,
+      0.0,
+      0.0,
+      0.5183467990032359
+    ]
+  },
+  {
+    "skill_id": "ebd5e3571f199d7b",
+    "parent_skill_id": "81725c5ce7061905",
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon reversal after liquidity-driven displacement in CSI1000 small caps, with only weak continuation when a calmer multi-week state remains intact; Measurement object: recovery/reversal intensity measured as fast displacement away from a slower persistent trend-state, penalized by path-stress magnitude and upside crowding while rewarding downside overshoot; Persistence hypothesis: 1-5 day shocks revert over the next horizon when accompanied by elevated volatility/range and extreme upside path marks, whereas 20-60 day state persists modestly only if stress is limited.",
+      "grammar": "Construct a displacement-versus-state measure: load negatively on fast return/gap/change variables (ret1, ret5, mean_ret1_5, delay_ret5_1, delta_ret5_1, ma_gap5), add mild positive slow-state anchors (ret20, ret60, ma_gap60, ma_gap20), then apply path/asymmetry attenuation by subtracting volatility, range, gap, return-volume coupling, and upside-extreme proxies (vol*, range1, open_close, overnight, corr_ret_volume20, cov_ret_range20, max_ret1_20, quantile_ret1_20) while adding downside-extreme recovery and modest liquidity support (min_ret1_20, liquidity20).",
+      "applicability": "Best in retail-flow, high-turnover CSI1000 regimes where recent price moves are often temporary displacement rather than durable information, especially when realized path stress and crowding are elevated but the slower 20-60 day state is not broken.",
+      "successes": [
+        "Displacement-versus-state construction that revises the measurement object from pure return level to recovery intensity relative to a slower anchor.",
+        "Path-aware asymmetry filter that distinguishes upside exhaustion from downside rebound using max_ret1_20 negative and min_ret1_20 positive.",
+        "Sparse reversal design that keeps only mild slow-state continuation so the signal remains interpretable in small-cap overshoot regimes."
+      ],
+      "failures": [
+        "Fails in genuine information-led momentum cascades where fast displacement is the start of a new persistent state rather than a temporary overshoot.",
+        "Underperforms in smooth low-volatility continuation regimes because stress penalties suppress valid trend following.",
+        "Can misclassify market-wide panic or policy repricing when downside extremes reflect ongoing transition instead of recoverable dislocation."
+      ]
+    },
+    "r_use": -0.0037795622861175925,
+    "r_select": -0.00350745151441862,
+    "r_distill": -0.00015489089506615962,
+    "candidate_id": "aa33983a83c270c69e48c17237ac2c94637f59432ffc4f141565f563f1d253df",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.4598394158124815,
+      0.5335189885612641,
+      0.0,
+      0.0,
+      -0.5576709931106365,
+      0.4392132328980969
+    ]
+  },
+  {
+    "skill_id": "e936997245a8425d",
+    "parent_skill_id": "81725c5ce7061905",
+    "skill": {
+      "hypothesis": "Phenomenon: small-cap short-horizon price pressure in CSI1000 tends to mean-revert when recent displacement is large and accompanied by stressed trading path, while only a weak residual multi-week state persists; Measurement object: recovery/reversal intensity measured as fast displacement away from a slower trend-state anchor, with separate asymmetry terms for upside exhaustion versus downside overshoot; Persistence hypothesis: 1-5 day dislocations revert over the next horizon when volatility, range, and crowding are elevated, whereas 20-60 day state contributes only mildly if path stress is limited.",
+      "grammar": "Build a displacement-versus-state signal by subtracting fast price-displacement measures from a mild slow-state anchor, then apply an asymmetry stress transform: penalize path-magnitude and crowding proxies plus upside-extreme recurrence, while rewarding downside-extreme recovery and modest liquidity support.",
+      "applicability": "Most applicable in CSI1000-style retail-flow and liquidity-driven regimes where recent moves frequently overshoot fundamentals, especially after volatile bursts, wide ranges, and crowded upside chasing; less suited to calm institutional trend regimes.",
+      "successes": [
+        "Sparse recovery/reversal construction using negative fast displacement terms (ret1, ret5, mean_ret1_5, delay_ret5_1, delta_ret5_1, ma_gap5) against only mild positive slow-state anchors (ret20, ret60, ma_gap20, ma_gap60).",
+        "Measurement-level revision from raw return level to displacement relative to persistent state, improving interpretability over pure short-term reversal.",
+        "Explicit path/asymmetry conditioning via negative vol/range/open_close/overnight/corr_ret_volume20/cov_ret_range20/max_ret1_20 and positive min_ret1_20 to separate upside exhaustion from downside rebound."
+      ],
+      "failures": [
+        "Fails in genuine information-driven momentum cascades where fast displacement marks a new persistent state rather than temporary overshoot.",
+        "Underperforms in smooth low-volatility continuation regimes because stress penalties suppress valid trend persistence.",
+        "Can misclassify market-wide panic or policy repricing when downside extremes reflect ongoing transition instead of recoverable dislocation."
+      ]
+    },
+    "r_use": -0.0014260368996759124,
+    "r_select": -0.003036746437130284,
+    "r_distill": 0.0023535253864416803,
+    "candidate_id": "02bedcfa2d2db8ab377540a61faf65e8e28733af0c0f0de51452dec2cff4f12f",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.4480203135058919,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.4959924689185562,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.5792136409138503,
+      0.0,
+      0.0,
+      0.0,
+      0.4666699343663342
+    ]
+  }
+]

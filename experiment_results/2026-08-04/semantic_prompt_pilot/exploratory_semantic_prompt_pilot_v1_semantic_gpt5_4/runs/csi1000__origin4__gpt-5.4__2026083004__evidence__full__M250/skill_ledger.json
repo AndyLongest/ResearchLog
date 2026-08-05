@@ -1,0 +1,206 @@
+[
+  {
+    "skill_id": "71a20c9dfd927fe3",
+    "parent_skill_id": null,
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon reversal after unstable price pressure with mild medium-horizon continuation; Measurement object: persistent state combining recent return level, local path instability, and distance from moving-average anchors rather than a pure one-day shock; Persistence hypothesis: in csi1000-like small-cap universes, transient demand/supply imbalances mean-revert over days, while smoother multi-week trends persist when not accompanied by extreme short-run acceleration.",
+      "grammar": "Construct a state score as (short-horizon return level and short MA gap with negative sign) + (medium-horizon trend level with positive sign) + (instability/asymmetry penalties from recent volatility, range, and delayed return acceleration). Reusable template: mean-reversion-on-levels conditioned by path-instability, i.e., negative exposure to recent price extension, positive exposure to slower trend, and negative exposure to unstable high-frequency path measures.",
+      "applicability": "Most applicable in liquid enough small/mid-cap cross-sections with active retail flow, elevated short-term overreaction, and no dominant market-wide momentum crash regime; weaker when broad macro trend strength overwhelms idiosyncratic reversal.",
+      "successes": [
+        "Negative recent-return and MA-gap loadings paired with modest positive 20-60 day trend exposure.",
+        "Using delayed/changed 5-day return terms to distinguish persistent extension from already-reversing moves.",
+        "Penalizing high short-term volatility/range to avoid chasing noisy rebounds."
+      ],
+      "failures": [
+        "Strong one-way momentum regimes where short-term continuation dominates reversal.",
+        "Event-driven names with persistent information diffusion, where negative recent-return exposure catches value traps.",
+        "Very illiquid or limit-constrained episodes where observed reversals are not tradable and volume signals become distorted."
+      ]
+    },
+    "r_use": -0.003226755761814984,
+    "r_select": -0.0006453511523629966,
+    "r_distill": -0.003226755761814984,
+    "candidate_id": "a024b9cb004981b27a914b1408a29763b2c4e405f4f47caf26c8b7f164138058",
+    "beta": [
+      0.0,
+      -0.5279857903150501,
+      0.0,
+      -0.4523949934708679,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.48070439816090765,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.5343155029536807,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "4d304dda96a27f28",
+    "parent_skill_id": "71a20c9dfd927fe3",
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon reversal after unstable price pressure with mild medium-horizon continuation; Measurement object: persistent state combining recent return level, short moving-average extension, and path instability/asymmetry rather than a pure one-day shock; Persistence hypothesis: in csi1000-like small-cap universes, temporary demand/supply imbalances mean-revert over several days, while smoother multi-week trend components persist when recent path noise and acceleration are not extreme.",
+      "grammar": "Build a composite state from three reusable measurement blocks: (1) extension level = negative recent return levels and negative short-horizon MA-gap levels; (2) persistent trend state = positive medium-horizon return level/rank terms; (3) instability filter = negative loadings on volatility, range, delayed-return acceleration, and return-path asymmetry covariation. Template: reversal-on-extension plus continuation-on-smoother-trend, conditioned by a penalty on unstable path measures.",
+      "applicability": "Most applicable in csi1000-style small-cap cross-sections with frequent short-term overreaction, moderate liquidity, and idiosyncratic flow-driven dislocations; weaker in broad momentum-dominated tapes or hard event-diffusion regimes.",
+      "successes": [
+        "Negative recent-return and ma_gap5 exposures define extension as a level measurement rather than a single-shock proxy.",
+        "Positive ret20/rank_ret20 with smaller ret60 captures smoother medium-horizon trend persistence without overpowering reversal.",
+        "Negative delay_ret5_1 and delta_ret5_1 penalize unresolved acceleration, improving separation between oversold rebounds and continuing breakdowns."
+      ],
+      "failures": [
+        "Strong one-way momentum regimes where short-horizon continuation dominates reversal.",
+        "Event-driven small caps with persistent information diffusion, where negative recent-return exposure can select value traps.",
+        "Severely illiquid or constraint-heavy episodes where volatility/range and volume-related measurements are distorted."
+      ]
+    },
+    "r_use": -0.003315829695208182,
+    "r_select": -0.003244570548493624,
+    "r_distill": -8.907393339319808e-05,
+    "candidate_id": "442e3e625b6b00f398cb2461ae925d89ca0bd8f5059b60ea1ebd77a93659d083",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.4122568029430521,
+      0.0,
+      0.0,
+      0.0,
+      0.5273840534824109,
+      0.0,
+      -0.5956840070728825,
+      -0.4439267420163256,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "8a80830e22315f86",
+    "parent_skill_id": "4d304dda96a27f28",
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon rebound after crowded downside extension, with weak support from smoother multi-week trend; Measurement object: persistent extension state measured by recent return/MA-gap levels and unresolved path instability rather than a one-day shock or pure volatility magnitude; Persistence hypothesis: in csi1000 small-cap names, temporary liquidity-demand imbalances mean-revert over several days when downside extension is large but instability is already decaying, while a mild underlying 20-day trend helps separate oversold rebounds from structural breakdowns.",
+      "grammar": "Construct a reversal-on-extension state using three reusable measurement transformations: (1) extension level block = negative loadings on recent return levels and short moving-average gap levels; (2) persistent trend confirmation block = modest positive loadings on medium-horizon return level/rank measures; (3) unresolved-instability penalty block = negative loadings on short/medium volatility, range, delayed-return carryover, return-change acceleration, and return-range path asymmetry. Template: score = -extension_level + trend_confirmation - unresolved_instability, where extension is measured as level distance from recent price anchors and instability is measured as persistence of noisy path behavior rather than raw turnover alone.",
+      "applicability": "Best suited to csi1000-style small-cap cross-sections with frequent short-term overreaction, moderate tradability, and idiosyncratic flow-driven dislocations; less reliable in strong market-wide momentum phases, persistent information-diffusion selloffs, or severe liquidity/limit-constraint episodes.",
+      "successes": [
+        "Defines oversoldness primarily as a level measurement via ret5 and ma_gap5 rather than a single-day shock proxy.",
+        "Keeps medium-horizon continuation sparse and secondary through ret20 and rank_ret20, preserving interpretability.",
+        "Uses delay_ret5_1, delta_ret5_1, cov_ret_range20, and short-horizon vol/range as a coherent unresolved-instability penalty to avoid unstable falling knives."
+      ],
+      "failures": [
+        "Fails in strong one-way momentum regimes where short-horizon continuation dominates reversal.",
+        "Can select value traps during genuine negative information diffusion in small caps.",
+        "Signal quality degrades when liquidity/range measurements are distorted by trading constraints or extreme illiquidity."
+      ]
+    },
+    "r_use": -0.0030250417944477784,
+    "r_select": -0.003257672115056101,
+    "r_distill": 0.00024625093406380454,
+    "candidate_id": "61bead7f25d6051bfe9f0e1a13637a04baa97359d629a7acc723ea5d9461463a",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.4972918789398498,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.6200874362911591,
+      -0.4659269408671008,
+      -0.38872155107294554,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "73385820320f4a1e",
+    "parent_skill_id": "8a80830e22315f86",
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon rebound after downside extension, but only when the extension looks exhausted rather than actively cascading; Measurement object: recovery-readiness state measured as extension level plus evidence that the worst local path has already been realized, not as raw volatility or a one-day shock; Persistence hypothesis: in csi1000 small caps, oversold names rebound over several days when recent price distance from anchors is large and the path is no longer worsening, while a mild medium-horizon trend state helps avoid structural losers.",
+      "grammar": "Construct a recovery-readiness score with three reusable transformations: (1) extension-level block = negative recent return levels and negative short moving-average-gap levels; (2) path-exhaustion block = reward evidence that recent downside tail state is already deep but no longer accelerating, using positive loading on rolling downside-extreme level proxies and negative loading on delayed-return carryover, return-change acceleration, and return-range co-movement; (3) slow-trend confirmation block = modest positive medium-horizon return level/rank terms. Template: score = -extension_level + downside_tail_realized - ongoing_cascade + slow_trend_confirmation.",
+      "applicability": "Best in csi1000 cross-sections with frequent flow-driven overshooting where short-term losers often mean-revert once deterioration stops; weaker in broad momentum crashes, fresh negative information diffusion, or binding liquidity/price-limit regimes where realized downside extremes do not indicate exhaustion.",
+      "successes": [
+        "Shifts the measurement object from generic instability to recovery-readiness by explicitly separating realized downside tail state (min_ret1_20, quantile_ret1_20) from ongoing deterioration (delay_ret5_1, delta_ret5_1).",
+        "Keeps extension defined primarily as a level via ret5 and ma_gap5, preserving interpretability and continuity with prior reversal constructions.",
+        "Uses only sparse medium-horizon confirmation through ret20, rank_ret20, and small signedpow_ret20_half rather than adding dense trend complexity."
+      ],
+      "failures": [
+        "Fails when downside extremes reflect new fundamental information rather than temporary flow imbalance, causing apparent exhaustion to be a value trap.",
+        "Underperforms in strong continuation regimes where recent losers keep cascading despite already-deep downside-tail measurements.",
+        "Can be distorted in severely illiquid or limit-constrained names where rolling downside-extreme statistics are mechanically pinned and not informative about true recovery readiness."
+      ]
+    },
+    "r_use": 0.0046270128334992755,
+    "r_select": -0.0014946308688583681,
+    "r_distill": 0.00785376859531426,
+    "candidate_id": "21a563f08935a720c2f1bf5b65919ddf346c0eeea963d88c6e506bccaf65ae68",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.6464332682837608,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.457610887709675,
+      0.42350154208987884,
+      -0.4397303138891304,
+      0.0,
+      0.0,
+      0.0
+    ]
+  }
+]
