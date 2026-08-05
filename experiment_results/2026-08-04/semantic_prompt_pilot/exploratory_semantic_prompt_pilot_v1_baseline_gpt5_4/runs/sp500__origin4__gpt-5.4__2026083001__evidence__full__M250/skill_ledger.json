@@ -1,0 +1,308 @@
+[
+  {
+    "skill_id": "7b0163eb286b2f29",
+    "parent_skill_id": null,
+    "skill": {
+      "hypothesis": "In large-cap US equities, short-to-medium horizon price extension tends to mean-revert, especially when accompanied by elevated volatility/range and stretched price relative to moving averages; mild positive loading on recent volatility proxies helps identify overreaction states where reversal is stronger.",
+      "grammar": "add( mul(a1, rank(neg(ret5))), mul(a2, rank(neg(ret20))), mul(a3, rank(neg(ma_gap20))), mul(a4, rank(neg(mean_ret1_5))), mul(a5, rank(vol20)), mul(a6, rank(range1)) )",
+      "applicability": "Most predictable in broad, liquid, non-crisis cross-sections with dispersed short-horizon returns and temporary overreaction; weaker during strong momentum/trend regimes and event-driven breakouts.",
+      "successes": [
+        "Short-horizon reversal built from negative recent returns plus negative moving-average gap",
+        "Augmenting reversal with volatility/range terms to target overshoot rather than stable trends",
+        "Using simple ranked additive components for sparse, interpretable cross-sectional construction"
+      ],
+      "failures": [
+        "Persistent momentum-led tapes where winners keep winning over 1-3 months",
+        "Low-dispersion calm markets where reversal signals are too weak after costs",
+        "Single-name news shocks or structural breaks where past return stretch is not an overreaction"
+      ]
+    },
+    "r_use": -0.002806258082955008,
+    "r_select": -0.0005612516165910015,
+    "r_distill": -0.002806258082955008,
+    "candidate_id": "aa581db4198ce2e057fc6e77d7bb7b663ad9b4608b4f41c198b983830170ed99",
+    "beta": [
+      0.0,
+      -0.50709255283711,
+      -0.6197797868009122,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.45074893585520887,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.3944053188733078,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "2a05a40fe81bfd24",
+    "parent_skill_id": "7b0163eb286b2f29",
+    "skill": {
+      "hypothesis": "Large-cap US equities exhibit short-to-medium horizon mean reversion after temporary price extension; reversals are stronger when recent losses and negative moving-average gaps coincide with elevated volatility and intraday range, consistent with overshoot rather than stable trend continuation.",
+      "grammar": "add( mul(a1, rank(neg(ret5))), mul(a2, rank(neg(ret20))), mul(a3, rank(neg(ma_gap20))), mul(a4, rank(neg(mean_ret1_5))), mul(a5, rank(vol20)), mul(a6, rank(range1)) )",
+      "applicability": "Broad, liquid S&P 500 cross-sections with dispersed short-horizon returns and moderate risk-off or overreaction conditions; less reliable in persistent momentum, breakout, or low-dispersion calm regimes.",
+      "successes": [
+        "Negative recent return plus negative medium moving-average gap as core reversal scaffold",
+        "Adding vol20 and range1 to focus on overshoot states where reversal is more likely",
+        "Sparse ranked additive construction for interpretable cross-sectional implementation"
+      ],
+      "failures": [
+        "Strong momentum/trend regimes where 1-3 month continuation dominates reversal",
+        "Event-driven or structural-break names where price moves reflect new information",
+        "Very low-dispersion quiet markets where reversal edge is too small relative to costs"
+      ]
+    },
+    "r_use": -0.0034954277416109226,
+    "r_select": -0.002944092014686191,
+    "r_distill": -0.0006891696586559144,
+    "candidate_id": "25110f4130621e7ccd8f7564a2a4d50efeface5f71b785f225df71c949c9d286",
+    "beta": [
+      0.0,
+      0.0,
+      -0.6569615089890243,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.5442900568092931,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.39036680623196646,
+      0.0,
+      0.0,
+      0.0,
+      0.34606887516454726
+    ]
+  },
+  {
+    "skill_id": "328c3f0c1a2c22b1",
+    "parent_skill_id": "2a05a40fe81bfd24",
+    "skill": {
+      "hypothesis": "Large-cap US equities in the S&P 500 show short-to-medium horizon mean reversion after temporary price extension; reversals are more likely when recent losses and negative medium moving-average gaps coincide with elevated volatility and intraday range, indicating overshoot rather than durable trend continuation.",
+      "grammar": "add( mul(-0.32, rank(ret5)), mul(-0.24, rank(ret20)), mul(-0.22, rank(ma_gap20)), mul(-0.18, rank(mean_ret1_5)), mul(0.14, rank(vol20)), mul(0.10, rank(range1)) )",
+      "applicability": "Broad, liquid S&P 500 cross-sections with dispersed short-horizon returns and moderate risk-off or overreaction conditions; less reliable in persistent momentum, breakout, event-driven, or very low-dispersion calm regimes.",
+      "successes": [
+        "Negative recent return plus negative medium moving-average gap as the core sparse reversal scaffold",
+        "Adding vol20 and range1 to emphasize overshoot states where reversal is more likely",
+        "Ranked additive construction remains interpretable and reusable across broad large-cap cross-sections"
+      ],
+      "failures": [
+        "Strong momentum or trend regimes where 1-3 month continuation dominates reversal",
+        "Single-name news, structural breaks, or information shocks where price extension is fundamental not temporary",
+        "Very low-dispersion quiet markets where reversal edge is too small relative to trading costs"
+      ]
+    },
+    "r_use": -0.0027577089687082588,
+    "r_select": -0.00334788398703039,
+    "r_distill": 0.0003931339435747066,
+    "candidate_id": "ccd643887c6fde2d35583fedaed0475b02c759b9b47de8566dd8e87a8607cb55",
+    "beta": [
+      0.0,
+      0.0,
+      -0.500449672928718,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.7114223922568219,
+      -0.33530175066051227,
+      0.36194065903835004,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "2d0e43bcbcb34d6a",
+    "parent_skill_id": "328c3f0c1a2c22b1",
+    "skill": {
+      "hypothesis": "In S&P 500 large caps, temporary short-to-medium horizon price extension tends to mean-revert. Reversal is more likely when recent underperformance aligns with a negative 20-day moving-average gap, while elevated 20-day volatility and current intraday range indicate overshoot conditions rather than durable trend continuation.",
+      "grammar": "add( mul(-0.24, rank(ret5)), mul(-0.18, rank(ret20)), mul(-0.22, rank(ma_gap20)), mul(-0.14, rank(mean_ret1_5)), mul(-0.06, rank(ret1)), mul(0.12, rank(vol20)), mul(0.08, rank(range1)) )",
+      "applicability": "Broad, liquid S&P 500 cross-sections with dispersed recent returns and moderate overreaction or risk-off conditions; weaker in persistent momentum, breakout, event-driven, or very low-dispersion calm regimes.",
+      "successes": [
+        "Sparse reversal scaffold using recent return weakness plus negative medium moving-average gap",
+        "Vol20 and range1 additions target overshoot states where reversal is more probable",
+        "Small ret1 term refines very short-horizon extension without changing the core interpretable structure"
+      ],
+      "failures": [
+        "Strong momentum or trend regimes where continuation dominates reversal",
+        "Single-name news, structural breaks, or fundamental repricing episodes",
+        "Quiet low-dispersion markets where reversal edge is too small relative to costs"
+      ]
+    },
+    "r_use": -0.0030871517771646176,
+    "r_select": -0.0028235975303995305,
+    "r_distill": -0.00028089369420960944,
+    "candidate_id": "8c2fe757dd99ffec20e398623814550698751abc7ec136526eef15b1f878d77b",
+    "beta": [
+      0.0,
+      -0.44077878263904224,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.7635181552046526,
+      0.0,
+      0.33545435757246306,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.33200070095373896,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "c5f7858c05123209",
+    "parent_skill_id": "328c3f0c1a2c22b1",
+    "skill": {
+      "hypothesis": "In S&P 500 large caps, temporary short-to-medium price weakness tends to mean-revert when it coincides with a negative 20-day moving-average gap and elevated volatility/range, which together indicate overshoot and crowding rather than durable information-driven trend continuation.",
+      "grammar": "add( mul(-0.26, rank(ret5)), mul(-0.16, rank(ret20)), mul(-0.24, rank(ma_gap20)), mul(-0.12, rank(mean_ret1_5)), mul(-0.04, rank(ret1)), mul(0.11, rank(vol20)), mul(0.08, rank(range1)) )",
+      "applicability": "Broad, liquid S&P 500 cross-sections with dispersed recent returns and moderate overreaction or risk-off conditions; most suitable when short-horizon losers are stretched below medium trend with elevated realized risk, and less suitable in persistent momentum, breakout, event-driven, or very low-dispersion calm regimes.",
+      "successes": [
+        "Sparse reversal scaffold centered on ret5, ret20, and ma_gap20 for interpretable mean reversion",
+        "Uses vol20 and range1 only as modest overshoot-state qualifiers rather than dominant drivers",
+        "Small ret1 term refines very short-horizon extension while preserving the established large-cap reversal template"
+      ],
+      "failures": [
+        "Strong momentum or trend regimes where continuation dominates reversal",
+        "Single-name news, structural breaks, or fundamental repricing where weakness is informative",
+        "Quiet low-dispersion markets where reversal spread is too small relative to costs"
+      ]
+    },
+    "r_use": -0.0038052060842351625,
+    "r_select": -0.0029672083918136395,
+    "r_distill": -0.0008585011541753498,
+    "candidate_id": "3f52cd1f3286c926250cecc4ac1388c92c474a3bb0581bc6d8b6c9585a3f4405",
+    "beta": [
+      0.0,
+      0.0,
+      -0.6756463633455769,
+      -0.38974171588690376,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.2802595497497082,
+      -0.5595158365672231,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "01d4747d5776ed13",
+    "parent_skill_id": "328c3f0c1a2c22b1",
+    "skill": {
+      "hypothesis": "In S&P 500 large caps, short-to-medium horizon price weakness tends to mean-revert when recent losses coincide with a negative 20-day moving-average gap and mildly elevated volatility and intraday range, consistent with temporary overshoot rather than durable trend continuation.",
+      "grammar": "add( mul(-0.28, rank(ret5)), mul(-0.14, rank(ret20)), mul(-0.26, rank(ma_gap20)), mul(-0.10, rank(mean_ret1_5)), mul(-0.05, rank(ret1)), mul(0.10, rank(vol20)), mul(0.07, rank(range1)) )",
+      "applicability": "Broad, liquid S&P 500 cross-sections with dispersed short-horizon returns and moderate overreaction or risk-off conditions; more suitable when losers are stretched below medium trend with somewhat elevated realized risk, and less suitable in persistent momentum, breakout, event-driven, or very low-dispersion calm regimes.",
+      "successes": [
+        "Sparse reversal scaffold using ret5 and ma_gap20 as the dominant interpretable anchors",
+        "Keeps ret20 and mean_ret1_5 as secondary confirmation of short-to-medium extension",
+        "Uses vol20 and range1 only as modest overshoot qualifiers rather than primary drivers"
+      ],
+      "failures": [
+        "Strong momentum or trend regimes where continuation dominates reversal",
+        "Single-name news, structural breaks, or fundamental repricing episodes",
+        "Quiet low-dispersion markets where reversal spread is too small relative to costs"
+      ]
+    },
+    "r_use": -0.004515020431212301,
+    "r_select": -0.003109171261209067,
+    "r_distill": -0.0014278686540476833,
+    "candidate_id": "796a68875a53304f259ad823d5242019adecd06d37d5fcce20ba0103a52ad366",
+    "beta": [
+      0.0,
+      0.5050551728933768,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.6080802210236382,
+      -0.42387498491964065,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.44213992614652997
+    ]
+  }
+]

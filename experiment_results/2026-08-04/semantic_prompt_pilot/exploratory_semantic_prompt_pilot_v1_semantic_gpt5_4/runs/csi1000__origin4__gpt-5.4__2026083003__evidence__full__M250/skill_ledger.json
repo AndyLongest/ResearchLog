@@ -1,0 +1,206 @@
+[
+  {
+    "skill_id": "49d4fb9fddf18161",
+    "parent_skill_id": null,
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon reversal with selective medium-horizon continuation in smaller-cap equities; Measurement object: persistent state of recent price displacement relative to its own recent path, penalized by unstable high-volatility moves and supported by adequate liquidity; Persistence hypothesis: 1-5 day overshoots mean-revert, while smoother 20-60 day drifts persist when not dominated by extreme daily jumps.",
+      "grammar": "state_score = a1*delay_ret5_1 + a2*delta_ret5_1 + a3*ret1 + a4*mean_ret1_5 + a5*ma_gap5 + a6*overnight + b1*ret20 + b2*ret60 + b3*rank_ret20 - c1*range1 - c2*vol20 - c3*max_ret1_20 + c4*min_ret1_20 + d1*liquidity20; use negative weights on short-horizon displacement/recent acceleration as a recovery-reversal measurement, positive weights on smoother medium-horizon state as a persistence measurement, and volatility/extreme-move penalties to suppress unstable paths.",
+      "applicability": "more predictable in liquid, high-turnover small-cap regimes with noisy short-term overreaction and weaker predictability during volatility shocks or one-sided momentum cascades.",
+      "successes": [
+        "Combine short-horizon displacement and acceleration terms with opposite-signed medium-horizon state terms.",
+        "Penalize range/volatility/extreme-up-day path features to distinguish unstable spikes from persistent trends.",
+        "Include a modest liquidity support term so reversal signals are favored where price discovery is less impaired."
+      ],
+      "failures": [
+        "Fails during regime-wide momentum surges where short-term continuation overwhelms reversal.",
+        "Weak in illiquid stress episodes where gaps and ranges reflect trading frictions rather than mispricing.",
+        "Can underperform after structural news shocks that create genuine repricing instead of temporary overshoot."
+      ]
+    },
+    "r_use": 3.357015163716259e-05,
+    "r_select": 6.714030327432516e-06,
+    "r_distill": 3.357015163716259e-05,
+    "candidate_id": "5db96ddb71d8ac35752748adec028a2263edf62542d4d106bdcec8daed4f2175",
+    "beta": [
+      0.0,
+      -0.4928839285277163,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.5275209246279312,
+      0.0,
+      0.0,
+      -0.6093434372426173,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.32785314176949704
+    ]
+  },
+  {
+    "skill_id": "eb8fb2874b08835c",
+    "parent_skill_id": "49d4fb9fddf18161",
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon recovery after overshoot with selective continuation of smoother medium-horizon drift in CSI1000 names; Measurement object: persistent state of price displacement relative to its recent path, separating recovery/reversal from stable trend level by penalizing unstable path asymmetry and jumpiness while modestly rewarding tradable liquidity; Persistence hypothesis: recent 1-5 day dislocations tend to mean-revert, but 20-60 day trends persist when their path is smooth, liquid, and not dominated by extreme up-moves or volatility bursts.",
+      "grammar": "state_score = reversal_block + persistence_block - instability_block + tradability_block, where reversal_block = a1*delay_ret5_1 + a2*delta_ret5_1 + a3*ret1 + a4*mean_ret1_5 + a5*ma_gap5 + a6*overnight measures short-horizon recovery/reversal state; persistence_block = b1*ret20 + b2*ret60 + b3*rank_ret20 + b4*ma_gap20 + b5*ma_gap60 + b6*signedpow_ret20_half measures smoother medium-horizon trend level; instability_block = c1*range1 + c2*vol20 + c3*max_ret1_20 - c4*min_ret1_20 + c5*corr_ret_volume20 + c6*cov_ret_range20 measures path instability/asymmetry and jump-driven moves; tradability_block = d1*liquidity20 + d2*volume_z20 measures whether the state is expressed in sufficiently tradable names.",
+      "applicability": "best in liquid small-cap regimes with frequent short-term overreaction and heterogeneous stock-specific paths; weaker during broad momentum cascades, volatility shocks, or news-led repricing when jumpy paths reflect genuine state changes rather than temporary displacement.",
+      "successes": [
+        "Use a two-block construction that separates recovery/reversal measurement from medium-horizon persistent trend measurement.",
+        "Penalize path instability with range, volatility, and extreme-up-day terms so continuation is only kept when the trend is smooth.",
+        "Add a modest tradability support term to favor signals that are more likely to reflect price discovery rather than friction."
+      ],
+      "failures": [
+        "Fails when market-wide momentum dominates and short-horizon losers continue falling instead of recovering.",
+        "Weak in illiquid stress or limit-driven episodes where ranges and gaps are microstructure artifacts.",
+        "Can underperform after structural information shocks that create durable repricing through large jumps."
+      ]
+    },
+    "r_use": -0.0013638092527550904,
+    "r_select": -0.00024590572924128795,
+    "r_distill": -0.001397379404392253,
+    "candidate_id": "86105786c1f5bb18702fd1e8075f5c8ab25c7fed5751e43dd6e1757c586d1b4b",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.3933000457888307,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.45849305773142013,
+      -0.6963441071904789,
+      0.0,
+      0.0,
+      0.3875617039591129,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "312fa44455c3b38c",
+    "parent_skill_id": "eb8fb2874b08835c",
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon recovery after local overshoot with conditional continuation of smoother medium-horizon drift in CSI1000 names; Measurement object: persistent state combining recovery/reversal displacement at 1-5 day horizon with medium-horizon trend level, while filtering out jump-driven and high-instability paths and modestly favoring tradable names; Persistence hypothesis: recent negative displacement and deceleration tend to mean-revert, but 20-60 day direction persists only when expressed as a smooth state rather than a volatile spike.",
+      "grammar": "state_score = reversal_state + smooth_trend_state - instability_filter + tradability_support, where reversal_state loads on short-horizon displacement and recovery/reversal measurements {delay_ret5_1, delta_ret5_1, ret1, mean_ret1_5, ma_gap5, overnight, open_close}; smooth_trend_state loads on persistent medium-horizon level measurements {ret20, ret60, rank_ret20, ma_gap20, ma_gap60, signedpow_ret20_half}; instability_filter penalizes path magnitude/asymmetry and jumpiness {range1, vol20, vol60, max_ret1_20, min_ret1_20, corr_ret_volume20, cov_ret_range20}; tradability_support modestly rewards implementable state expression {liquidity20, volume_z20}.",
+      "applicability": "best in liquid small-cap regimes with frequent short-term overreaction and dispersed stock-specific trends; weaker in market-wide momentum cascades, volatility shock regimes, and structural repricing episodes where large moves reflect genuine information.",
+      "successes": [
+        "Separate recovery/reversal measurement from medium-horizon persistent trend level in a sparse additive construction.",
+        "Use instability penalties on volatility, range, and extreme daily moves to keep only smoother continuation states.",
+        "Add modest liquidity and volume support so the measured state is more likely to be tradable rather than friction-driven."
+      ],
+      "failures": [
+        "Fails when short-horizon losers continue trending down in broad momentum or deleveraging waves.",
+        "Weak when volatility spikes and jump/range measures reflect true information arrival rather than temporary overshoot.",
+        "Can underperform in illiquid or limit-constrained episodes where gaps and path asymmetry are dominated by trading frictions."
+      ]
+    },
+    "r_use": -0.0031973626962923593,
+    "r_select": -0.001730519941462544,
+    "r_distill": -0.0025322431457333954,
+    "candidate_id": "a9236799a7a257c5dfbda1b1641dd31b41b1edd4b7dfe8997db25dbf8355c0ac",
+    "beta": [
+      0.0,
+      0.0,
+      0.34848387971345596,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.6825246675953859,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.415884792421773,
+      0.4896518182708653
+    ]
+  },
+  {
+    "skill_id": "b5b4b5c4fae539ef",
+    "parent_skill_id": "312fa44455c3b38c",
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon recovery after local overshoot with selective continuation of smoother medium-horizon drift in CSI1000 names; Measurement object: persistent state formed by combining recovery/reversal displacement with a smooth trend level, while penalizing jumpy path magnitude/asymmetry and modestly favoring tradable expression; Persistence hypothesis: recent 1-5 day negative displacement and deceleration tend to mean-revert, while 20-60 day direction persists only when carried by a stable, low-instability state rather than extreme daily spikes.",
+      "grammar": "state_score = recovery_state + smooth_level_state - path_instability_state + tradability_state, where recovery_state is a signed displacement-and-recovery measurement using {delay_ret5_1, delta_ret5_1, ret1, mean_ret1_5, ma_gap5, overnight, open_close}; smooth_level_state is a persistent medium-horizon level measurement using {ret20, ret60, rank_ret20, ma_gap20, ma_gap60, signedpow_ret20_half}; path_instability_state is a magnitude/asymmetry filter using {range1, vol20, vol60, max_ret1_20, corr_ret_volume20, cov_ret_range20} with partial allowance for washed-out downside via {min_ret1_20}; tradability_state is a modest implementation support using {liquidity20, volume_z20}.",
+      "applicability": "best in liquid CSI1000 regimes with frequent short-term overreaction and dispersed stock-specific drift; weaker during broad momentum cascades, volatility shock regimes, and structural repricing episodes where large jumps reflect genuine information.",
+      "successes": [
+        "Separate recovery/reversal measurement from medium-horizon smooth trend level in a sparse additive construction.",
+        "Use instability penalties on volatility, range, and extreme positive daily moves so continuation is retained only for smoother paths.",
+        "Allow severe recent downside only modestly as a washed-out reversal cue while adding small tradability support through liquidity and volume."
+      ],
+      "failures": [
+        "Fails when short-horizon losers continue trending down in market-wide momentum or deleveraging waves.",
+        "Weak when volatility and jump measures proxy true information arrival rather than temporary overshoot.",
+        "Can underperform in illiquid or limit-constrained episodes where gaps, ranges, and reversals are dominated by trading frictions."
+      ]
+    },
+    "r_use": 0.0012074674510089275,
+    "r_select": -0.002316396666832102,
+    "r_distill": 0.002571276703764018,
+    "candidate_id": "963f15d43bfa67593cdeb1efb391fdc850bccceaf9c8b391d965346303b9fb6b",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.609824958948798,
+      -0.44020057202783963,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.4426486300868678,
+      0.48826137069368764
+    ]
+  }
+]

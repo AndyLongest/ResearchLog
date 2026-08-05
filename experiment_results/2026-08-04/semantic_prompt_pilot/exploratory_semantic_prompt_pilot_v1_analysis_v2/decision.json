@@ -1,0 +1,16 @@
+{
+  "truth_label": "exploratory retrospective semantic-prompt pilot",
+  "models_computable": [
+    "gpt-5.4"
+  ],
+  "models_noncomputable": {
+    "claude-sonnet-4.6": "provider returned model_not_supported before formal pilot"
+  },
+  "pairs": 15,
+  "primary_metric": "paired locked RankIC, semantic minus baseline",
+  "primary_effect": 0.005717379406214231,
+  "ci_low": -0.014882649919522328,
+  "ci_high": 0.02631740873195079,
+  "conclusion": "inconclusive",
+  "claim_boundary": "already-opened 2023-2025 outcomes; exploratory only; 26-feature daily basis"
+}

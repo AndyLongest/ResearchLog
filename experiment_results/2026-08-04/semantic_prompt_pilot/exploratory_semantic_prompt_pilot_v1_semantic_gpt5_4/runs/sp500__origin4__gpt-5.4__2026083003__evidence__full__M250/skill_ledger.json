@@ -1,0 +1,296 @@
+[
+  {
+    "skill_id": "5ba8e746f3508493",
+    "parent_skill_id": null,
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon reversal embedded within medium-horizon trend continuation in large-cap equities; Measurement object: recovery/reversal intensity relative to persistent state, using recent return shocks and moving-average gap as reversal measures while retaining slower trend rank/level terms as state; Persistence hypothesis: 1-5 day dislocations mean-revert, but 1-3 month relative strength persists when not dominated by acute volatility expansion.",
+      "grammar": "Combine a persistent-state term with a recovery term: alpha = a1*persistent_state + a2*reversal_measure + a3*stress_filter, where persistent_state is a medium-horizon return level/rank proxy (e.g., ret20, ret60, rank_ret20, ma_gap60), reversal_measure is a short-horizon signed dislocation or delayed move proxy (e.g., ret1, delay_ret5_1, delta_ret5_1, mean_ret1_5, ma_gap5), and stress_filter is a magnitude/path penalty (e.g., vol5, range1, overnight).",
+      "applicability": "Most predictable in broad, liquid large-cap universes during non-crisis regimes with dispersed short-term shocks and intact medium-term trend structure; weaker during regime breaks, panic deleveraging, or volatility spikes that overwhelm normal reversal dynamics.",
+      "successes": [
+        "State-plus-reversal construction: pair positive medium-horizon trend level/rank exposure with negative very-short-horizon return and MA-gap exposure.",
+        "Use path/stress penalties to suppress names experiencing abrupt volatility, gap, or range expansion while preserving slower trend information."
+      ],
+      "failures": [
+        "Fails in crash/rebound transitions where short-term reversal flips into momentum or where volatility expansion is itself the dominant continuation signal.",
+        "Weak when cross-sectional dispersion is low and both trend and reversal signals are compressed, reducing efficacy of mixed-horizon constructions."
+      ]
+    },
+    "r_use": -0.004081998693923096,
+    "r_select": -0.000816399738784619,
+    "r_distill": -0.004081998693923096,
+    "candidate_id": "2650af7e27043dd287062a64497d490131e1f13f3cdaa33c8f0dcdb0114d074b",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.5322748473070312,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.48709009505195294,
+      0.0,
+      -0.498991028353937,
+      0.0,
+      0.0,
+      -0.48003612348326075,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "375f1301c8622a6a",
+    "parent_skill_id": "5ba8e746f3508493",
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon reversal embedded within medium-horizon trend continuation in large-cap equities; Measurement object: recovery/reversal intensity relative to persistent state, with persistent state measured by medium-horizon return level/rank and MA-gap level, and reversal intensity measured by recent signed dislocation plus stress/path expansion penalties; Persistence hypothesis: 1-5 day dislocations mean-revert, while 1-3 month relative strength persists when recent volatility, gap, and range expansion do not indicate regime disruption.",
+      "grammar": "Reusable state-conditioned reversal template: alpha = a1*persistent_state + a2*reversal_intensity + a3*path_stress_penalty + a4*stability_tilt, where persistent_state is a medium-horizon level/rank measure (ret20, ret60, rank_ret20, ma_gap20, ma_gap60), reversal_intensity is a short-horizon signed dislocation/recovery measure (ret1, ma_gap5, delay_ret5_1, delta_ret5_1, mean_ret1_5), path_stress_penalty is a magnitude/asymmetry filter (vol5, vol20, range1, overnight, cov_ret_range20, corr_ret_volume20), and stability_tilt is a mild liquidity/continuity preference (liquidity20, signedpow_ret20_half, min_ret1_20).",
+      "applicability": "Broad liquid large-cap universes in non-crisis or post-shock normalization regimes where medium-horizon leadership remains informative and short-term overshoots are common but not structurally destabilizing; less reliable when volatility expansion itself signals persistent continuation.",
+      "successes": [
+        "State-conditioned reversal construction: keep positive exposure to medium-horizon trend level/rank while fading acute 1-5 day dislocations via negative ret1, ma_gap5, and delayed-move terms.",
+        "Measurement-level stress control: penalize magnitude/path expansion through vol, range, overnight, and return-range covariance rather than only shortening windows."
+      ],
+      "failures": [
+        "Crash, squeeze, or regime-break episodes where short-term losers continue to underperform and volatility expansion is a continuation signal rather than a reversal setup.",
+        "Low-dispersion trendless markets where both persistent-state and reversal measurements are weak, leaving the mixed-horizon template underpowered."
+      ]
+    },
+    "r_use": -0.0037681987149495804,
+    "r_select": -0.004019238698128392,
+    "r_distill": 0.00031379997897351556,
+    "candidate_id": "4aa340d1953a5402d93be5ff27f48c2b1377df73502cee1bdae8f384a85c5ac6",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.4692526279369042,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.43980100552148677,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.6470736391560753,
+      0.0,
+      -0.40947863463911266,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "e6883d5c6c2e331b",
+    "parent_skill_id": "375f1301c8622a6a",
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon reversal nested inside medium-horizon trend persistence in large-cap equities; Measurement object: recovery/reversal intensity relative to a persistent state, with persistent state measured by medium-horizon return level/rank and MA-gap level, and reversal intensity measured by recent signed dislocation plus path-stress expansion penalties; Persistence hypothesis: medium-horizon leadership persists across weeks, while 1-5 day overshoots partially mean-revert when volatility, gap, and range expansion indicate temporary stress rather than a new continuation regime.",
+      "grammar": "Reusable persistent-state plus signed-dislocation template: alpha = a1*state_level + a2*state_rank + a3*short_horizon_dislocation + a4*delayed_reversal + a5*path_stress_penalty + a6*stability_preference, where state_level is a medium-horizon level measure (ret20, ret60, ma_gap20, ma_gap60), state_rank is a medium-horizon cross-sectional state proxy (rank_ret20), short_horizon_dislocation is a signed recovery/reversal measure (ret1, ma_gap5, mean_ret1_5), delayed_reversal is a recurrence/recovery proxy (delay_ret5_1, delta_ret5_1), path_stress_penalty is a magnitude/asymmetry filter (vol5, vol20, range1, overnight, cov_ret_range20, corr_ret_volume20), and stability_preference is a continuity tilt (liquidity20, signedpow_ret20_half, min_ret1_20).",
+      "applicability": "Broad liquid S&P 500 names in normal or post-shock normalization regimes where medium-horizon relative strength remains informative and very recent dislocations are more likely to mean-revert than to initiate a fresh persistent trend; less reliable during crisis continuation, squeeze dynamics, or volatility-led regime breaks.",
+      "successes": [
+        "Construction pattern: retain positive exposure to medium-horizon state level/rank while fading acute 1-day and 1-week signed dislocations through negative ret1, ma_gap5, delay_ret5_1, and delta_ret5_1 loadings.",
+        "Measurement-level revision: control continuation-risk by penalizing path expansion and asymmetry via vol, range, overnight, and return-range covariance rather than merely altering lookback windows."
+      ],
+      "failures": [
+        "Failure boundary: crash, squeeze, or structural-break episodes where short-term losers keep underperforming and volatility/range expansion reflects persistent continuation rather than temporary overshoot.",
+        "Failure boundary: low-dispersion, low-shock environments where both persistent-state and reversal measurements are weak, making the mixed state-plus-recovery template underpowered."
+      ]
+    },
+    "r_use": -0.0009625246400156147,
+    "r_select": -0.003207063899962787,
+    "r_distill": 0.002962574064420724,
+    "candidate_id": "23da95040a66017ce8c3944737f0e591f7e05ef3e4cc494a28de1aa508e1cded",
+    "beta": [
+      0.0,
+      0.0,
+      -0.37023063521462907,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.4553304975144416,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.42472393576944656,
+      0.0,
+      -0.6893569417698893,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "76d6920b7382cec0",
+    "parent_skill_id": "375f1301c8622a6a",
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon reversal nested within medium-horizon trend persistence in large-cap equities; Measurement object: recovery/reversal intensity relative to persistent state, with persistent state measured by medium-horizon return level/rank and MA-gap level, reversal measured by recent signed dislocation and delayed move recurrence, and continuation-risk measured by path-stress magnitude/asymmetry; Persistence hypothesis: 1-5 day overshoots partially mean-revert, while 1-3 month relative strength persists when volatility, gap, and range expansion do not signal regime disruption.",
+      "grammar": "Reusable persistent-state plus recovery template: alpha = a1*state_level + a2*state_rank + a3*signed_dislocation + a4*delayed_recovery + a5*path_stress_penalty + a6*stability_tilt, where state_level is a medium-horizon level measure (ret20, ret60, ma_gap20, ma_gap60), state_rank is a medium-horizon state proxy (rank_ret20), signed_dislocation is a short-horizon recovery/reversal measure (ret1, ma_gap5, mean_ret1_5), delayed_recovery is a recurrence proxy for prior short-run move exhaustion (delay_ret5_1, delta_ret5_1), path_stress_penalty is a magnitude/asymmetry filter (vol5, vol20, range1, overnight, cov_ret_range20, corr_ret_volume20), and stability_tilt is a mild continuity preference (liquidity20, signedpow_ret20_half, min_ret1_20).",
+      "applicability": "Broad liquid S&P 500 names in normal, non-crisis, or post-shock normalization regimes where medium-horizon leadership remains informative and recent sharp dislocations are more likely to mean-revert than to begin a fresh persistent trend; less reliable when volatility expansion itself is the continuation signal.",
+      "successes": [
+        "Construction pattern: keep positive exposure to medium-horizon trend state (ret20, ret60, rank_ret20, ma_gap20) while fading acute short-horizon dislocations through negative ret1, ma_gap5, delay_ret5_1, and delta_ret5_1.",
+        "Measurement-level stress control: penalize path expansion and asymmetry via vol, range, overnight, and return-range covariance rather than relying on window changes alone."
+      ],
+      "failures": [
+        "Crash, squeeze, or structural-break episodes where short-term losers continue to underperform and volatility/range expansion reflects persistent continuation rather than temporary overshoot.",
+        "Low-dispersion or trendless environments where both persistent-state and recovery measurements are weak, leaving the mixed state-plus-reversal template underpowered."
+      ]
+    },
+    "r_use": -0.0035270821937904775,
+    "r_select": -0.0037199754107177596,
+    "r_distill": 0.00024111652115910284,
+    "candidate_id": "1a3c861ad092d93d9421856385c100dc273ddbdf4422ea2c1c1129df73a641c8",
+    "beta": [
+      0.0,
+      0.0,
+      0.494627722169776,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.47289429566314145,
+      -0.5551553442303249,
+      -0.4727757876233827,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "2fe603da2a204c0b",
+    "parent_skill_id": "375f1301c8622a6a",
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon reversal nested inside medium-horizon trend persistence in large-cap equities; Measurement object: recovery/reversal intensity relative to a persistent state, with persistent state measured by medium-horizon return level/rank and MA-gap level, recovery measured by recent signed dislocation plus delayed-move exhaustion, and continuation-risk measured by path/asymmetry stress expansion; Persistence hypothesis: 1-5 day overshoots partially mean-revert, while 1-3 month leadership persists when volatility, gap, and range expansion do not indicate a regime break.",
+      "grammar": "Reusable persistent-state plus recovery-under-stress template: alpha = a1*state_level + a2*state_rank + a3*signed_dislocation + a4*delayed_exhaustion + a5*path_stress_penalty + a6*continuity_tilt, where state_level is a medium-horizon level measure (ret20, ret60, ma_gap20, ma_gap60), state_rank is a medium-horizon persistent-state proxy (rank_ret20), signed_dislocation is a short-horizon recovery/reversal measure (ret1, ma_gap5, mean_ret1_5), delayed_exhaustion is a recurrence/recovery proxy for prior move fatigue (delay_ret5_1, delta_ret5_1), path_stress_penalty is a magnitude/asymmetry filter (vol5, vol20, range1, overnight, cov_ret_range20, corr_ret_volume20), and continuity_tilt is a mild persistent-state quality preference (liquidity20, signedpow_ret20_half, min_ret1_20).",
+      "applicability": "Broad liquid S&P 500 names in normal, non-crisis, or post-shock normalization regimes where medium-horizon relative strength remains informative and recent sharp dislocations are more likely to mean-revert than to initiate a fresh persistent trend; less reliable when volatility expansion itself becomes the continuation signal.",
+      "successes": [
+        "Construction pattern: retain positive exposure to medium-horizon state level/rank while fading acute short-horizon signed dislocations through negative ret1, ma_gap5, delay_ret5_1, and delta_ret5_1 loadings.",
+        "Measurement-level stress control: penalize path and asymmetry expansion via vol, range, overnight, and return-range covariance rather than only changing windows."
+      ],
+      "failures": [
+        "Crash, squeeze, or structural-break episodes where short-term losers continue to underperform and volatility/range expansion reflects persistent continuation rather than temporary overshoot.",
+        "Low-dispersion or trendless environments where both persistent-state and recovery measurements are weak, leaving the mixed state-plus-reversal template underpowered."
+      ]
+    },
+    "r_use": -0.0033296656556036966,
+    "r_select": -0.0036804921030804036,
+    "r_distill": 0.00031797479876633254,
+    "candidate_id": "3665578e6ee6f7a48067c364e9599b1948bebd3c818ff5dd0ef56e86a6a6dfd5",
+    "beta": [
+      0.0,
+      0.0,
+      0.4726440878428496,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.4020034636654527,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.5790124498230006,
+      0.0,
+      0.0,
+      0.0,
+      -0.5289095994384551
+    ]
+  },
+  {
+    "skill_id": "a0b504d5f808be2d",
+    "parent_skill_id": "375f1301c8622a6a",
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon reversal nested within medium-horizon trend persistence in large-cap equities; Measurement object: recovery/reversal intensity relative to persistent state, with persistent state measured by medium-horizon return level/rank and MA-gap level, recovery measured by recent signed dislocation plus delayed-move exhaustion, and continuation-risk measured by path/asymmetry stress expansion; Persistence hypothesis: 1-5 day overshoots partially mean-revert, while 1-3 month leadership persists when volatility, gap, and range expansion do not indicate regime disruption.",
+      "grammar": "Reusable persistent-state plus recovery-under-stress template: alpha = a1*state_level + a2*state_rank + a3*signed_dislocation + a4*delayed_exhaustion + a5*path_stress_penalty + a6*continuity_tilt, where state_level is a medium-horizon level measure (ret20, ret60, ma_gap20, ma_gap60), state_rank is a medium-horizon persistent-state proxy (rank_ret20), signed_dislocation is a short-horizon recovery/reversal measure (ret1, ma_gap5, mean_ret1_5), delayed_exhaustion is a recurrence/recovery proxy for prior move fatigue (delay_ret5_1, delta_ret5_1), path_stress_penalty is a magnitude/asymmetry filter (vol5, vol20, range1, overnight, cov_ret_range20, corr_ret_volume20), and continuity_tilt is a mild persistent-state quality preference (liquidity20, signedpow_ret20_half, min_ret1_20).",
+      "applicability": "Broad liquid S&P 500 names in normal, non-crisis, or post-shock normalization regimes where medium-horizon relative strength remains informative and recent sharp dislocations are more likely to mean-revert than to initiate a fresh persistent trend; less reliable when volatility expansion itself becomes the continuation signal.",
+      "successes": [
+        "Construction pattern: retain positive exposure to medium-horizon state level/rank while fading acute short-horizon signed dislocations through negative ret1, ma_gap5, delay_ret5_1, and delta_ret5_1 loadings.",
+        "Measurement-level stress control: penalize path and asymmetry expansion via vol, range, overnight, and return-range covariance rather than only changing windows."
+      ],
+      "failures": [
+        "Crash, squeeze, or structural-break episodes where short-term losers continue to underperform and volatility/range expansion reflects persistent continuation rather than temporary overshoot.",
+        "Low-dispersion or trendless environments where both persistent-state and recovery measurements are weak, leaving the mixed state-plus-reversal template underpowered."
+      ]
+    },
+    "r_use": -0.0033603832085002516,
+    "r_select": -0.0036866356136597144,
+    "r_distill": 0.000166698985290226,
+    "candidate_id": "e25fa3078c226daeca94c4660f264359f422cccde01dafa870fa591ac7bf4914",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.5231468653315485,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.40091078985659584,
+      -0.5036048357790647,
+      0.0,
+      -0.5585428052085858,
+      0.0,
+      0.0
+    ]
+  }
+]

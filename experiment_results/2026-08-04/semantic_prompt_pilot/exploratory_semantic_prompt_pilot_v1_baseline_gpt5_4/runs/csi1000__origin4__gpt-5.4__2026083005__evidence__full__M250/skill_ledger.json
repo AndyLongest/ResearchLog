@@ -1,0 +1,208 @@
+[
+  {
+    "skill_id": "d98d4cd051214f44",
+    "parent_skill_id": null,
+    "skill": {
+      "hypothesis": "In CSI1000-style small-cap universes, short-horizon price extensions driven by attention and trading bursts tend to mean-revert, especially when accompanied by elevated recent volume and stretched distance above short moving averages. A sparse contrarian signal combining recent return reversal, short-term overextension, and volume confirmation should work best in noisy, retail-dominated, liquidity-fragile regimes.",
+      "grammar": "add(neg(ret5), add(neg(ma_gap5), add(volume_z5, neg(delay_ret5_1))))",
+      "applicability": "Most applicable in small-cap cross-sections with high turnover dispersion, weak fundamental anchoring, and choppy non-trending tape; less reliable during strong momentum-led policy or macro trend regimes.",
+      "successes": [
+        "Short-horizon contrarian construction using neg(ret5) or neg(mean_ret1_5) as core",
+        "Adding neg(ma_gap5) to capture local overextension relative to trend anchor",
+        "Conditioning reversal on positive volume_z5 or corr_ret_volume20 to target crowded bursts"
+      ],
+      "failures": [
+        "Persistent momentum or policy-driven trend regimes where recent winners keep outperforming",
+        "Illiquid stress episodes where reversal signals are dominated by gap risk and execution frictions",
+        "Broad market panic/rebound days when cross-sectional dispersion collapses and simple reversal becomes unstable"
+      ]
+    },
+    "r_use": -0.00019763282178589118,
+    "r_select": -3.9526564357178226e-05,
+    "r_distill": -0.00019763282178589118,
+    "candidate_id": "7fe0513e1b7a92400b19f6ef489ec7d3de5ca366440e7208d7a4a7f5876d1d6b",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.5528314198069096,
+      0.0,
+      -0.49215561829872934,
+      0.0,
+      0.509207594362376,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.4391672739343788,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "af6c36766395ab0a",
+    "parent_skill_id": "d98d4cd051214f44",
+    "skill": {
+      "hypothesis": "In CSI1000 small-cap names, short-term attention spikes and local price overextension often reverse rather than persist. A sparse contrarian signal should therefore lean against recent 5-day strength and distance above the short moving average, while requiring some evidence of crowding via elevated recent volume; mild penalties on liquidity and gap-like components help avoid fragile names where reversal is harder to monetize.",
+      "grammar": "add(add(neg(ret5), neg(ma_gap5)), add(volume_z5, neg(delay_ret5_1)))",
+      "applicability": "Best in noisy, retail-driven, high-turnover small-cap regimes with weak medium-term trend leadership and elevated idiosyncratic churn; less effective in strong policy-led momentum tapes or broad one-way rebounds.",
+      "successes": [
+        "Core short-horizon reversal built from neg(ret5) in small-cap cross-sections",
+        "Adding neg(ma_gap5) to capture local overextension above short trend anchor",
+        "Using positive volume_z5 as a crowding/attention confirmation for reversal setups"
+      ],
+      "failures": [
+        "Persistent momentum regimes where recent winners continue to trend",
+        "Liquidity-stress or gap-dominated sessions where execution frictions overwhelm reversal edge",
+        "Marketwide panic or policy shock days when cross-sectional reversal relationships become unstable"
+      ]
+    },
+    "r_use": -0.0012383536521745106,
+    "r_select": -0.00040577698786361496,
+    "r_distill": -0.0010407208303886194,
+    "candidate_id": "1d9675b2c6eb71bc7aad0b45ad8568ea74d6167faa287ab69022a7b1395537cd",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.3908242933289654,
+      0.0,
+      -0.6561278838483949,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.5219875388116887,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.3798441537076195
+    ]
+  },
+  {
+    "skill_id": "05096b92b128a612",
+    "parent_skill_id": "af6c36766395ab0a",
+    "skill": {
+      "hypothesis": "In CSI1000 small-cap names, short-term attention-driven price extensions tend to mean-revert. A sparse contrarian signal should fade recent 5-day strength and short moving-average overextension, while requiring elevated recent volume as a crowding confirmation and lightly penalizing liquidity-fragile names plus stale prior 5-day continuation.",
+      "grammar": "add(add(mul(-0.78, ret5), mul(-0.52, ma_gap5)), add(mul(0.46, volume_z5), add(mul(-0.18, delay_ret5_1), mul(-0.12, liquidity20))))",
+      "applicability": "Best in noisy, retail-dominated, high-turnover CSI1000 regimes with weak medium-term trend leadership and elevated idiosyncratic churn; less effective in strong momentum, policy-led trend, or broad one-way rebound environments.",
+      "successes": [
+        "Sparse short-horizon reversal centered on neg(ret5)",
+        "Adding neg(ma_gap5) to capture local overextension above a short trend anchor",
+        "Using positive volume_z5 as crowding/attention confirmation for reversal setups",
+        "Light liquidity20 penalty to avoid fragile execution tails in small caps"
+      ],
+      "failures": [
+        "Persistent momentum regimes where recent winners continue to trend",
+        "Liquidity-stress or gap-dominated sessions where execution frictions overwhelm reversal edge",
+        "Marketwide panic or policy shock days when cross-sectional reversal relationships become unstable"
+      ]
+    },
+    "r_use": -0.0028020808016895322,
+    "r_select": -0.001551099082077515,
+    "r_distill": -0.0020840875647093315,
+    "candidate_id": "cbc46ca27870c4e3ce4a480ab8512167dddc10fe8452522393468e9fee3fecf6",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.7195125524367028,
+      -0.41584680633091814,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.4123814867801332,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.37324875071646746
+    ]
+  },
+  {
+    "skill_id": "1e0304b3d8e0d0aa",
+    "parent_skill_id": "05096b92b128a612",
+    "skill": {
+      "hypothesis": "In CSI1000 small-cap names, short-horizon attention-driven price extensions are more likely to mean-revert than persist. The most reusable sparse direction from pre-birth memory is to short recent 5-day strength and short moving-average overextension, require elevated recent volume as crowding confirmation, and lightly penalize stale prior continuation plus liquidity fragility.",
+      "grammar": "add(add(mul(-0.82, ret5), mul(-0.57, ma_gap5)), add(mul(0.38, volume_z5), add(mul(-0.21, delay_ret5_1), mul(-0.16, liquidity20))))",
+      "applicability": "Best in noisy, retail-dominated, high-turnover CSI1000 regimes with weak medium-term trend leadership and elevated idiosyncratic churn; less effective in persistent momentum, policy-led trend, broad one-way rebound, or liquidity-stress/gap-dominated environments.",
+      "successes": [
+        "Sparse short-horizon contrarian construction centered on negative ret5",
+        "Adding negative ma_gap5 to capture local overextension above a short trend anchor",
+        "Using positive volume_z5 as crowding/attention confirmation for reversal setups",
+        "Light negative liquidity20 and delay_ret5_1 terms to reduce fragile execution tails and stale continuation exposure"
+      ],
+      "failures": [
+        "Persistent momentum regimes where recent winners continue to trend",
+        "Liquidity-stress or gap-dominated sessions where execution frictions overwhelm reversal edge",
+        "Marketwide panic, policy shock, or broad rebound days when simple cross-sectional reversal relationships become unstable"
+      ]
+    },
+    "r_use": 0.0021036289730911825,
+    "r_select": -0.0018209388467333894,
+    "r_distill": 0.003341982625265693,
+    "candidate_id": "8562fcc1d26333bd360922bf1ea95444201129d52fb41d9b32111096fabdc218",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.523112414783447,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.4478342475791462,
+      0.0,
+      0.0,
+      -0.6004365023241204,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.4065389217177458,
+      0.0,
+      0.0
+    ]
+  }
+]

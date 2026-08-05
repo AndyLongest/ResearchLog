@@ -1,0 +1,8 @@
+{
+  "full_remote_archive": {
+    "path": "/mnt/SSD3_4TB/zechuan/alpha2_followups_20260731_v1/semantic_prompt_pilot_v1_archive/semantic_prompt_pilot_v1_full.tar.gz",
+    "bytes": 59672892,
+    "sha256": "16ef8a24f12bb8b2f17fc6818b356d335fbb347be1bbacf13242055c71bd0057"
+  },
+  "local_recovery_boundary": "daily_evidence_ledger.parquet excluded from compact analysis archive; retained in full remote archive"
+}

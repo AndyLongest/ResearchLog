@@ -1,0 +1,307 @@
+[
+  {
+    "skill_id": "1a05f44c1da7258a",
+    "parent_skill_id": null,
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon reversal embedded in medium-horizon overextension for smaller, noisier equities; Measurement object: persistent state of directional overextension tempered by recent shock/recovery asymmetry; Persistence hypothesis: when cumulative and moving-average-based return levels are elevated but the most recent delayed/recovery terms indicate exhaustion, subsequent returns mean-revert over short to medium horizons.",
+      "grammar": "Combine a medium-horizon return level or trend-gap state with a short-horizon reversal/recovery term: add negative exposure to persistent return/trend level measures (ret20, rank_ret20, ma_gap20, signedpow_ret20_half) and positive exposure to downside-state/rebound asymmetry measures (min_ret1_20, delay_ret5_1), while keeping magnitude/risk controls (vol20, range1, cov_ret_range20) modest.",
+      "applicability": "Most predictable in retail-dominated, high-dispersion small/mid-cap universes when medium-horizon winners become crowded and recent path dynamics show exhaustion rather than fresh information incorporation.",
+      "successes": [
+        "State-plus-reversal construction: negative medium-horizon return/trend level combined with positive delayed rebound and downside-extreme terms.",
+        "Asymmetry-aware mean reversion: using min_ret1_20 or recovery proxies instead of only raw volatility to distinguish oversold bounce from simple high risk."
+      ],
+      "failures": [
+        "Strong information-driven momentum regimes where medium-horizon trend level reflects persistent fundamentals rather than crowding.",
+        "Low-dispersion or policy-shock environments where reversal signals are overwhelmed by one-sided market direction.",
+        "Very illiquid stress episodes where downside extremes proxy distress continuation instead of recoverable overreaction."
+      ]
+    },
+    "r_use": -0.0028077054711408084,
+    "r_select": -0.0005615410942281616,
+    "r_distill": -0.0028077054711408084,
+    "candidate_id": "38877e7ea6916cf883cdddd3c6c0be7be06d88a5f42e3896cf4a7347d9129d01",
+    "beta": [
+      0.0,
+      -0.47327742185526245,
+      -0.5343329475432875,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.4529147826003239,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.5341956409723311
+    ]
+  },
+  {
+    "skill_id": "e52765ea662b89ff",
+    "parent_skill_id": "1a05f44c1da7258a",
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon reversal after crowded medium-horizon overextension in smaller, noisier equities; Measurement object: persistent state of directional overextension combined with recovery/reversal asymmetry after recent exhaustion; Persistence hypothesis: when medium-horizon return/trend levels are elevated but recent path terms indicate weakening continuation and downside washout, subsequent returns mean-revert over short to medium horizons.",
+      "grammar": "State-plus-reversal template: combine negative exposure to persistent directional level measures (ret20, rank_ret20, ma_gap20, signedpow_ret20_half, optionally ret60/ma_gap5 as confirming state) with positive exposure to recovery-from-downside measures (delay_ret5_1, min_ret1_20), and add a small negative term to recent continuation/re-acceleration proxies (delta_ret5_1, max_ret1_20) while keeping pure magnitude/risk controls modest (vol20, range1, cov_ret_range20).",
+      "applicability": "Most applicable in CSI500-like small/mid-cap regimes with high dispersion, crowding, and retail-driven overshooting, where medium-horizon winners are prone to exhaustion and recent downside/rebound path information helps separate recoverable overreaction from fresh trend initiation.",
+      "successes": [
+        "Negative medium-horizon state paired with positive delayed-rebound and downside-extreme terms.",
+        "Measurement-level revision from raw momentum to persistent overextension plus recovery asymmetry, rather than merely changing windows.",
+        "Sparse construction that distinguishes state (ret20/ma_gap20/rank_ret20) from path exhaustion and reversal (delay_ret5_1/min_ret1_20/delta_ret5_1)."
+      ],
+      "failures": [
+        "Strong information-driven momentum regimes where medium-horizon trend level reflects durable fundamentals.",
+        "Broad one-way policy or macro shocks that suppress cross-sectional reversal.",
+        "Illiquidity/distress episodes where downside extremes indicate continuation risk rather than rebound potential."
+      ]
+    },
+    "r_use": -0.0008095322892862271,
+    "r_select": -0.002408070834769892,
+    "r_distill": 0.0019981731818545815,
+    "candidate_id": "c3fd7698a84bf80e5961ec251256fcf4ca3478daa10fb4f44224ac40265ae96c",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.41849844381684104,
+      0.0,
+      0.0,
+      0.0,
+      0.5353687412811348,
+      0.0,
+      -0.604702768242779,
+      0.0,
+      0.0,
+      0.0,
+      0.41542017941050424,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "42892a6e1f89c872",
+    "parent_skill_id": "e52765ea662b89ff",
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon reversal after crowded medium-horizon overextension in CSI500-type smaller equities; Measurement object: persistent state of directional overextension combined with recovery/reversal asymmetry after recent downside exhaustion; Persistence hypothesis: when medium-horizon return and trend-gap levels remain elevated but recent path terms show weakening continuation and evidence of rebound from downside extremes, subsequent returns mean-revert over short to medium horizons.",
+      "grammar": "State-plus-reversal template: apply negative exposure to persistent directional level measures (ret20, rank_ret20, ma_gap20, signedpow_ret20_half, with light confirmation from ret60 and ma_gap5), add positive exposure to recovery-from-downside measures (delay_ret5_1, min_ret1_20), and include a small negative term on recent continuation/re-acceleration proxies (delta_ret5_1, max_ret1_20), while keeping pure magnitude/risk controls modest (vol20, range1, cov_ret_range20).",
+      "applicability": "Most applicable in CSI500-like high-dispersion, crowding-prone small/mid-cap regimes where medium-horizon winners are vulnerable to exhaustion and recent downside/rebound path information helps distinguish recoverable overreaction from fresh trend initiation.",
+      "successes": [
+        "Negative persistent state terms (ret20, ma_gap20, rank_ret20, signedpow_ret20_half) paired with positive delayed-rebound and downside-extreme terms (delay_ret5_1, min_ret1_20).",
+        "Measurement-level distinction between persistent overextension state and recovery/reversal asymmetry rather than a simple momentum window tweak.",
+        "Sparse construction with only light risk controls and small penalties on re-acceleration proxies (delta_ret5_1, max_ret1_20)."
+      ],
+      "failures": [
+        "Strong information-driven momentum regimes where medium-horizon trend level reflects durable fundamentals rather than crowding.",
+        "Broad one-way policy or macro shock environments that suppress cross-sectional reversal.",
+        "Illiquidity or distress episodes where downside extremes indicate continuation risk instead of rebound potential."
+      ]
+    },
+    "r_use": -0.003182894298302982,
+    "r_select": -0.001284204691089578,
+    "r_distill": -0.0013742754180894644,
+    "candidate_id": "9d5c64b2eb82c4f8787c42ac41c93283df23a3095e9a9459547c6cb274059ee1",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.42691138587228017,
+      0.0,
+      0.4545112430364161,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.4561252338482483,
+      -0.6349141434973565,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "bc228e7217b9317c",
+    "parent_skill_id": "e52765ea662b89ff",
+    "skill": {
+      "hypothesis": "Phenomenon: short-horizon reversal after crowded medium-horizon overextension in smaller, noisier equities; Measurement object: persistent state of directional overextension combined with recovery/reversal asymmetry after recent downside exhaustion; Persistence hypothesis: when medium-horizon return and trend-gap levels remain elevated but recent path terms show weakening continuation and evidence of rebound from downside extremes, subsequent returns mean-revert over short to medium horizons.",
+      "grammar": "State-plus-reversal template: combine negative exposure to persistent directional level measures (ret20, ma_gap20, rank_ret20, signedpow_ret20_half, with light confirmation from ret60 and ma_gap5) with positive exposure to recovery-from-downside measures (delay_ret5_1, min_ret1_20), then add a small negative term to recent continuation/re-acceleration proxies (delta_ret5_1, max_ret1_20) while keeping pure magnitude/risk controls modest (vol20, range1, cov_ret_range20).",
+      "applicability": "Most applicable in CSI500-like high-dispersion, crowding-prone small/mid-cap regimes where medium-horizon winners are vulnerable to exhaustion and recent downside/rebound path information helps distinguish recoverable overreaction from fresh trend initiation.",
+      "successes": [
+        "Negative persistent state terms paired with positive delayed-rebound and downside-extreme terms.",
+        "Measurement-level distinction between persistent overextension state and recovery/reversal asymmetry rather than a simple momentum window tweak.",
+        "Sparse construction with only light risk controls and small penalties on re-acceleration proxies."
+      ],
+      "failures": [
+        "Strong information-driven momentum regimes where medium-horizon trend level reflects durable fundamentals rather than crowding.",
+        "Broad one-way policy or macro shock environments that suppress cross-sectional reversal.",
+        "Illiquidity or distress episodes where downside extremes indicate continuation risk instead of rebound potential."
+      ]
+    },
+    "r_use": -0.004064319255656416,
+    "r_select": -0.0014604896825602645,
+    "r_distill": -0.0012566137845156072,
+    "candidate_id": "690edccf34e0133885f61664a1c50c0fe04d02dc2c85d8706c7ea34e434cc033",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.5177807468674808,
+      0.0,
+      -0.5914469643809087,
+      0.0,
+      0.0,
+      0.0,
+      0.45404232874068307,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.41945101050027195,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "6b9c309477c26a47",
+    "parent_skill_id": "e52765ea662b89ff",
+    "skill": {
+      "hypothesis": "Phenomenon: reversal after crowded medium-horizon overextension in CSI500-like smaller equities; Measurement object: persistent state of directional overextension combined with recovery/reversal asymmetry from downside extremes, with a small penalty for renewed continuation; Persistence hypothesis: elevated medium-horizon return/trend levels that are no longer cleanly accelerating, but instead show rebound from prior downside stress, tend to mean-revert over subsequent short to medium horizons.",
+      "grammar": "State-plus-reversal template: assign negative weights to persistent directional level measures (ret20, ma_gap20, rank_ret20, signedpow_ret20_half, with light confirmation from ret60 and ma_gap5), positive weights to recovery-from-downside measures (delay_ret5_1, min_ret1_20), and small negative weights to recent continuation/re-acceleration proxies (delta_ret5_1, max_ret1_20), while keeping pure magnitude/risk controls modest (vol20, range1, cov_ret_range20).",
+      "applicability": "Most applicable in high-dispersion, crowding-prone CSI500 regimes where medium-horizon winners are vulnerable to exhaustion and recent path information helps distinguish recoverable overreaction from fresh information-driven trend continuation.",
+      "successes": [
+        "Sparse negative persistent-state block plus positive delayed-rebound and downside-extreme block.",
+        "Measurement-level separation between persistent overextension state and recovery/reversal asymmetry.",
+        "Small continuation penalty to avoid buying fresh re-acceleration inside apparent overextension."
+      ],
+      "failures": [
+        "Strong information-driven momentum regimes where medium-horizon trend level reflects durable fundamentals.",
+        "Broad one-way macro or policy shocks that suppress cross-sectional reversal.",
+        "Illiquidity or distress episodes where downside extremes signal continuation risk rather than rebound potential."
+      ]
+    },
+    "r_use": -0.0034133426472242,
+    "r_select": -0.0013302943608738216,
+    "r_distill": -0.00041804276250230477,
+    "candidate_id": "f922a241076f7dbe70eb01e5377c5f3b07fc8b6eaca2c84ec10a4697d0f6790e",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.3769496631874291,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.4196184773751802,
+      0.0,
+      -0.7402188908987288,
+      0.0,
+      0.0,
+      0.0,
+      0.36593070167024133,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "fb2bd4649ed85a7e",
+    "parent_skill_id": "42892a6e1f89c872",
+    "skill": {
+      "hypothesis": "Phenomenon: rebound after downside tail events in CSI500-type smaller equities when stress is transient rather than informational; Measurement object: path/asymmetry of recent return distribution, emphasizing downside-tail incidence versus subsequent recovery capacity, with light stress-crowding confirmation from return-volume co-movement; Persistence hypothesis: names with unusually negative recent tail realizations but sufficient liquidity and limited panic-style return-volume coupling tend to mean-revert over short to medium horizons.",
+      "grammar": "Tail-asymmetry reversal template: emphasize downside-path state using positive exposure to downside-extreme distribution measures (min_ret1_20, quantile_ret1_20), offset with negative exposure to upside-spike/short-run continuation measures (max_ret1_20, mean_ret1_5), and filter for transient rather than informational stress using negative stress-coupling terms (corr_ret_volume20, cov_ret_range20) plus modest volatility/range penalties and a small positive liquidity support term.",
+      "applicability": "Most applicable in high-dispersion CSI500 regimes where many selloffs are flow-driven and overshooting, especially when downside tails are common but not accompanied by strong volume-confirmed information shocks; less about persistent overextension level and more about recoverable downside path asymmetry.",
+      "successes": [
+        "Measurement-level shift from persistent trend state to downside-tail path/asymmetry using min_ret1_20 and quantile_ret1_20.",
+        "Sparse reversal block where downside-tail terms are positive and upside-spike/short-run continuation terms are negative.",
+        "Stress filter using corr_ret_volume20 and cov_ret_range20 to avoid names whose downside move is strongly information-confirmed."
+      ],
+      "failures": [
+        "Information-driven drawdowns where negative tail events correctly signal deteriorating fundamentals.",
+        "Broad deleveraging or liquidity-crisis regimes where downside-tail incidence persists and rebounds fail.",
+        "Low-dispersion steady-trend markets where tail-asymmetry reversal is weaker than directional continuation."
+      ]
+    },
+    "r_use": 0.0017732823279988513,
+    "r_select": -0.0021916589730426156,
+    "r_distill": 0.004956176626301833,
+    "candidate_id": "9926006b05e7f840cc5a9ee5785cd89870fa9e51c9c232b0b5c6001c7cbfbea6",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.4095085096480436,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.4540803278913734,
+      -0.4400677364836924,
+      -0.6576125178659697,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  }
+]

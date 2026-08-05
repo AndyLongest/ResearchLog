@@ -1,0 +1,308 @@
+[
+  {
+    "skill_id": "a3ba93f41cd316ac",
+    "parent_skill_id": null,
+    "skill": {
+      "hypothesis": "Phenomenon: medium-horizon trend continuation tempered by short-horizon reversal after stretched moves; Measurement object: persistent state versus transitory displacement, using moving-average gaps and multi-horizon returns to separate level/trend from short-run overshoot; Persistence hypothesis: 1-3 month directional state persists in broad liquid equities, while 1-5 day shocks and gap-like dislocations partially mean-revert.",
+      "grammar": "state_persistence = a*ma_gap60 + b*ma_gap20 + c*ret60 + d*ret20; transitory_overshoot = e*ret1 + f*ret5 + g*open_close + h*overnight + i*ma_gap5 + j*delay_ret5_1; confirm_or_filter = k*rank_ret20 + l*signedpow_ret20_half + m*liquidity20 - n*vol5 - o*range1; alpha = state_persistence - transitory_overshoot + confirm_or_filter",
+      "applicability": "Most predictable in diversified large-cap universes during normal-to-moderately trending regimes with stable liquidity and without extreme volatility shocks; weaker in abrupt macro reversal regimes or crisis deleveraging episodes where medium-horizon state breaks quickly.",
+      "successes": [
+        "Combine long-horizon moving-average gap and 20-60 day return as a persistent-state measure, then subtract short-horizon return and gap terms as transitory displacement.",
+        "Use rank-style medium-horizon momentum confirmation with mild liquidity preference to stabilize cross-sectional selection.",
+        "Keep volatility and range as small negative filters to avoid paying for unstable short-term moves."
+      ],
+      "failures": [
+        "Sharp regime breaks where 20-60 day trend becomes stale and reverses suddenly.",
+        "High-volatility panic/rebound environments where short-term reversal dominates and medium-horizon continuation is unreliable.",
+        "Crowded momentum unwind periods where positive ma_gap and ret20/60 exposures are penalized simultaneously."
+      ]
+    },
+    "r_use": -0.003278893298855056,
+    "r_select": -0.000655778659771011,
+    "r_distill": -0.003278893298855056,
+    "candidate_id": "b46b13fa1dd2f1d9829cf1b7308f3c6ad7249b9b04dc68c89172a6c60f353e32",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.6954997021794194,
+      0.0,
+      0.37505991518240933,
+      -0.4158479096611749,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.4502007777893486,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "35892226b0608f6b",
+    "parent_skill_id": "a3ba93f41cd316ac",
+    "skill": {
+      "hypothesis": "Phenomenon: medium-horizon continuation with short-horizon stretch reversal in large-cap equities; Measurement object: persistent state versus transitory displacement, with added path-asymmetry control via recent downside excursion and unstable-jump penalties; Persistence hypothesis: 20-60 day trend state persists when supported by smooth moving-average separation and liquidity, while 1-5 day shocks, gap-like moves, and extreme one-day path excursions mean-revert or fail to propagate.",
+      "grammar": "persistent_state = a*ma_gap60 + b*ma_gap20 + c*ret60 + d*ret20; transitory_displacement = e*ret1 + f*ret5 + g*open_close + h*overnight + i*ma_gap5 + j*delay_ret5_1 + k*mean_ret1_5; path_asymmetry_filter = l*min_ret1_20 - m*max_ret1_20 - n*range1 - o*cov_ret_range20; confirmation = p*rank_ret20 + q*signedpow_ret20_half + r*liquidity20 + s*volume_z20 - t*vol5 - u*vol20; alpha = persistent_state - transitory_displacement + path_asymmetry_filter + confirmation",
+      "applicability": "Best in normal to moderately trending, liquid large-cap regimes where medium-horizon state evolves gradually and recent sharp downside shocks create recoverable dislocations; weaker during abrupt macro regime flips, crisis cascades, or momentum-unwind episodes where path asymmetry becomes a sign of genuine state change rather than temporary displacement.",
+      "successes": [
+        "Revise the prior construction by shifting from a pure level/trend split to a level-plus-path measurement: keep 20-60 day state terms, but add recent downside excursion versus upside spike terms to distinguish recoverable weakness from exhausted strength.",
+        "Use negative exposure to max one-day return and positive exposure to min one-day return over 20 days as an interpretable asymmetry proxy for unstable upside jumps versus rebound candidates.",
+        "Retain small volatility/range penalties and mild liquidity/volume confirmation so continuation is favored only when the state is smoother and more tradable."
+      ],
+      "failures": [
+        "Fast bear-leg accelerations where recent downside excursion reflects persistent deterioration rather than reversal opportunity.",
+        "Explosive upside breakouts driven by new information, where penalizing recent maximum daily return suppresses true winners.",
+        "Event-heavy or crisis periods where gap, range, and volatility terms dominate and medium-horizon state loses persistence."
+      ]
+    },
+    "r_use": -0.003669782813429518,
+    "r_select": -0.0033570712017699485,
+    "r_distill": -0.0003908895145744622,
+    "candidate_id": "029d3c5d51bbcdf6a2ccd5e354366434b22fd6ea68d5b27fbe773e42619c934d",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.503866286493877,
+      0.0,
+      0.0,
+      -0.49935662857974306,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.48647601505633326,
+      -0.5100027545055548,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "205703e1c1cec58d",
+    "parent_skill_id": "35892226b0608f6b",
+    "skill": {
+      "hypothesis": "Phenomenon: medium-horizon continuation with short-horizon recovery from downside path damage in large-cap equities; Measurement object: persistent state versus transitory displacement, augmented by path-asymmetry and recurrence-of-instability proxies rather than a pure trend level; Persistence hypothesis: 20-60 day state persists when supported by smooth moving-average separation and liquidity, while recent jumpy upside, repeated short-horizon acceleration, and downside shock signatures are more often temporary unless they coincide with broad instability.",
+      "grammar": "persistent_state = a*ma_gap60 + b*ma_gap20 + c*ret60 + d*ret20; transitory_displacement = e*ret1 + f*ret5 + g*open_close + h*overnight + i*ma_gap5 + j*delay_ret5_1 + k*delta_ret5_1; path_recovery_vs_exhaustion = l*min_ret1_20 - m*max_ret1_20 - n*quantile_ret1_20; instability_recurrence_filter = -o*range1 - p*cov_ret_range20 - q*corr_ret_volume20 - r*vol5 - s*vol20; confirmation = t*rank_ret20 + u*signedpow_ret20_half + v*liquidity20 + w*volume_z20; alpha = persistent_state - transitory_displacement + path_recovery_vs_exhaustion + instability_recurrence_filter + confirmation",
+      "applicability": "Best in normal to moderately trending, liquid S&P 500 regimes where medium-horizon state evolves gradually and recent downside path damage is more likely to mean-revert than to signal structural break; weaker in crisis cascades, abrupt macro regime shifts, and information-driven upside breakouts where path asymmetry and short-horizon acceleration reflect genuine state transition.",
+      "successes": [
+        "Shift the revision from a simple level/trend split toward a path-and-recurrence measurement by adding delta_ret5_1 and quantile_ret1_20, which proxy whether recent movement is accelerating and whether the return path has been persistently skewed toward large positive days.",
+        "Retain the interpretable persistent-state core in ma_gap20/60 and ret20/60, while using min_ret1_20 versus max_ret1_20 to distinguish rebound candidates from exhausted upside jumps.",
+        "Use instability filters based on range, return-range covariance, return-volume correlation, and short-horizon volatility so continuation is favored when the state is smoother rather than repeatedly shock-driven."
+      ],
+      "failures": [
+        "Fast bear-leg deterioration where negative path asymmetry is not transitory and min_ret1_20 identifies real structural weakness rather than recovery potential.",
+        "News-driven breakout regimes where penalizing max_ret1_20, quantile_ret1_20, and short-horizon acceleration suppresses valid winners.",
+        "High-volatility momentum-unwind environments where both persistent-state and recovery signals are overwhelmed by regime-level de-risking."
+      ]
+    },
+    "r_use": -0.003232528380793461,
+    "r_select": -0.003582331926902307,
+    "r_distill": 0.00024180967534882586,
+    "candidate_id": "17ff2100bda17b2365979928d0b62b9a999368d9e45258cbfb9e74acaa4d376b",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.5059570094899153,
+      0.0,
+      0.0,
+      -0.43844142920655627,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.3244270824873241,
+      0.6682242781073561,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "0f80aa8547a6e4e2",
+    "parent_skill_id": "205703e1c1cec58d",
+    "skill": {
+      "hypothesis": "Phenomenon: medium-horizon continuation with short-horizon reversal after unstable path extremes in large-cap equities; Measurement object: persistent state separated from recovery/reversal and path/asymmetry, with recurrence-of-instability treated as a filter rather than a trend signal; Persistence hypothesis: 20-60 day state persists when expressed through smooth moving-average separation and medium-horizon returns, while recent acceleration, gap-like displacement, and extreme upside days are more often temporary unless accompanied by stable broad participation.",
+      "grammar": "persistent_state = a*ma_gap60 + b*ma_gap20 + c*ret60 + d*ret20; recovery_reversal = e*min_ret1_20 - f*max_ret1_20 - g*ret1 - h*ret5 - i*ma_gap5 - j*open_close - k*overnight - l*delay_ret5_1 - m*delta_ret5_1 - n*mean_ret1_5; instability_filter = -o*range1 - p*vol5 - q*vol20 - r*cov_ret_range20 - s*corr_ret_volume20; confirmation = t*rank_ret20 + u*signedpow_ret20_half + v*liquidity20 + w*volume_z20; alpha = persistent_state + recovery_reversal + instability_filter + confirmation",
+      "applicability": "Best in normal to moderately trending, liquid S&P 500 regimes where medium-horizon state changes gradually and recent short-horizon shocks are often transitory; weaker in crisis cascades, abrupt macro breaks, and genuine information-driven upside regime shifts where path extremes reflect true state transition.",
+      "successes": [
+        "Measure medium-horizon state with ma_gap20/60 plus ret20/60, while separately measuring recovery/reversal through recent displacement and path extremes rather than mixing all horizons into one trend proxy.",
+        "Use min_ret1_20 versus max_ret1_20 as an interpretable path-asymmetry object: downside excursion can mark rebound candidates, while isolated upside spikes often indicate exhaustion.",
+        "Treat volatility, range, and return-range/return-volume co-movement as recurrence-of-instability filters so continuation is preferred only when the state is smoother and more persistent."
+      ],
+      "failures": [
+        "Fast deteriorations where recent downside extremes are not recoverable displacement but persistent structural weakness.",
+        "News-driven breakout regimes where penalizing recent upside extremes and short-horizon acceleration suppresses valid winners.",
+        "Broad momentum unwinds or crisis de-risking episodes where medium-horizon state and reversal cues are both overwhelmed by regime-level selling."
+      ]
+    },
+    "r_use": -0.0003240739214831986,
+    "r_select": -0.002650837488931409,
+    "r_distill": 0.0029548193773718573,
+    "candidate_id": "ef92be6835cf8ed365132a33cf4cd0c38b176ae090cdc1e3a7eace65b110a8dc",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.5185689969162763,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.23103855657471614,
+      0.0,
+      0.7906857999188879,
+      0.0,
+      0.0,
+      -0.22917972558615865,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "de62c975bad00272",
+    "parent_skill_id": "205703e1c1cec58d",
+    "skill": {
+      "hypothesis": "Phenomenon: medium-horizon continuation in large-cap equities with failure of short-horizon unstable advances and only mild recovery from downside displacement; Measurement object: persistent state separated from path-instability and upside-exhaustion, emphasizing recurrence of jumpy positive moves rather than broad reversal after damage; Persistence hypothesis: 20-60 day state persists when expressed through smooth moving-average separation and medium-horizon returns, but recent upside spikes, accelerating short-run gains, and instability-linked participation are more often temporary and fade unless embedded in a stable persistent state.",
+      "grammar": "persistent_state = a*ma_gap60 + b*ma_gap20 + c*ret60 + d*ret20 + e*rank_ret20 + f*signedpow_ret20_half; short_horizon_displacement = g*ret1 + h*ret5 + i*ma_gap5 + j*open_close + k*overnight + l*delay_ret5_1 + m*delta_ret5_1 + n*mean_ret1_5; upside_exhaustion_path = -o*max_ret1_20 - p*quantile_ret1_20 + q*min_ret1_20; instability_recurrence = -r*range1 - s*vol5 - t*vol20 - u*vol60 - v*cov_ret_range20 - w*corr_ret_volume20; tradability_confirmation = x*liquidity20 + y*volume_z20 - z*volume_z5; alpha = persistent_state - short_horizon_displacement + upside_exhaustion_path + instability_recurrence + tradability_confirmation",
+      "applicability": "Best in normal to moderately trending, liquid S&P 500 regimes where medium-horizon state is persistent but recent sharp upside moves are often overextended and unstable; weaker in genuine information-driven breakout regimes, crisis rebounds, or deep bear accelerations where upside spikes confirm state change or downside extremes do not mean-revert.",
+      "successes": [
+        "Revises the measurement object away from broad downside-recovery emphasis toward upside-exhaustion recurrence, using max_ret1_20 and quantile_ret1_20 as path-level proxies for repeated jumpy positive days.",
+        "Keeps the interpretable persistent-state core in ma_gap20/60 and ret20/60, while treating 1-5 day returns, gap-like moves, and acceleration as transitory displacement rather than continuation.",
+        "Uses instability as a recurrence filter through volatility, range, and return-range/return-volume coupling so medium-horizon continuation is selected only when the path is smoother and participation is not shock-driven."
+      ],
+      "failures": [
+        "News-driven breakout regimes where repeated large positive days represent true information diffusion rather than exhaustion.",
+        "Crash-rebound episodes where short-horizon upside acceleration is the start of a durable state transition.",
+        "Fast structural deteriorations where positive min_ret1_20 exposure is insufficient and medium-horizon state terms lag the break."
+      ]
+    },
+    "r_use": -0.004667176574531317,
+    "r_select": -0.0035194580195410325,
+    "r_distill": -0.0014114657347070584,
+    "candidate_id": "b022e516ec4e0acc8751b4204f3d02a8488380552c010f6dd5907595d2920d59",
+    "beta": [
+      0.0,
+      -0.3273910132002854,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.3635693543137321,
+      0.0,
+      0.7504765789956503,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.4443167265122614,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "807ebb877a97ed0f",
+    "parent_skill_id": "0f80aa8547a6e4e2",
+    "skill": {
+      "hypothesis": "Phenomenon: medium-horizon continuation in S&P 500 names with failure of short-horizon stretched advances; Measurement object: persistent state separated from path-level upside-exhaustion and instability recurrence, with only mild recovery from downside excursion; Persistence hypothesis: 20-60 day state persists when expressed through smooth moving-average separation and medium-horizon returns, while recent acceleration, gap-like displacement, and repeated large positive daily moves are more often temporary unless the path is stable and liquid.",
+      "grammar": "persistent_state = a*ma_gap60 + b*ma_gap20 + c*ret20 + d*ret60; transitory_displacement = e*ret1 + f*ret5 + g*ma_gap5 + h*open_close + i*overnight + j*delay_ret5_1 + k*delta_ret5_1 + l*mean_ret1_5; upside_exhaustion_path = -m*max_ret1_20 - n*quantile_ret1_20 + o*min_ret1_20; instability_recurrence = -p*range1 - q*vol5 - r*vol20 - s*cov_ret_range20 - t*corr_ret_volume20; confirmation = u*rank_ret20 + v*signedpow_ret20_half + w*liquidity20 + x*volume_z20 - y*volume_z5; alpha = persistent_state - transitory_displacement + upside_exhaustion_path + instability_recurrence + confirmation",
+      "applicability": "Best in normal to moderately trending, liquid S&P 500 regimes where medium-horizon state changes gradually and recent sharp upside bursts are more often overextended than informative; weaker in news-driven breakout regimes, crisis rebounds, and abrupt macro state changes where upside spikes confirm genuine transition.",
+      "successes": [
+        "Use a measurement-level split between persistent state and upside-exhaustion path, rather than broad reversal from all extremes.",
+        "Keep the state core sparse and interpretable with ma_gap20/60 plus ret20/60, while treating 1-5 day displacement and acceleration as temporary.",
+        "Apply instability recurrence as a filter through range, volatility, and return-range/return-volume coupling so continuation is selected only when the path is smoother and tradable."
+      ],
+      "failures": [
+        "Information-driven breakout episodes where repeated large positive days are true diffusion rather than exhaustion.",
+        "Crash-rebound transitions where short-horizon upside acceleration marks a durable new state.",
+        "Fast structural deterioration where mild positive exposure to downside excursion is insufficient and medium-horizon state lags the break."
+      ]
+    },
+    "r_use": -0.0018621831812812536,
+    "r_select": -0.0006316957734428095,
+    "r_distill": 0.0014167101175738023,
+    "candidate_id": "09727510317a58cf58317d87957b8082227e51828afe2efaf8b7deb7fc292cfc",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      -0.3326157309677908,
+      0.0,
+      0.0,
+      -0.3578045082330097,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.7847772804105182,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.38140179542362834,
+      0.0,
+      0.0,
+      0.0
+    ]
+  }
+]

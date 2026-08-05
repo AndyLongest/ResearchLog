@@ -1,0 +1,206 @@
+[
+  {
+    "skill_id": "04a51bca6458c80f",
+    "parent_skill_id": null,
+    "skill": {
+      "hypothesis": "In CSI1000-style small caps, short-horizon price pressure and attention bursts tend to mean-revert because liquidity is thinner and retail-driven overreaction is more common. A sparse contrarian signal should work best when recent returns and short moving-average gaps are extended, especially if accompanied by temporary volume expansion rather than durable trend confirmation.",
+      "grammar": "add(neg(ret5), add(neg(mean_ret1_5), add(neg(ma_gap5), add(scale(volume_z5, 0.5), neg(delay_ret5_1)))))",
+      "applicability": "Most predictable in cross-sectional small-cap universes during range-bound or choppy regimes with elevated speculative turnover and weak medium-term trend persistence; less suitable in strong momentum-led breakout phases.",
+      "successes": [
+        "Short-term reversal built from recent return extension plus short MA-gap reversion",
+        "Contrarian core strengthened by temporary volume surprise as an overreaction proxy",
+        "Sparse additive construction with mostly short-horizon terms for interpretable small-cap mean reversion"
+      ],
+      "failures": [
+        "Fails during persistent momentum regimes where volume expansion confirms information rather than noise",
+        "Weak in crisis/liquidity-shock periods when reversals are delayed and volatility dominates signal",
+        "Can underperform when medium-term trend leadership in small caps overwhelms short-term overreaction effects"
+      ]
+    },
+    "r_use": -0.0020436520591553442,
+    "r_select": -0.00040873041183106876,
+    "r_distill": -0.0020436520591553442,
+    "candidate_id": "29e6383706d0fe1e34c1185f1ec10c3e5a44c07be621b5c29db3a57b7387c4ab",
+    "beta": [
+      0.0,
+      -0.5099045955476559,
+      -0.5649657789595708,
+      0.0,
+      0.0,
+      -0.4511537643464854,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.46612364557055325,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "a3c09fb69e1294ad",
+    "parent_skill_id": "04a51bca6458c80f",
+    "skill": {
+      "hypothesis": "In CSI1000 small caps, thin liquidity and retail attention can create short-lived overreaction. A sparse contrarian signal should fade recent price extension and short moving-average stretch, while using temporary volume surprise as a marker of crowded attention rather than durable information. Mild penalties on illiquidity and return-volume co-movement help avoid cases where volume is trend-confirming instead of noise-driven.",
+      "grammar": "add(add(add(neg(ret5), neg(mean_ret1_5)), add(neg(ma_gap5), scale(volume_z5, 0.5))), add(add(neg(delay_ret5_1), neg(delta_ret5_1)), add(neg(liquidity20), neg(corr_ret_volume20))))",
+      "applicability": "Best in choppy, range-bound small-cap regimes with elevated speculative turnover, weak medium-horizon trend persistence, and frequent attention bursts; less suitable during broad momentum breakouts or information-led rallies with persistent volume confirmation.",
+      "successes": [
+        "Short-horizon contrarian core from ret5, mean_ret1_5, and ma_gap5 reversion",
+        "Volume_z5 used as an overreaction/attention proxy rather than a standalone trend signal",
+        "Sparse additive template with liquidity and return-volume filters to reduce false reversals in confirmation regimes"
+      ],
+      "failures": [
+        "Underperforms in persistent momentum or breakout phases where recent strength continues",
+        "Can fail when volume expansion reflects genuine information arrival and strong trend confirmation",
+        "Less reliable during severe liquidity stress or volatility shocks when reversal timing becomes unstable"
+      ]
+    },
+    "r_use": -0.004689277800674544,
+    "r_select": -0.002572777207459184,
+    "r_distill": -0.0026456257415192,
+    "candidate_id": "3a9c69c491314556cc94375749b1d38f04aabb54bbf12aa49595bd82b622959d",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.48094265120732366,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.5562125133808108,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.4965308206253908,
+      0.4612796878005232,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "905acb0af8fb3b90",
+    "parent_skill_id": "a3c09fb69e1294ad",
+    "skill": {
+      "hypothesis": "In CSI1000 small caps, short-horizon price extensions often mean-revert because thin liquidity and retail attention create temporary overreaction. The signal should fade recent strength and short moving-average stretch, while treating near-term volume surprise as a crowded-attention marker rather than durable information. Small penalties on illiquidity, delayed continuation, and return-volume confirmation help avoid names where volume is validating a true trend.",
+      "grammar": "add(add(add(neg(ret5), neg(mean_ret1_5)), add(neg(ma_gap5), scale(volume_z5, 0.5))), add(add(neg(delay_ret5_1), neg(delta_ret5_1)), add(neg(liquidity20), neg(corr_ret_volume20))))",
+      "applicability": "Best in choppy, range-bound CSI1000 regimes with elevated speculative turnover, weak medium-horizon trend persistence, and frequent attention bursts; less suitable during broad momentum breakouts or information-led rallies with persistent volume confirmation.",
+      "successes": [
+        "Sparse short-horizon contrarian core using ret5, mean_ret1_5, and ma_gap5",
+        "Volume_z5 included as an attention/overreaction proxy instead of a standalone trend bet",
+        "Liquidity and return-volume penalties help filter confirmation-driven moves that are less likely to reverse"
+      ],
+      "failures": [
+        "Underperforms in persistent momentum or breakout phases where recent strength continues",
+        "Fails when volume expansion reflects genuine information arrival and trend confirmation",
+        "Less reliable during severe liquidity stress or volatility shocks when reversal timing destabilizes"
+      ]
+    },
+    "r_use": -0.002607030101301746,
+    "r_select": -0.004272828260799985,
+    "r_distill": 0.0007594348286131983,
+    "candidate_id": "f58e1234ff4b66305d4c972b3efb37feeef4a6ccecbf7de519abe4a8eef74f98",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.48476028661537274,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.42663948471995633,
+      0.0,
+      0.0,
+      0.0,
+      0.6010695196375511,
+      0.0,
+      0.0,
+      -0.4708520438111695,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "7355ffbfcf10392b",
+    "parent_skill_id": "905acb0af8fb3b90",
+    "skill": {
+      "hypothesis": "In CSI1000 small caps, short-horizon price extensions and short moving-average stretch often mean-revert because thin liquidity and retail attention create temporary overreaction. Near-term volume surprise is more useful as a crowded-attention marker than as confirmation of durable information, so the signal should fade recent strength while penalizing cases with delayed continuation, illiquidity, and return-volume confirmation.",
+      "grammar": "add(add(add(neg(ret5), neg(mean_ret1_5)), add(neg(ma_gap5), scale(volume_z5, 0.5))), add(add(neg(delay_ret5_1), neg(delta_ret5_1)), add(neg(liquidity20), neg(corr_ret_volume20))))",
+      "applicability": "Best in choppy, range-bound CSI1000 regimes with elevated speculative turnover, weak medium-horizon trend persistence, and frequent attention bursts; less suitable during broad momentum breakouts or information-led rallies with persistent volume confirmation.",
+      "successes": [
+        "Sparse short-horizon contrarian core using ret5, mean_ret1_5, and ma_gap5",
+        "Volume_z5 included as an attention/overreaction proxy rather than a standalone trend bet",
+        "Liquidity and return-volume penalties help filter confirmation-driven moves that are less likely to reverse"
+      ],
+      "failures": [
+        "Underperforms in persistent momentum or breakout phases where recent strength continues",
+        "Fails when volume expansion reflects genuine information arrival and trend confirmation",
+        "Less reliable during severe liquidity stress or volatility shocks when reversal timing destabilizes"
+      ]
+    },
+    "r_use": 0.004778504487540738,
+    "r_select": -0.001129923183533249,
+    "r_distill": 0.007385534588842484,
+    "candidate_id": "2c7255b6995fbd0ce53c134b29316f1b490d30f605d12308cf576ef13514c789",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.5575067987464912,
+      0.0,
+      0.0,
+      0.0,
+      0.47792112263972014,
+      0.0,
+      0.0,
+      -0.41711557233759716,
+      0.0,
+      -0.5355298023450307,
+      0.0
+    ]
+  }
+]

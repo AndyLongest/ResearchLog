@@ -1,0 +1,210 @@
+[
+  {
+    "skill_id": "c64711ce6ef8e6ac",
+    "parent_skill_id": null,
+    "skill": {
+      "hypothesis": "In CSI1000-style small-cap universes, short-horizon overextension and price-above-moving-average states tend to mean-revert when not supported by persistent medium-term strength; recent pullback within a weak 1-month rank can create rebound potential.",
+      "grammar": "add(add(mul(a,ma_gap5),mul(b,ret5)),add(mul(c,delay_ret5_1),add(mul(d,rank_ret20),mul(e,min_ret1_20))))",
+      "applicability": "Small-cap, sentiment-driven, high-retail-participation regimes with frequent short-term overshooting and partial reversal; more suitable in range-bound or choppy tapes than in strong trend persistence regimes.",
+      "successes": [
+        "Use sparse mean-reversion core: negative ma_gap5 and negative ret5.",
+        "Add one rebound stabilizer from lag structure: positive delay_ret5_1.",
+        "Condition on weak medium-term state via negative rank_ret20.",
+        "Optionally include positive min_ret1_20 to prefer names that sold off but avoided extreme crash dynamics."
+      ],
+      "failures": [
+        "Strong momentum or policy-driven trend regimes where price extension persists instead of mean-reverting.",
+        "Illiquid stress or limit-dominated episodes where technical reversal signals cannot be monetized.",
+        "Broad panic deleveraging where weak rank_ret20 and recent losses continue to worsen rather than rebound."
+      ]
+    },
+    "r_use": -0.002240221021365456,
+    "r_select": -0.0004480442042730911,
+    "r_distill": -0.002240221021365456,
+    "candidate_id": "613e38c1e6700df61562ca6d5ec005a2596d4aa42a44e44af1a3bac6faca1b44",
+    "beta": [
+      0.0,
+      -0.6548415579620374,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.3599619428460577,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.46280387223443326,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.47688836168767773,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "34c80261b922ce96",
+    "parent_skill_id": "c64711ce6ef8e6ac",
+    "skill": {
+      "hypothesis": "In CSI1000 small-cap names, short-term price extension above the 5-day average and recent 5-day gains often reverse, especially when the 1-month cross-sectional state is still weak; a modest lagged-return rebound term and a floor on crash severity help isolate oversold bounce candidates rather than persistent winners.",
+      "grammar": "add(add(mul(-0.46,ma_gap5),mul(-0.34,ret5)),add(mul(0.22,delay_ret5_1),add(mul(-0.18,rank_ret20),mul(0.11,min_ret1_20))))",
+      "applicability": "Choppy, retail-driven CSI1000 regimes with frequent short-horizon overshooting and partial reversal; best when medium-term trend persistence is weak and rebounds emerge from controlled drawdowns rather than from strong momentum leadership.",
+      "successes": [
+        "Sparse mean-reversion core using negative ma_gap5 and negative ret5.",
+        "Single lag stabilizer via positive delay_ret5_1 to capture rebound after immediate pullback.",
+        "Weak medium-term conditioning through negative rank_ret20.",
+        "Positive min_ret1_20 to avoid the most fragile crash-like losers while keeping rebound exposure."
+      ],
+      "failures": [
+        "Momentum-dominant or policy impulse regimes where short-term extension keeps trending.",
+        "Liquidity stress, limit-up/limit-down, or execution-constrained episodes in small caps.",
+        "Broad deleveraging phases where weak 20-day rank and recent losses continue to deteriorate instead of mean-reverting."
+      ]
+    },
+    "r_use": -0.0030667460234852437,
+    "r_select": -0.0024055260217894134,
+    "r_distill": -0.0008265250021197877,
+    "candidate_id": "35a115553b8fd0b3460a7e7040f01a34a541a89ef271fe11d2b266785cbf48a8",
+    "beta": [
+      0.0,
+      -0.548103953967087,
+      0.0,
+      0.3520952033073097,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.6503500960096457,
+      0.0,
+      0.0,
+      0.0,
+      0.39071188371212134,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "ec44034b21bb3e79",
+    "parent_skill_id": "34c80261b922ce96",
+    "skill": {
+      "hypothesis": "In CSI1000 small-cap names, short-term overextension above the 5-day average and recent 5-day gains tend to mean-revert, especially when the 20-day cross-sectional state is not strong. A small positive lagged 5-day return term helps isolate rebound setups after immediate weakness, while a mild positive floor on the worst daily return over the past month avoids the most fragile crash candidates.",
+      "grammar": "add(add(mul(-0.38,ma_gap5),mul(-0.28,ret5)),add(mul(0.18,delay_ret5_1),add(mul(-0.14,rank_ret20),mul(0.09,min_ret1_20))))",
+      "applicability": "Choppy, sentiment-driven CSI1000 regimes with frequent short-horizon overshooting and partial reversal; more suitable when medium-term momentum leadership is weak and rebounds come from controlled drawdowns rather than persistent trend continuation.",
+      "successes": [
+        "Sparse mean-reversion core using negative ma_gap5 and negative ret5.",
+        "Single lag stabilizer via positive delay_ret5_1 to capture rebound after recent pullback.",
+        "Weak medium-term conditioning through negative rank_ret20.",
+        "Positive min_ret1_20 to avoid the most damaged crash-like losers while retaining oversold bounce exposure."
+      ],
+      "failures": [
+        "Momentum-dominant or policy-driven trend regimes where short-term extension keeps persisting.",
+        "Liquidity stress, limit-up/limit-down, or execution-constrained small-cap episodes.",
+        "Broad deleveraging phases where weak 20-day rank and recent losses continue to deteriorate instead of mean-reverting."
+      ]
+    },
+    "r_use": -0.004285384651584756,
+    "r_select": -0.0033104737491051464,
+    "r_distill": -0.0016319011291594065,
+    "candidate_id": "01db9a81773695fbea22ebebf70528598c031b7897981011a2b3f778bd156c4e",
+    "beta": [
+      0.0,
+      -0.53013497707478,
+      0.0,
+      0.0,
+      0.0,
+      -0.4360587265715399,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.5608321708182713,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.4629006040587925,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "0232fba0138abdfe",
+    "parent_skill_id": "ec44034b21bb3e79",
+    "skill": {
+      "hypothesis": "In CSI1000 small-cap names, short-term overextension above the 5-day average and recent 5-day gains tend to mean-revert. Rebound odds improve when the immediately preceding 5-day move was weaker, while weak 20-day cross-sectional state helps avoid chasing medium-term leaders. A mild positive floor on the worst daily return over the past month filters out the most fragile crash candidates.",
+      "grammar": "add(add(mul(-0.32,ma_gap5),mul(-0.24,ret5)),add(mul(0.16,delay_ret5_1),add(mul(-0.12,rank_ret20),mul(0.08,min_ret1_20))))",
+      "applicability": "Choppy, sentiment-driven CSI1000 regimes with frequent short-horizon overshooting and partial reversal; more suitable when medium-term momentum leadership is weak and rebounds come from controlled drawdowns rather than persistent trend continuation.",
+      "successes": [
+        "Sparse mean-reversion core using negative ma_gap5 and negative ret5.",
+        "Single lag stabilizer via positive delay_ret5_1 to capture rebound setups after immediate weakness.",
+        "Weak medium-term conditioning through negative rank_ret20.",
+        "Positive min_ret1_20 to avoid the most damaged crash-like losers while retaining oversold bounce exposure."
+      ],
+      "failures": [
+        "Momentum-dominant or policy-driven trend regimes where short-term extension persists.",
+        "Liquidity stress, limit-up/limit-down, or execution-constrained small-cap episodes.",
+        "Broad deleveraging phases where weak 20-day rank and recent losses continue to deteriorate instead of mean-reverting."
+      ]
+    },
+    "r_use": -0.0013488767714201154,
+    "r_select": -0.0036980830755518283,
+    "r_distill": 0.0017178692520651282,
+    "candidate_id": "a1acc4972b7c7f64495ce5ad1370ab9add64c8ddfc37ae759e9b936db6380e4a",
+    "beta": [
+      0.0,
+      -0.4879445036158357,
+      0.0,
+      0.0,
+      0.0,
+      -0.6375527605290421,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.41498335367012795,
+      0.0,
+      -0.42804842612674926,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  }
+]

@@ -1,0 +1,308 @@
+[
+  {
+    "skill_id": "44fa04d291050735",
+    "parent_skill_id": null,
+    "skill": {
+      "hypothesis": "In CSI500-like small/mid-cap universes, short-horizon overreaction and liquidity-driven crowding tend to mean-revert, while mild medium-horizon trend persistence can survive when not accompanied by extreme short-term extension. A sparse signal should therefore lean against recent sharp gains, elevated short-term moving-average gaps, and abnormal volume/range expansion, while allowing a small positive weight to slower 60-day trend context.",
+      "grammar": "add(add(add(mul(a,neg(ret5)),mul(b,neg(ma_gap5))),add(mul(c,neg(mean_ret1_5)),mul(d,neg(ret1)))),add(add(mul(e,vol5),mul(f,range1)),add(mul(g,volume_z5),mul(h,ret60))))",
+      "applicability": "Most predictable in cross-sectional stock selection regimes with high retail participation, noisy short-term flows, and limited large-cap dominance; weaker in strong policy-driven momentum bursts or broad crisis deleveraging where reversal is overwhelmed.",
+      "successes": [
+        "Short-term reversal core: negative weights on ret1/ret5/mean_ret1_5 combined with negative ma_gap5 to fade stretched names.",
+        "Crowding filter: positive vol5/range1/volume_z5 penalties identify unstable attention spikes when used against reversal candidates.",
+        "Context overlay: small positive ret60 or ma_gap60 can prevent fighting durable medium-term winners too aggressively."
+      ],
+      "failures": [
+        "Fails in persistent momentum regimes where recent winners continue to be bid despite high extension and volume.",
+        "Fails around event-driven repricing, policy shocks, or limit-move environments where reversal signals are dominated by new information.",
+        "Can underperform in illiquid stress when volume/range spikes reflect genuine risk transfer rather than temporary crowding."
+      ]
+    },
+    "r_use": -0.004246433256009389,
+    "r_select": -0.0008492866512018776,
+    "r_distill": -0.004246433256009389,
+    "candidate_id": "5f3567e548e5903cd5fe5627738c87b65d192a379a9d24ead9fd1ac388d54029",
+    "beta": [
+      0.0,
+      -0.5756413512236662,
+      0.0,
+      0.34478873191483456,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.5243449694649808,
+      0.0,
+      -0.5242328853693942,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "ea346fc43d6bea20",
+    "parent_skill_id": "44fa04d291050735",
+    "skill": {
+      "hypothesis": "In CSI500 small/mid-cap stocks, short-horizon price extension and attention-driven trading bursts often mean-revert. A sparse cross-sectional signal should fade recent gains and short-term moving-average stretch, while penalizing candidates experiencing abnormal volume and intraday range expansion that indicate unstable crowding. A small positive 60-day return term preserves some medium-horizon trend context so the factor does not over-fight durable winners.",
+      "grammar": "add(add(add(mul(-0.34,ret5),mul(-0.22,ma_gap5)),add(mul(-0.16,mean_ret1_5),mul(-0.18,ret1))),add(add(mul(0.12,vol5),mul(0.10,range1)),add(mul(0.14,volume_z5),mul(0.10,ret60))))",
+      "applicability": "Best in CSI500-like regimes with high retail participation, noisy liquidity, and cross-sectional overreaction where short-term reversals dominate. Less reliable during strong policy-led momentum surges, broad deleveraging, or event-driven repricing when continuation overwhelms reversal.",
+      "successes": [
+        "Sparse reversal core using negative ret1, ret5, mean_ret1_5, and ma_gap5.",
+        "Crowding penalty via positive vol5, range1, and volume_z5 to avoid unstable attention spikes.",
+        "Small positive ret60 context term to reduce fighting persistent medium-term winners."
+      ],
+      "failures": [
+        "Persistent momentum regimes where recent winners keep trending despite extension.",
+        "Event or policy shock periods where new information dominates technical mean reversion.",
+        "Stress/liquidity crunch episodes where volume and range spikes reflect genuine repricing rather than temporary crowding."
+      ]
+    },
+    "r_use": -0.001079721508650303,
+    "r_select": -0.0036130909065375722,
+    "r_distill": 0.003166711747359086,
+    "candidate_id": "0d60b9b479740c47433fe17c595885a3677928435b250058dd95899014c1f7b9",
+    "beta": [
+      0.0,
+      -0.41566150811205194,
+      0.0,
+      0.542992077412775,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.5826009648307814,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.4392735256297792,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "2295046e94258377",
+    "parent_skill_id": "ea346fc43d6bea20",
+    "skill": {
+      "hypothesis": "In CSI500 small/mid-cap stocks, short-horizon overreaction and attention-driven trading bursts tend to mean-revert cross-sectionally. A sparse signal should fade recent gains and short-term moving-average stretch, while penalizing abnormal volume and intraday range expansion that indicate unstable crowding. A small positive 60-day return term preserves medium-horizon trend context so the factor does not over-fight durable winners.",
+      "grammar": "add(add(add(mul(-0.34,ret5),mul(-0.22,ma_gap5)),add(mul(-0.16,mean_ret1_5),mul(-0.18,ret1))),add(add(mul(0.12,vol5),mul(0.10,range1)),add(mul(0.14,volume_z5),mul(0.10,ret60))))",
+      "applicability": "Best in CSI500 regimes with high retail participation, noisy liquidity, and cross-sectional overreaction where short-term reversals dominate; weaker during strong policy-led momentum surges, event-driven repricing, or deleveraging stress when continuation overwhelms reversal.",
+      "successes": [
+        "Sparse reversal core using negative ret1, ret5, mean_ret1_5, and ma_gap5.",
+        "Crowding penalty via positive vol5, range1, and volume_z5 to avoid unstable attention spikes.",
+        "Small positive ret60 context term to reduce fighting persistent medium-term winners."
+      ],
+      "failures": [
+        "Persistent momentum regimes where recent winners keep trending despite extension.",
+        "Event or policy shock periods where new information dominates technical mean reversion.",
+        "Stress/liquidity crunch episodes where volume and range spikes reflect genuine repricing rather than temporary crowding."
+      ]
+    },
+    "r_use": -0.0030521795223661242,
+    "r_select": -0.0014742131113934672,
+    "r_distill": -0.00038910214003627826,
+    "candidate_id": "4c8cfaccc7d41c34ffef7cab50617b63d26261b52bf36cd1770762caaadefd59",
+    "beta": [
+      0.0,
+      -0.5419936335997249,
+      -0.5155975907225632,
+      0.0,
+      0.0,
+      0.0,
+      -0.5157455284902099,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.41762252743453554,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "f8d0865a182e5ed7",
+    "parent_skill_id": "ea346fc43d6bea20",
+    "skill": {
+      "hypothesis": "In CSI500 small/mid-cap stocks, short-term price extension and attention-driven trading bursts tend to mean-revert cross-sectionally. A sparse signal should fade recent gains, short-term moving-average stretch, and accelerating 5-day reversal pressure, while penalizing abnormal volume and range expansion that indicate unstable crowding. A small positive 60-day return term preserves medium-horizon trend context so the factor does not over-fight durable winners.",
+      "grammar": "add(add(add(add(mul(-0.24,ret5),mul(-0.18,ma_gap5)),add(mul(-0.12,mean_ret1_5),mul(-0.12,ret1))),add(add(mul(0.08,vol5),mul(0.08,range1)),add(mul(0.12,volume_z5),mul(0.08,ret60)))),mul(-0.06,delta_ret5_1))",
+      "applicability": "Best in CSI500-like regimes with high retail participation, noisy liquidity, and cross-sectional overreaction where short-horizon reversals dominate but medium-horizon trend persistence still exists. Less reliable during strong policy-led momentum surges, event-driven repricing, or liquidity stress when continuation overwhelms reversal.",
+      "successes": [
+        "Sparse reversal core centered on negative ret1, ret5, mean_ret1_5, and ma_gap5.",
+        "Crowding control through positive vol5, range1, and volume_z5 penalties to avoid unstable attention spikes.",
+        "Adds a small negative delta_ret5_1 term to capture worsening short-term extension without increasing complexity."
+      ],
+      "failures": [
+        "Persistent momentum regimes where recent winners continue trending despite extension and crowding.",
+        "Event or policy shock periods where new information dominates technical mean reversion.",
+        "Stress/liquidity crunch episodes where volume and range spikes reflect genuine repricing rather than temporary crowding."
+      ]
+    },
+    "r_use": -0.0014160836084472894,
+    "r_select": -0.0011469939286097002,
+    "r_distill": 0.0016360959139188349,
+    "candidate_id": "1997e488e3c1b1452f8952f5d53dfcc0fe6430119c3f4ed41cffd98b30d88d37",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.5886029006227066,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.5689057450588986,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.43517736335421586,
+      0.0,
+      0.0,
+      0.0,
+      0.374851358596429,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "64c411c3f0579fed",
+    "parent_skill_id": "f8d0865a182e5ed7",
+    "skill": {
+      "hypothesis": "In CSI500 small/mid-cap stocks, short-horizon overreaction and attention-driven crowding tend to mean-revert cross-sectionally. A sparse signal should fade recent gains, short-term moving-average stretch, and worsening 5-day reversal pressure, while penalizing abnormal volume and range expansion that indicate unstable participation. A small positive 60-day return term preserves medium-horizon trend context so the factor does not over-fight durable winners.",
+      "grammar": "add(add(add(add(mul(-0.28,ret5),mul(-0.18,ma_gap5)),add(mul(-0.10,mean_ret1_5),mul(-0.14,ret1))),add(add(mul(0.08,vol5),mul(0.08,range1)),add(mul(0.12,volume_z5),mul(0.06,ret60)))),mul(-0.05,delta_ret5_1))",
+      "applicability": "Best in CSI500-like regimes with high retail participation, noisy liquidity, and cross-sectional short-term overreaction where reversal dominates but some medium-horizon trend persistence remains. Less reliable during strong policy-led momentum surges, event-driven repricing, or liquidity stress when continuation overwhelms reversal.",
+      "successes": [
+        "Sparse reversal core centered on negative ret1, ret5, mean_ret1_5, and ma_gap5.",
+        "Crowding control through positive vol5, range1, and volume_z5 penalties to avoid unstable attention spikes.",
+        "Adds a small negative delta_ret5_1 term to capture accelerating short-term extension without increasing complexity."
+      ],
+      "failures": [
+        "Persistent momentum regimes where recent winners continue trending despite extension and crowding.",
+        "Event or policy shock periods where new information dominates technical mean reversion.",
+        "Stress/liquidity crunch episodes where volume and range spikes reflect genuine repricing rather than temporary crowding."
+      ]
+    },
+    "r_use": -0.003732021456713031,
+    "r_select": -0.0018792711781004377,
+    "r_distill": -0.001497889891306324,
+    "candidate_id": "742844c53daeed5a0f354c6aec57d6cf56ea68365dd64872a9208cdb91c2483b",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.4287695066624217,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.5558450971321659,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.3920382962453139,
+      0.0,
+      0.0,
+      0.0,
+      0.5945577452423508,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "ecc5838dc51944ab",
+    "parent_skill_id": "ea346fc43d6bea20",
+    "skill": {
+      "hypothesis": "In CSI500 small/mid-cap stocks, the only pre-birth pattern with any positive distillation is sparse short-horizon reversal with crowding control. Recent gains and short-term moving-average stretch tend to mean-revert, especially when accompanied by abnormal volume and range expansion that signal unstable attention. A small positive 60-day return term keeps the signal from over-shorting durable medium-horizon winners, while a mild negative delta_ret5_1 term captures worsening short-term extension.",
+      "grammar": "add(add(add(add(mul(-0.22,ret5),mul(-0.16,ma_gap5)),add(mul(-0.10,mean_ret1_5),mul(-0.10,ret1))),add(add(mul(0.06,vol5),mul(0.06,range1)),add(mul(0.10,volume_z5),mul(0.06,ret60)))),mul(-0.04,delta_ret5_1))",
+      "applicability": "Most applicable in CSI500 regimes with high retail participation, noisy liquidity, and cross-sectional overreaction where short-term reversal dominates but some medium-horizon trend persistence remains. Less applicable during strong policy-led momentum surges, event-driven repricing, or liquidity-stress episodes where continuation dominates reversal.",
+      "successes": [
+        "Sparse reversal core using ret1, ret5, mean_ret1_5, and ma_gap5.",
+        "Crowding penalty via vol5, range1, and volume_z5 to avoid unstable attention spikes.",
+        "Small ret60 context plus mild delta_ret5_1 extension term, aligned with the only pre-birth memories showing positive distillation."
+      ],
+      "failures": [
+        "Persistent momentum regimes where recent winners continue trending despite extension and crowding.",
+        "Event or policy shock periods where new information overwhelms technical mean reversion.",
+        "Stress or deleveraging episodes where volume and range spikes reflect genuine repricing rather than temporary crowding."
+      ]
+    },
+    "r_use": -0.003921964745515407,
+    "r_select": -0.0016481701560233236,
+    "r_distill": -0.000869785223149283,
+    "candidate_id": "f82857cd8c51a3aaf957f277e23a3d95a563a839d0dfc1304eddbfcf2cf4d700",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.6271539838264585,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.42422875715620534,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.407163604965822,
+      0.0,
+      -0.5108088105774408,
+      0.0,
+      0.0,
+      0.0
+    ]
+  }
+]

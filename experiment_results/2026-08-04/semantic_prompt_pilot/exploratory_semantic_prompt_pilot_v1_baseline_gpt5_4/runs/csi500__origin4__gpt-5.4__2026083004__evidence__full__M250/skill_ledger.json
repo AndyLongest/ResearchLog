@@ -1,0 +1,318 @@
+[
+  {
+    "skill_id": "677ee440875d8906",
+    "parent_skill_id": null,
+    "skill": {
+      "hypothesis": "In CSI500-style small/mid-cap equities, short-horizon reversal tends to dominate after recent price strength, while elevated trading activity and volatility proxy for attention and temporary dislocation rather than persistent information. A sparse contrarian signal should therefore lean against recent returns and moving-average extension, but condition on moderate volume/volatility expansion that helps identify overreaction episodes.",
+      "grammar": "add(add(mul(a,ret5),mul(b,ma_gap20)),add(mul(c,delay_ret5_1),add(mul(d,vol20),mul(e,volume_z5)))) with signs a<0, b<0, c>0, d>0, e>0 and small |d|,|e| relative to |a|,|b|",
+      "applicability": "Most predictable in liquid but non-mega-cap cross-sections with high retail participation, weak trend persistence, and frequent short-term overreaction; better when dispersion is elevated and medium-term trends are not strongly one-sided.",
+      "successes": [
+        "Negative recent-return plus negative moving-average-gap core for short-term reversal construction",
+        "Use of lagged return term with opposite sign to separate bounce timing from pure momentum chasing",
+        "Light positive volume/volatility conditioning to target crowded overreaction rather than illiquid noise"
+      ],
+      "failures": [
+        "Strong trend-following or policy-driven momentum regimes where recent winners keep outperforming",
+        "Severe liquidity stress or limit-hit environments where reversal signals are dominated by trading frictions",
+        "Very low-dispersion calm markets where volume spikes reflect genuine information instead of temporary mispricing"
+      ]
+    },
+    "r_use": -0.0030358451714453424,
+    "r_select": -0.0006071690342890684,
+    "r_distill": -0.0030358451714453424,
+    "candidate_id": "c8fb6ffaa500b9f353877d58d15bdc9150ca7dac7f08d79030d96f98a8d2054b",
+    "beta": [
+      0.0,
+      -0.512265354379052,
+      -0.4756589700477268,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.462434491401663,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.545423772930852
+    ]
+  },
+  {
+    "skill_id": "56ae30af1280ebcf",
+    "parent_skill_id": "677ee440875d8906",
+    "skill": {
+      "hypothesis": "For CSI500 small/mid-cap equities, short-horizon overreaction and mean reversion are more persistent than trend continuation. Recent price strength and extension above moving averages tend to reverse, especially when accompanied by moderate increases in trading activity and volatility that signal attention-driven crowding rather than durable information. A lagged positive return term helps distinguish rebound timing from naive anti-momentum by favoring setups where the immediate reversal is not already exhausted.",
+      "grammar": "add(add(add(mul(a,ret5),mul(b,ma_gap20)),add(mul(c,delay_ret5_1),mul(d,volume_z5))),add(add(mul(e,vol20),mul(f,mean_ret1_5)),add(mul(g,ma_gap5),mul(h,corr_ret_volume20)))) with a<0, b<0, c>0, d>0, e>0, f<0, g<0, h>0, and |a|,|b| > |c| > |d|,|e|,|f|,|g|,|h|",
+      "applicability": "Best in CSI500-like retail-dominated, high-dispersion, non-mega-cap regimes with weak medium-term trend persistence and sufficient liquidity for reversals to express. Most useful when attention and turnover are elevated but not in panic-level stress, and when cross-sectional extensions from moving averages are wide.",
+      "successes": [
+        "Negative ret5 plus negative ma_gap20 as sparse reversal core",
+        "Positive delay_ret5_1 to separate bounce timing from pure contrarian exposure",
+        "Light positive volume_z5 and vol20 conditioning to focus on crowded overreaction episodes",
+        "Optional negative ma_gap5 and mean_ret1_5 to sharpen very short-horizon extension reversal"
+      ],
+      "failures": [
+        "Strong policy/liquidity-driven momentum regimes where winners continue to run",
+        "Limit-hit, severe stress, or impaired liquidity environments where reversal cannot monetize",
+        "Low-dispersion calm markets where volume spikes are information-driven rather than attention-driven",
+        "Broad market inflections where medium-horizon trend dominates short-horizon mean reversion"
+      ]
+    },
+    "r_use": -0.0009710635782366578,
+    "r_select": -0.0026228888528036054,
+    "r_distill": 0.0020647815932086848,
+    "candidate_id": "c3fd7698a84bf80e5961ec251256fcf4ca3478daa10fb4f44224ac40265ae96c",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.41849844381684104,
+      0.0,
+      0.0,
+      0.0,
+      0.5353687412811348,
+      0.0,
+      -0.604702768242779,
+      0.0,
+      0.0,
+      0.0,
+      0.41542017941050424,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "76235bfaa1a9910a",
+    "parent_skill_id": "56ae30af1280ebcf",
+    "skill": {
+      "hypothesis": "In CSI500 small/mid-cap equities, short-horizon overreaction and mean reversion are more persistent than continuation. Recent strength and extension above moving averages tend to reverse, especially when accompanied by modest attention proxies such as slightly higher volume and volatility. A positive lagged return term helps time rebounds by avoiding names where the reversal impulse is already exhausted.",
+      "grammar": "add(add(add(mul(-0.34,ret5),mul(-0.29,ma_gap20)),add(mul(0.16,delay_ret5_1),mul(0.08,vol20))),add(add(mul(0.06,volume_z5),mul(-0.08,ma_gap5)),add(mul(-0.05,mean_ret1_5),add(mul(0.04,corr_ret_volume20),add(mul(-0.03,open_close),mul(-0.02,overnight))))))",
+      "applicability": "Best in CSI500-like retail-dominated, high-dispersion, sufficiently liquid small/mid-cap regimes with weak medium-term trend persistence and elevated but non-panic attention/turnover.",
+      "successes": [
+        "Negative ret5 plus negative ma_gap20 as sparse reversal core",
+        "Positive delay_ret5_1 to separate rebound timing from naive anti-momentum",
+        "Light positive volume_z5 and vol20 conditioning to focus on crowded overreaction episodes",
+        "Small negative ma_gap5 and mean_ret1_5 to sharpen very short-horizon extension reversal"
+      ],
+      "failures": [
+        "Strong policy/liquidity-driven momentum regimes where winners continue to run",
+        "Limit-hit, severe stress, or impaired liquidity environments where reversal cannot monetize",
+        "Low-dispersion calm markets where volume spikes are information-driven rather than attention-driven",
+        "Broad market inflections where medium-horizon trend dominates short-horizon mean reversion"
+      ]
+    },
+    "r_use": -0.0030919744774982553,
+    "r_select": -0.0013952457580889773,
+    "r_distill": -0.001088520102657255,
+    "candidate_id": "d3339377788198022ae6c400d9cacf06ecf3dbcabc0804465a6ef9ef983b4019",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.43265499399398477,
+      0.0,
+      0.4606261759084361,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.46226188113464556,
+      -0.6220507499311406,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "40dbedb73c96c91d",
+    "parent_skill_id": "56ae30af1280ebcf",
+    "skill": {
+      "hypothesis": "In CSI500 small/mid-cap equities, short-horizon mean reversion is more persistent than continuation. Recent strength and extension above moving averages tend to reverse, especially when paired with modest attention proxies such as slightly elevated volume and volatility. A positive lagged return term helps distinguish rebound timing from naive anti-momentum, while small negative intraday and overnight terms lightly penalize names with very fresh upside extension.",
+      "grammar": "add(add(add(mul(-0.31,ret5),mul(-0.27,ma_gap20)),add(mul(0.15,delay_ret5_1),mul(0.08,vol20))),add(add(mul(0.06,volume_z5),mul(-0.07,ma_gap5)),add(mul(-0.05,mean_ret1_5),add(mul(0.03,corr_ret_volume20),add(mul(-0.04,ret1),add(mul(-0.02,open_close),mul(-0.01,overnight)))))))",
+      "applicability": "Best in CSI500-like retail-dominated, high-dispersion, sufficiently liquid small/mid-cap regimes with weak medium-term trend persistence and elevated but non-panic attention and turnover.",
+      "successes": [
+        "Negative ret5 plus negative ma_gap20 as sparse reversal core",
+        "Positive delay_ret5_1 to separate rebound timing from pure contrarian exposure",
+        "Light positive volume_z5 and vol20 conditioning to target crowded overreaction episodes",
+        "Small negative ma_gap5, mean_ret1_5, ret1, open_close, and overnight to sharpen very short-horizon extension reversal"
+      ],
+      "failures": [
+        "Strong policy- or liquidity-driven momentum regimes where winners continue to run",
+        "Limit-hit, severe stress, or impaired liquidity environments where reversal cannot monetize",
+        "Low-dispersion calm markets where volume spikes are information-driven rather than attention-driven",
+        "Broad market inflections where medium-horizon trend dominates short-horizon mean reversion"
+      ]
+    },
+    "r_use": -0.0041815446947691915,
+    "r_select": -0.0016131598015431644,
+    "r_distill": -0.0011456995233238491,
+    "candidate_id": "df3424f06a1a52f58e33dff71f6eb692e5a8d19761ef7dbb558f20038c3d0933",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.47147202639659513,
+      0.0,
+      -0.4810215780643534,
+      0.0,
+      0.0,
+      0.0,
+      0.5496590058772581,
+      0.0,
+      0.0,
+      0.4941733977259318,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "1110b90025f5d132",
+    "parent_skill_id": "56ae30af1280ebcf",
+    "skill": {
+      "hypothesis": "For CSI500 small/mid-cap equities, short-horizon overreaction and mean reversion are more persistent than continuation. Recent strength and extension above moving averages tend to reverse, especially when accompanied by modest increases in volume and volatility that proxy for attention-driven crowding rather than durable information. A positive lagged return term helps time rebounds, while small negative very-short-horizon terms penalize names whose upside extension is still too fresh.",
+      "grammar": "add(add(add(mul(-0.32,ret5),mul(-0.28,ma_gap20)),add(mul(0.16,delay_ret5_1),mul(0.08,vol20))),add(add(mul(0.06,volume_z5),mul(-0.07,ma_gap5)),add(mul(-0.05,mean_ret1_5),add(mul(0.03,corr_ret_volume20),add(mul(-0.03,ret1),add(mul(-0.02,open_close),mul(-0.01,overnight)))))))",
+      "applicability": "Best in CSI500-like retail-dominated, high-dispersion, sufficiently liquid small/mid-cap regimes with weak medium-term trend persistence and elevated but non-panic attention and turnover; less suitable when broad momentum leadership is strong.",
+      "successes": [
+        "Negative ret5 plus negative ma_gap20 as sparse reversal core",
+        "Positive delay_ret5_1 to separate rebound timing from naive anti-momentum",
+        "Light positive volume_z5 and vol20 conditioning to focus on crowded overreaction episodes",
+        "Small negative ret1, ma_gap5, open_close, overnight, and mean_ret1_5 to sharpen very short-horizon extension reversal"
+      ],
+      "failures": [
+        "Strong policy- or liquidity-driven momentum regimes where recent winners continue to run",
+        "Limit-hit, severe stress, or impaired liquidity environments where reversal cannot monetize",
+        "Low-dispersion calm markets where volume spikes are information-driven rather than attention-driven",
+        "Broad market inflections where medium-horizon trend dominates short-horizon mean reversion"
+      ]
+    },
+    "r_use": -0.0032845903065783556,
+    "r_select": -0.0014337689239049974,
+    "r_distill": -0.0002206804821065565,
+    "candidate_id": "41825d3301f5717bb35b3b9b64513374437c6d509c8d0864257ee24b7dd0c9fe",
+    "beta": [
+      0.0,
+      -0.3168664890844973,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.6185791558785897,
+      0.0,
+      -0.6017457075425,
+      0.0,
+      0.0,
+      0.0,
+      0.39351945245689146,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "4627fa9525e898c3",
+    "parent_skill_id": "76235bfaa1a9910a",
+    "skill": {
+      "hypothesis": "In CSI500 small/mid-cap equities, short-horizon overreaction and mean reversion tend to dominate continuation. Recent 5-day strength and extension above the 20-day moving average are likely to reverse, especially when accompanied by modest attention proxies such as slightly higher volume and volatility. A positive lagged 5-day return helps avoid chasing already-exhausted rebounds, while small negative very-short-horizon terms penalize names with still-fresh upside extension.",
+      "grammar": "add(add(add(mul(-0.30,ret5),mul(-0.26,ma_gap20)),add(mul(0.14,delay_ret5_1),mul(0.07,vol20))),add(add(mul(0.05,volume_z5),mul(-0.06,ma_gap5)),add(mul(-0.04,mean_ret1_5),add(mul(0.02,corr_ret_volume20),add(mul(-0.03,ret1),add(mul(-0.02,open_close),mul(-0.01,overnight)))))))",
+      "applicability": "Best in CSI500-like retail-dominated, high-dispersion, sufficiently liquid small/mid-cap regimes with weak medium-term trend persistence and elevated but non-panic attention/turnover; less suitable when broad momentum leadership is strong.",
+      "successes": [
+        "Negative ret5 plus negative ma_gap20 as sparse reversal core",
+        "Positive delay_ret5_1 to separate rebound timing from naive anti-momentum",
+        "Light positive volume_z5 and vol20 conditioning to target crowded overreaction episodes",
+        "Small negative ret1, ma_gap5, mean_ret1_5, open_close, and overnight to sharpen very short-horizon extension reversal"
+      ],
+      "failures": [
+        "Strong policy- or liquidity-driven momentum regimes where recent winners continue to run",
+        "Limit-hit, severe stress, or impaired liquidity environments where reversal cannot monetize",
+        "Low-dispersion calm markets where volume spikes are information-driven rather than attention-driven",
+        "Broad market inflections where medium-horizon trend dominates short-horizon mean reversion"
+      ]
+    },
+    "r_use": 0.0018633476871401983,
+    "r_select": -0.002100910044570565,
+    "r_distill": 0.004955322164638454,
+    "candidate_id": "961a053169449e38c118f3a2326fac18652750e626234e1d623b6e73a0b38149",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.41536160757168283,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.4552149797573284,
+      -0.44601434645448956,
+      -0.6490957247716065,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  }
+]

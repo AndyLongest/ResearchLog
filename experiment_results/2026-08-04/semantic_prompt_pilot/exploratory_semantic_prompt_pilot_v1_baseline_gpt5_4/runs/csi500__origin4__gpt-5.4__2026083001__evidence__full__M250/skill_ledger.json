@@ -1,0 +1,313 @@
+[
+  {
+    "skill_id": "ac49a48ac09d28a0",
+    "parent_skill_id": null,
+    "skill": {
+      "hypothesis": "In CSI500-style small/mid-cap equities, short-horizon reversal tends to dominate after recent price extension, especially when accompanied by elevated turnover and weak liquidity; mild medium-horizon continuation can coexist at longer windows. The mechanism is temporary demand pressure and retail-flow overreaction that mean-reverts once liquidity providers refill inventory.",
+      "grammar": "add(sub(mul(a,delay_ret5_1),mul(b,ret5)),sub(neg(mul(c,ma_gap5)),mul(d,volume_z5)))",
+      "applicability": "Most predictable in broad small/mid-cap cross-sections during non-crisis, range-bound or choppy regimes with high dispersion and no strong index-level trend; weaker in persistent momentum-led rallies or panic deleveraging phases.",
+      "successes": [
+        "Short-term reversal core: negative recent-return loading combined with positive lagged-return anchor",
+        "Crowding filter: penalize stretched price-vs-MA and elevated abnormal volume",
+        "Sparse mixed-horizon design: small positive long-window trend term with dominant short-window reversal terms"
+      ],
+      "failures": [
+        "Strong one-way momentum regimes where recent winners keep outperforming",
+        "Event-driven revaluations with genuine information arrival rather than temporary flow",
+        "Severe liquidity stress where reversal signals are overwhelmed by forced selling or buying"
+      ]
+    },
+    "r_use": -0.003853648818549091,
+    "r_select": -0.000770729763709818,
+    "r_distill": -0.003853648818549091,
+    "candidate_id": "7ec1c50d3da91aa8a64e5ef4d8c0966d87e8cd9ce50b75c8823547ca0d09e49f",
+    "beta": [
+      0.0,
+      -0.4559767037318105,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.45972030870715047,
+      0.0,
+      0.0,
+      0.0,
+      -0.587532867694651,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.4853324765504313,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "8a78e3a0d9b6d28b",
+    "parent_skill_id": "ac49a48ac09d28a0",
+    "skill": {
+      "hypothesis": "In CSI500 small/mid-cap equities, short-horizon price extension driven by crowded turnover and weak liquidity tends to mean-revert, while a faint medium-horizon continuation component can remain. The mechanism is temporary order-imbalance and retail-flow overreaction that reverses after inventory replenishment; better liquidity dampens crash risk and allows cleaner reversal capture.",
+      "grammar": "add(add(sub(mul(a,delay_ret5_1),mul(b,ret5)),sub(neg(mul(c,ma_gap5)),mul(d,volume_z5))),add(mul(e,liquidity20),sub(mul(f,ret20),mul(g,mean_ret1_5))))",
+      "applicability": "Best in non-crisis, range-bound or choppy CSI500 regimes with high cross-sectional dispersion, elevated but not extreme turnover, and no persistent index-level trend; weaker during strong momentum rallies, panic deleveraging, or fundamental re-rating episodes.",
+      "successes": [
+        "Negative ret5 with positive delay_ret5_1 as reversal core",
+        "Penalty on ma_gap5 and volume_z5 to avoid crowded extensions",
+        "Small positive liquidity20 term to prefer names where reversal can monetize",
+        "Weak positive ret20 term to retain mild medium-horizon continuation when not overextended"
+      ],
+      "failures": [
+        "Persistent momentum regimes where recent winners continue to run",
+        "Information-driven breakouts or re-ratings that should not mean-revert quickly",
+        "Acute liquidity stress where forced flows dominate normal inventory rebalancing"
+      ]
+    },
+    "r_use": -0.002578073927944327,
+    "r_select": -0.0035985338404281382,
+    "r_distill": 0.0012755748906047638,
+    "candidate_id": "e627037459c79ff3ad05b3acf477f271dafada33a7dea5aa317a036d55d764b3",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.4545590043339448,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.49004613817987797,
+      0.0,
+      0.0,
+      -0.6037346596519944,
+      0.43443682483050544
+    ]
+  },
+  {
+    "skill_id": "af9336b72ecb230e",
+    "parent_skill_id": "8a78e3a0d9b6d28b",
+    "skill": {
+      "hypothesis": "In CSI500 small/mid-cap equities, recent short-horizon price extension with elevated abnormal turnover and stretched distance from short moving average tends to mean-revert as temporary order imbalance and retail-flow overreaction fade; better liquidity improves implementation and a weak medium-horizon continuation component can remain when names are not crowded.",
+      "grammar": "add(add(sub(mul(a,delay_ret5_1),mul(b,ret5)),sub(neg(mul(c,ma_gap5)),mul(d,volume_z5))),add(mul(e,liquidity20),sub(mul(f,ret20),mul(g,mean_ret1_5))))",
+      "applicability": "Best in non-crisis, range-bound or choppy CSI500 regimes with elevated but not extreme turnover, high cross-sectional dispersion, and limited index-level trend persistence; weaker in strong momentum rallies, panic deleveraging, or information-driven re-rating episodes.",
+      "successes": [
+        "Dominant short-term reversal core using negative ret5 and positive delay_ret5_1",
+        "Crowding control via negative ma_gap5 and volume_z5 to avoid chasing extended moves",
+        "Small positive liquidity20 term to favor names where reversal can monetize cleanly",
+        "Weak positive ret20 with mild negative mean_ret1_5 to preserve faint medium-horizon continuation while fading very recent overreaction"
+      ],
+      "failures": [
+        "Persistent momentum regimes where recent winners continue to outperform",
+        "Event-driven breakouts or re-ratings that should not mean-revert quickly",
+        "Acute liquidity stress where forced flows overwhelm normal inventory rebalancing"
+      ]
+    },
+    "r_use": -0.0028733286300083745,
+    "r_select": -0.0026371248683571364,
+    "r_distill": 0.0003425327432383346,
+    "candidate_id": "9634e23c08433421f32edf06f446e390241d90a90f5c9f3952ce3de81aa7748c",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.4358019541498058,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.5883876959842813,
+      -0.48096401799994815,
+      0.0,
+      -0.4822345791861727,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "270057bea6408232",
+    "parent_skill_id": "8a78e3a0d9b6d28b",
+    "skill": {
+      "hypothesis": "In CSI500 small/mid-cap equities, short-horizon price extension accompanied by abnormal turnover and short-term stretch tends to mean-revert as temporary order imbalance and retail-flow overreaction fade; modest liquidity helps implementation, while a faint medium-horizon continuation component can coexist when names are not excessively crowded.",
+      "grammar": "add(add(sub(mul(0.27,delay_ret5_1),mul(0.32,ret5)),sub(neg(mul(0.22,ma_gap5)),mul(0.18,volume_z5))),add(mul(0.09,liquidity20),sub(mul(0.08,ret20),mul(0.07,mean_ret1_5))))",
+      "applicability": "Best in non-crisis, range-bound or choppy CSI500 regimes with elevated but not extreme turnover, high cross-sectional dispersion, and limited index-level trend persistence; weaker during strong momentum rallies, panic deleveraging, or information-driven re-rating episodes.",
+      "successes": [
+        "Dominant short-term reversal core using negative ret5 and positive delay_ret5_1",
+        "Crowding filter via negative ma_gap5 and volume_z5 to avoid chasing extended moves",
+        "Small positive liquidity20 term to prefer names where reversal can monetize more cleanly",
+        "Weak positive ret20 with mild negative mean_ret1_5 to retain faint medium-horizon continuation while fading very recent overreaction"
+      ],
+      "failures": [
+        "Persistent momentum regimes where recent winners continue to run",
+        "Event-driven breakouts or re-ratings that should not mean-revert quickly",
+        "Acute liquidity stress where forced flows dominate normal inventory rebalancing"
+      ]
+    },
+    "r_use": -0.001039032524800745,
+    "r_select": -0.0022702656473156104,
+    "r_distill": 0.0018342961052076295,
+    "candidate_id": "132e747c13f36c9c957d019daf1f433bf7027bca667db95612bb65cc75f3ead4",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.28310911256899807,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.5316205027802258,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.6587011274122294,
+      0.45093424814484034
+    ]
+  },
+  {
+    "skill_id": "5fa2762ae75c9a63",
+    "parent_skill_id": "8a78e3a0d9b6d28b",
+    "skill": {
+      "hypothesis": "In CSI500 small/mid-cap equities, short-horizon price extension driven by crowded turnover and short-term stretch tends to mean-revert as temporary order imbalance and retail-flow overreaction fade; modest liquidity improves implementation, while only a faint medium-horizon continuation component should remain.",
+      "grammar": "add(add(sub(mul(0.29,delay_ret5_1),mul(0.34,ret5)),sub(neg(mul(0.24,ma_gap5)),mul(0.19,volume_z5))),add(mul(0.10,liquidity20),sub(mul(0.07,ret20),mul(0.08,mean_ret1_5))))",
+      "applicability": "Best in non-crisis, range-bound or choppy CSI500 regimes with elevated but not extreme turnover, high cross-sectional dispersion, and limited index-level trend persistence; weaker during strong momentum rallies, panic deleveraging, or information-driven re-rating episodes.",
+      "successes": [
+        "Dominant short-term reversal core using negative ret5 and positive delay_ret5_1",
+        "Crowding filter via negative ma_gap5 and volume_z5 to avoid chasing extended moves",
+        "Small positive liquidity20 term to prefer names where reversal can monetize more cleanly",
+        "Weak positive ret20 with mild negative mean_ret1_5 to retain faint medium-horizon continuation while fading very recent overreaction"
+      ],
+      "failures": [
+        "Persistent momentum regimes where recent winners continue to run",
+        "Event-driven breakouts or re-ratings that should not mean-revert quickly",
+        "Acute liquidity stress where forced flows dominate normal inventory rebalancing"
+      ]
+    },
+    "r_use": -0.003222848186592078,
+    "r_select": -0.002707028779673877,
+    "r_distill": -0.0004971469076157273,
+    "candidate_id": "16b20326bafe467186ebe78de0070742c6f884a5e9d3283af83b914ad67890aa",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.4787617481065546,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.4323292298751561,
+      0.0,
+      0.0,
+      -0.5737442585727707,
+      0.5046743021992424
+    ]
+  },
+  {
+    "skill_id": "08fa814d1437808c",
+    "parent_skill_id": "8a78e3a0d9b6d28b",
+    "skill": {
+      "hypothesis": "In CSI500 small/mid-cap equities, short-horizon price extension accompanied by abnormal turnover and short-term stretch tends to mean-revert as temporary order imbalance and retail-flow overreaction fade; modest liquidity improves implementation, while only a faint medium-horizon continuation component should remain.",
+      "grammar": "add(add(sub(mul(0.30,delay_ret5_1),mul(0.35,ret5)),sub(neg(mul(0.24,ma_gap5)),mul(0.18,volume_z5))),add(mul(0.10,liquidity20),sub(mul(0.08,ret20),mul(0.08,mean_ret1_5))))",
+      "applicability": "Best in non-crisis, range-bound or choppy CSI500 regimes with elevated but not extreme turnover, high cross-sectional dispersion, and limited index-level trend persistence; weaker during strong momentum rallies, panic deleveraging, or information-driven re-rating episodes.",
+      "successes": [
+        "Dominant short-term reversal core using negative ret5 and positive delay_ret5_1",
+        "Crowding filter via negative ma_gap5 and volume_z5 to avoid chasing extended moves",
+        "Small positive liquidity20 term to prefer names where reversal can monetize more cleanly",
+        "Weak positive ret20 with mild negative mean_ret1_5 to retain faint medium-horizon continuation while fading very recent overreaction"
+      ],
+      "failures": [
+        "Persistent momentum regimes where recent winners continue to run",
+        "Event-driven breakouts or re-ratings that should not mean-revert quickly",
+        "Acute liquidity stress where forced flows dominate normal inventory rebalancing"
+      ]
+    },
+    "r_use": -0.003202048604897742,
+    "r_select": -0.00270286886333501,
+    "r_distill": -0.00032871997488936747,
+    "candidate_id": "32bd57a8f314690b6c045461139cb0cadae81c2de72d9bceecfb57204fe99642",
+    "beta": [
+      0.0,
+      0.0,
+      0.472942333565479,
+      0.0,
+      0.0,
+      0.0,
+      -0.5258056659207647,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.4052407273393253,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.5793391957331687,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  }
+]

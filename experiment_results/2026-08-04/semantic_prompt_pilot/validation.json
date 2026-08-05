@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "truth_label": "exploratory retrospective semantic-prompt pilot",
+  "runs": 30,
+  "candidates": 7500,
+  "unique_candidates_within_runs": 7500,
+  "daily_evidence_rows": 1835030,
+  "prompt_calls": 160,
+  "parse_fallbacks": 0,
+  "semantic_compliant_calls": 80,
+  "baseline_semantic_marker_calls": 0,
+  "credential_leak_detected": false,
+  "models_computable": [
+    "gpt-5.4"
+  ],
+  "models_noncomputable": {
+    "claude-sonnet-4.6": "provider model_not_supported"
+  }
+}

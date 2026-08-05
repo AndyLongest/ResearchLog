@@ -1,0 +1,308 @@
+[
+  {
+    "skill_id": "9c129fbec60f7c3c",
+    "parent_skill_id": null,
+    "skill": {
+      "hypothesis": "Short-horizon reversal dominates after transitory price pressure, while medium-horizon trend persistence survives in liquid large-cap equities; the factor should buy recent losers with stable longer-run support and avoid names with acute gap/range stress.",
+      "grammar": "add(add(mul(a,neg(ret1)),mul(b,neg(mean_ret1_5))),add(mul(c,ret60),mul(d,ma_gap60)))",
+      "applicability": "Most predictable in broad, liquid large-cap universes during non-crisis, two-sided markets where short-term overreaction and medium-term underreaction coexist.",
+      "successes": [
+        "Combine negative 1-5 day return terms with positive 20-60 day trend terms.",
+        "Penalize overnight/open-close shock proxies to reduce event-driven reversals.",
+        "Keep exposure modestly positive to liquidity and modestly negative to near-term volatility/range."
+      ],
+      "failures": [
+        "Momentum crashes and sharp regime flips where medium-term trend reverses abruptly.",
+        "High-macro-news or earnings-heavy periods dominated by gap risk.",
+        "Panic/liquidity shock regimes where reversal signals become unstable and volatility overwhelms cross-sectional structure."
+      ]
+    },
+    "r_use": -0.0044870450195122966,
+    "r_select": -0.0008974090039024591,
+    "r_distill": -0.0044870450195122966,
+    "candidate_id": "c527bd7a49895b3a786caada20d810a0e078beefc0cbef4ce2cec74453d2f797",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.4748616060703804,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.35277765244772086,
+      0.0,
+      -0.5022166607913318,
+      0.0,
+      0.0,
+      0.0,
+      -0.6307398898415558,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "2773f391389abfcc",
+    "parent_skill_id": "9c129fbec60f7c3c",
+    "skill": {
+      "hypothesis": "In S&P 500 large caps, short-term price pressure and overreaction tend to mean-revert, while slower-moving medium-horizon trend and distance above long moving-average support can persist. A sparse blend should favor recent losers that still retain longer-run support, while avoiding names with acute gap, intraday stress, and elevated short-run volatility that often reflect event risk rather than clean reversal.",
+      "grammar": "add(add(add(mul(a,neg(ret1)),mul(b,neg(mean_ret1_5))),add(mul(c,ret60),mul(d,ma_gap60))),add(mul(e,liquidity20),add(mul(f,neg(overnight)),add(mul(g,neg(open_close)),add(mul(h,neg(range1)),mul(i,neg(delta_ret5_1)))))))",
+      "applicability": "Best suited to broad, liquid, non-crisis S&P 500 regimes with two-sided trading, moderate dispersion, and intact medium-term trend structure; less reliable during panic deleveraging, earnings/news shock clusters, or abrupt momentum reversals.",
+      "successes": [
+        "Negative ret1 and mean_ret1_5 paired with positive ret60 or ma_gap60 to capture reversal-with-support.",
+        "Small positive liquidity20 tilt to keep the signal concentrated in scalable large-cap dislocations.",
+        "Explicit penalties on overnight, open_close, range1, and delta_ret5_1 to filter event-driven or unstable reversals."
+      ],
+      "failures": [
+        "Momentum crash or sharp macro regime-flip periods where ret60 and ma_gap60 reverse quickly.",
+        "Earnings or news-dominated windows where overnight and intraday gaps contain information rather than noise.",
+        "Stress/liquidity shock environments where volatility and range effects swamp cross-sectional reversal structure."
+      ]
+    },
+    "r_use": -0.0029191716144394367,
+    "r_select": -0.004173470338497725,
+    "r_distill": 0.0015678734050728598,
+    "candidate_id": "4dddb2579dad494030c1752d64fd717461b9595291382a78ee085d1c731905b5",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.5194421862645524,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.39419303016129875,
+      0.0,
+      0.0,
+      -0.621622524886333,
+      0.0,
+      0.0,
+      -0.43402431574152145,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "004e2d17027b2636",
+    "parent_skill_id": "2773f391389abfcc",
+    "skill": {
+      "hypothesis": "In 2019-era S&P 500 large caps, the most reusable cross-sectional edge from pre-birth memory is a sparse reversal-with-support profile: very recent losers tend to mean-revert when medium-horizon trend/support remains intact, while names with large overnight gaps, intraday stress, unstable short-run return acceleration, or elevated volatility are more often event-driven and less reliable.",
+      "grammar": "add(add(add(mul(a,neg(ret1)),mul(b,neg(mean_ret1_5))),add(mul(c,ret60),mul(d,ma_gap60))),add(mul(e,liquidity20),add(add(mul(f,neg(overnight)),mul(g,neg(open_close))),add(mul(h,neg(range1)),add(mul(i,neg(delta_ret5_1)),mul(j,neg(vol20)))))))",
+      "applicability": "Best in broad, liquid, non-crisis S&P 500 regimes with moderate dispersion, two-sided trading, and intact medium-term trend structure; especially when short-term price pressure is likely transitory rather than information-driven.",
+      "successes": [
+        "Use negative ret1 and mean_ret1_5 as the primary reversal sleeve.",
+        "Retain positive ret60 and ma_gap60 to require medium-horizon support rather than indiscriminate catching of falling knives.",
+        "Add small positive liquidity20 and penalties on overnight, open_close, range1, delta_ret5_1, and vol20 to filter event-risk and unstable reversals."
+      ],
+      "failures": [
+        "Momentum-crash or abrupt macro regime-flip periods where medium-term trend support fails quickly.",
+        "Earnings/news shock clusters where gaps and intraday stress carry genuine information instead of noise.",
+        "Panic deleveraging or liquidity-stress environments where volatility dominates and reversal signals become unstable."
+      ]
+    },
+    "r_use": -0.003533982132934579,
+    "r_select": -0.003042133718138465,
+    "r_distill": 0.00016912618404128776,
+    "candidate_id": "3d0cc31141324fb436187c9dbb4071f7b074e468c84417455686b98faaa1837a",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.6146518407035652,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.377534839471167,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.47365416109865977,
+      0.0,
+      -0.5052942661253187,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "733d6f8db3bdf11e",
+    "parent_skill_id": "2773f391389abfcc",
+    "skill": {
+      "hypothesis": "In S&P 500 large caps, short-term price pressure often mean-reverts, but reversal is more reliable when medium-horizon trend/support remains intact. Recent losers with positive longer-run support can rebound, while large overnight gaps, intraday stress, unstable short-run acceleration, and elevated volatility more often indicate event-driven moves that should be avoided.",
+      "grammar": "add(add(add(mul(a,neg(ret1)),mul(b,neg(mean_ret1_5))),add(mul(c,ret60),mul(d,ma_gap60))),add(mul(e,liquidity20),add(add(mul(f,neg(overnight)),mul(g,neg(open_close))),add(mul(h,neg(range1)),add(mul(i,neg(delta_ret5_1)),mul(j,neg(vol20)))))))",
+      "applicability": "Broad, liquid, non-crisis S&P 500 regimes with two-sided trading, moderate dispersion, and intact medium-term trend structure; most suitable when short-horizon dislocations are likely transitory rather than information-driven.",
+      "successes": [
+        "Primary construction uses negative ret1 and mean_ret1_5 for short-horizon reversal.",
+        "Positive ret60 and ma_gap60 require medium-term support to avoid indiscriminate falling-knife exposure.",
+        "Negative overnight, open_close, range1, delta_ret5_1, and vol20 terms filter gap-risk, intraday stress, and unstable reversals."
+      ],
+      "failures": [
+        "Momentum-crash or abrupt regime-flip periods where medium-term support reverses quickly.",
+        "Earnings/news shock clusters where gaps and intraday stress contain real information.",
+        "Panic deleveraging or liquidity-stress environments where volatility dominates cross-sectional reversal structure."
+      ]
+    },
+    "r_use": -0.001312480181252852,
+    "r_select": -0.00259783332780212,
+    "r_distill": 0.002221501951681727,
+    "candidate_id": "60f7659c7f18f91464b8b54fe05dfc4a4ddb9a3c7d0b9843e3d56366c42ec3ed",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.530359369890626,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.432371878030064,
+      0.0,
+      0.0,
+      -0.5932417556108739,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.4240727735397565
+    ]
+  },
+  {
+    "skill_id": "5fc3ab96b3a4498a",
+    "parent_skill_id": "733d6f8db3bdf11e",
+    "skill": {
+      "hypothesis": "In S&P 500 large caps, the most reusable pre-birth pattern is short-horizon mean reversion conditioned on intact medium-horizon support. Recent losers rebound more reliably when longer-run trend/support remains positive, while large overnight gaps, intraday stress, unstable short-run acceleration, and elevated volatility more often indicate event-driven moves that should be avoided.",
+      "grammar": "add(add(add(mul(a,neg(ret1)),mul(b,neg(mean_ret1_5))),add(mul(c,ret60),mul(d,ma_gap60))),add(mul(e,liquidity20),add(add(mul(f,neg(overnight)),mul(g,neg(open_close))),add(mul(h,neg(range1)),add(mul(i,neg(delta_ret5_1)),mul(j,neg(vol20)))))))",
+      "applicability": "Broad, liquid, non-crisis S&P 500 regimes with two-sided trading, moderate dispersion, and intact medium-term trend structure; most suitable when short-horizon dislocations are likely transitory rather than information-driven.",
+      "successes": [
+        "Primary construction uses negative ret1 and mean_ret1_5 for short-horizon reversal.",
+        "Positive ret60 and ma_gap60 require medium-term support to avoid indiscriminate falling-knife exposure.",
+        "Negative overnight, open_close, range1, delta_ret5_1, and vol20 terms filter gap-risk, intraday stress, and unstable reversals."
+      ],
+      "failures": [
+        "Momentum-crash or abrupt regime-flip periods where medium-term support reverses quickly.",
+        "Earnings/news shock clusters where gaps and intraday stress contain real information.",
+        "Panic deleveraging or liquidity-stress environments where volatility dominates cross-sectional reversal structure."
+      ]
+    },
+    "r_use": -0.004236701276401319,
+    "r_select": -0.001897324400282545,
+    "r_distill": -0.0010101244027143114,
+    "candidate_id": "ee910e2b3310d1476b189225d138403cfce7f0524fa1487bbeee03725e651f7d",
+    "beta": [
+      0.0,
+      0.40807343290689924,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.5307372374043356,
+      0.0,
+      0.0,
+      -0.4871272580126665,
+      -0.5608039699298263,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "skill_id": "9c328ef132a8b525",
+    "parent_skill_id": "2773f391389abfcc",
+    "skill": {
+      "hypothesis": "In S&P 500 large caps, the most reusable pre-registration pattern is short-horizon mean reversion conditioned on intact medium-horizon support. Recent losers tend to rebound when longer-run trend and distance above long moving-average support remain positive, while large overnight gaps, intraday stress, unstable short-run acceleration, and elevated volatility more often indicate event-driven moves that should be avoided.",
+      "grammar": "add(add(add(mul(0.34,neg(ret1)),mul(0.22,neg(mean_ret1_5))),add(mul(0.18,ret60),mul(0.16,ma_gap60))),add(mul(0.05,liquidity20),add(add(mul(0.08,neg(overnight)),mul(0.08,neg(open_close))),add(mul(0.09,neg(range1)),add(mul(0.07,neg(delta_ret5_1)),mul(0.10,neg(vol20)))))))",
+      "applicability": "Best suited to broad, liquid, non-crisis S&P 500 regimes with two-sided trading, moderate dispersion, and intact medium-term trend structure, when short-term dislocations are more likely transitory than information-driven.",
+      "successes": [
+        "Use negative ret1 and mean_ret1_5 as the primary reversal sleeve.",
+        "Require positive ret60 and ma_gap60 so reversal is taken only with medium-horizon support.",
+        "Penalize overnight, open_close, range1, delta_ret5_1, and vol20 to filter event-risk and unstable reversals."
+      ],
+      "failures": [
+        "Momentum-crash or abrupt regime-flip periods where medium-term support reverses quickly.",
+        "Earnings or macro-news shock clusters where gaps and intraday stress contain real information.",
+        "Panic deleveraging or liquidity-stress environments where volatility dominates cross-sectional reversal structure."
+      ]
+    },
+    "r_use": -0.002707680784933593,
+    "r_select": -0.002876873448538268,
+    "r_distill": 0.0008263013480009859,
+    "candidate_id": "c6013685712b4a74f5c8c1d8a07fa6fbbc5d5821b87143ed71d1a80c8ecc3c21",
+    "beta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.5156278606391566,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.5806742706628955,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.5159482203966215,
+      0.0,
+      -0.3615836481263504,
+      0.0,
+      0.0
+    ]
+  }
+]
