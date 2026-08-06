@@ -1,0 +1,118 @@
+仓库当前内置的对象是：
+
+ChinaA
+GlobalEquity（US / HK 两种模式）
+IndiaEquity
+KoreaEquity
+Crypto
+ChinaFutures
+GlobalFutures
+Forex
+Composite
+options_portfolio
+
+前八个是具体市场执行规则；Composite 负责跨市场组合；options_portfolio 是独立的期权组合模拟器。
+
+1. 交易方向与结算制度
+ChinaA：T+1，当天买入不能当天卖出；禁止开空仓。
+GlobalEquity-US：T+0，允许做多和做空。
+GlobalEquity-HK：T+0，允许做多和做空。
+IndiaEquity：默认按交割股票模拟，T+1、默认禁止隔夜做空；可通过 allow_short=True 近似日内做空。
+KoreaEquity：允许当天买卖，但严格只做多；即使配置 allow_short=True 也会直接报错，因为仓库没有模拟韩国融券和 uptick rule。
+Crypto：24/7，允许多空。
+ChinaFutures：T+0，允许多空和日内开平仓。
+GlobalFutures：接近 24×5，允许多空和当日平仓。
+Forex：24×5，无多空方向限制。
+2. 能否成交与价格限制
+ChinaA：检查主板约 ±10%、创业板/科创板 ±20%、北交所约 ±30% 等涨跌停；以昨日已知基准价和当前开盘加滑点后的实际成交价判断是否封板。
+IndiaEquity：使用可配置 circuit band，默认按 ±20% 简化，因为单只印度股票的实际 band 无法仅从代码推断。
+KoreaEquity：检查 ±30% 涨跌幅限制，而且会把价格落到 KRX 的实际 tick grid 上。
+ChinaFutures：不同品种使用不同涨跌停比例，股指、国债、商品分别处理，并以前结算价为基准。
+GlobalFutures：股指和部分商品检查 limit up/down，同样以前结算价为主要基准。
+US/HK 股票、Crypto、Forex：核心实现中没有日涨跌停阻止成交，通常只要该 bar 有价格就允许执行。
+3. 最小交易单位
+ChinaA：买入按 100 股一手向下取整。
+US 股票：支持到 0.01 股的小数股。
+港股：仓库简化成 100 股一手，并没有根据每只港股真实 board lot 动态查询。
+IndiaEquity：1 股。
+KoreaEquity：1 股。
+Crypto：允许小数数量。
+ChinaFutures / GlobalFutures：最小 1 张合约。
+Forex：内部数量用基础货币单位表示，默认按 1,000 单位，即 0.01 标准手取整。
+4. 手续费与税费
+ChinaA：双边佣金，默认万 2.5、最低 5 元；双边过户费；卖出收印花税。
+US 股票：默认零佣金，忽略很小的监管费。
+港股：佣金、双边印花税、SFC/FRC 征费和 CCASS 结算费。
+IndiaEquity：STT、交易所费用、SEBI 费用、买入印花税、GST，以及可配置的卖出 DP charge。
+KoreaEquity：双边券商佣金，卖出时收证券交易税。
+Crypto：区分 maker 和 taker，默认 taker 成本更高。
+ChinaFutures：不同品种有两种方式——按每张固定费用，或者按名义金额比例收费。
+GlobalFutures：通常按每张合约固定收费，可按品种配置。
+Forex：主要成本不是显式佣金，而是买卖价差 spread，另加可配置滑点。
+5. 成交价与滑点
+
+所有普通 engine 基本都从当前 bar 的开盘价开始，再把成交价向不利方向移动：
+
+买入成交价 > open
+卖出成交价 < open
+
+具体默认值不同：
+
+ChinaA、港股、India、Korea：默认约 10 bps。
+US 股票：默认约 5 bps。
+Crypto：默认约 5 bps。
+GlobalFutures：默认约 3 bps。
+Forex：先加入不同货币对的 bid-ask spread，再加入额外的 pip 滑点。
+
+这些通常是固定比例或固定 pip 的简化模型，不会因为订单从 1 万元增至 1 亿元而自动显著扩大市场冲击。
+
+6. 杠杆、保证金与盈亏
+ChinaA、India、Korea：强制 leverage=1，按现金股票处理。
+US/HK 股票：默认也是 1 倍，但配置层允许调整；源码暂未真正模拟 Reg-T、融券借贷费等完整机制。
+Crypto：可配置杠杆；支持逐仓和全仓保证金，并计算维持保证金。
+ChinaFutures：每个品种内置不同合约乘数和保证金率。例如 IF、黄金、螺纹钢的“一张合约”对应的实际名义金额完全不同。
+GlobalFutures：同样按 ES、NQ、CL、GC 等品种配置合约乘数；默认用约 10 倍杠杆近似保证金制度。
+Forex：默认 100:1，可配置；标准手为 100,000 基础货币单位，盈亏按报价货币计算。
+7. 持仓期间的额外事件
+普通股票：主要是持仓价格变化，没有复杂的逐 bar 现金流。
+Crypto 永续合约：每 8 小时结算资金费；保证金不足时触发强制平仓；执行价格和风险计算使用的 mark price 可以分开。
+Forex：跨日持仓产生 swap，即隔夜展期利息。
+期货：主要模拟保证金、合约乘数和价格限制；GlobalFutures 明确没有模拟真实换月和到期，默认使用连续主力数据。
+ChinaFutures：夜盘时段只是文档规则，bar 级回测不会严格检查当前时间是否属于某品种夜盘。
+8. 跨市场组合方式
+
+CompositeEngine 不是一种新资产，而是统一调度上述 engine：
+
+A股代码 → ChinaA规则
+美股代码 → GlobalEquity-US规则
+BTC → Crypto规则
+期货代码 → 对应Futures规则
+
+资金、持仓和权益曲线统一由 CompositeEngine 管理，各子 engine 只提供市场规则。
+
+但它目前要求所有资产使用同一种结算货币。例如把人民币 A 股和美元美股直接放进同一权益曲线会被拒绝，因为仓库还没有 FX 换算层，不能把 CNY、USD、KRW 直接相加。
+
+9. 期权与其他对象的区别
+
+options_portfolio 不完全沿用“信号→开盘成交→持仓”的普通市场 engine 逻辑。它更关注：
+
+多条期权腿；
+call / put；
+行权价和到期日；
+隐含波动率；
+Delta、Gamma、Theta、Vega；
+到期 payoff；
+情景分析和组合风险。
+
+所以它更像一个期权组合估值和收益情景模拟器，而不是普通股票方向策略的逐 bar 撮合器。README 也把它单独列为 options portfolio，而不是普通 engine。
+
+最终就是：
+
+BaseEngine：
+统一时间推进、信号、账户、持仓和绩效统计
+
+具体Market Engine：
+交易制度 + 成交限制 + 数量单位 + 成本
++ 滑点 + 杠杆保证金 + 持仓期间事件
+
+因此，不同交易对象的主要区别确实发生在“执行和记账”环节，但不是只有能否交易和手续费，而是整套市场规则都由对应 engine 提供。
