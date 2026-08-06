@@ -1,0 +1,29 @@
+1）搞清楚 vibe-trading 的 pipeline，是如何从一句话到一个回测报告的？
+我本来认为它提出的是一个新的，厉害的架构，其实不是，只是做了系统性改造优化。
+
+把通用 ReAct agent 系统化改造成了一个 finance-native、可执行、可验证、可追溯的交易研究工作台。
+ReAct 本身只是一个循环：
+观察 → 调用工具 → 获得结果 → 继续决策
+Vibe-Trading 的系统价值在于，它为这个循环准备了一整套金融原生组件：
+包括
+├── 金融 skills
+├── 市场数据 loaders
+├── 因子库
+├── 回测引擎
+├── 文档和网络检索
+├── 多智能体 swarm
+├── memory
+└── broker connectors
+
+可以学习的是金融原生组件的设计 & 统一的 agent runtime，也就是组件之间如何规划、调用等；
+vibe-trading 是一个基础设施，和 trading agent 不是一个层级的概念，可以作为我们以后的实验平台。
+
+2）（AlphaGen）Generating Synergistic Formulaic Alpha Collections via Reinforcement Learning
+	很传统，每次到一个新的数据集，都要先训练，然后推理阶段它就会逐token输出合法公式。
+	a）PPO
+		PPO : 好公式里出现过的 token 选择，以后概率提高(exploit)；坏公式里的选择，概率降低，但每次不能改得太猛(explore)
+		Actor - critic : 以实际 reward - 预计收益 作为 advantage 来更新策略网络。这不是创新点，是强化学习 PPO 的标准机制。
+	b）表达式
+		很有意思，因为我看见它逐token生成时感觉判断语法正确会很繁琐，它为了解决这个问题使用逆波兰表达式（RPN, Reverse Polish Notation），也叫后缀表达式。
+		后续 Alpha² 也指出其局限：在生成半截 RPN 时，某个 token 将来位于最终表达式树的哪个位置不够直观，因此难以提前进行更强的语义和维度（金融逻辑不合理）剪枝
+
