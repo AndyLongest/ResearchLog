@@ -1,0 +1,115 @@
+A 股
+Tencent
+→ mootdx
+→ Eastmoney
+→ BaoStock
+→ AKShare
+→ Tushare
+→ Local
+
+这是目前最完整的一条链。Tencent、mootdx、Eastmoney、BaoStock、AKShare 都可以在不配置 Tushare token 的情况下工作；Tushare 已经是比较靠后的兜底方案。
+
+美股
+Yahoo
+→ Stooq
+→ Sina
+→ Eastmoney
+→ yfinance
+→ Tiingo
+→ FMP
+→ Finnhub
+→ Alpha Vantage
+→ Longbridge
+→ AKShare
+→ Local
+
+这条链很长，因为美股公开行情源很多。前面的 Yahoo、Stooq、Sina、Eastmoney 属于无需用户 API key 的公共源；Tiingo、FMP、Finnhub、Alpha Vantage 等则属于 key-gated REST API，因此被放得比较靠后。
+
+港股
+Tencent
+→ Eastmoney
+→ Yahoo
+→ Futu
+→ AKShare
+→ yfinance
+→ Tushare
+→ Longbridge
+→ Local
+
+仓库特别把 Tencent 放第一，因为作者注明它目前没有明显的 IP-ban 问题；Yahoo 系列在中国大陆网络环境下可能受阻，所以不是第一优先级。Futu 则需要本地 OpenD/相关连接条件。
+
+印度股票
+Yahoo
+→ yfinance
+→ India Broker
+→ Local
+
+这条链相对简单。前两层主要走 Yahoo 数据生态；india_broker 更接近券商数据源，需要相应环境或认证。
+
+韩国股票
+pykrx
+→ Yahoo
+→ yfinance
+→ Local
+
+第一优先使用韩国本地生态的 pykrx，失败以后再退到 Yahoo 系列。
+
+加密货币
+OKX
+→ Binance
+→ CCXT
+→ yfinance
+→ Local
+
+优先级非常合理：
+
+交易所原生 API
+→ 另一家大型交易所
+→ CCXT 统一交易所接口
+→ Yahoo 类兜底
+→ 本地数据
+
+仓库注释明确说明 OKX 是 native 首选，Binance 次之，再退到通用 CCXT。
+
+期货
+Tushare
+→ AKShare
+→ Local
+
+这里不像股票那样有大量免费公共行情源，因此链明显短一些。Tushare 排第一，AKShare 作为无 key 的主要兜底。
+
+基金
+Tushare
+→ AKShare
+→ Local
+
+和期货一样。
+
+宏观数据
+AKShare
+→ Tushare
+→ Local
+
+这里顺序反过来了：AKShare 第一，Tushare 第二。因为很多宏观统计数据 AKShare 已经聚合了公开来源，不一定需要先走有认证要求的 Tushare。
+
+外汇
+MT5
+→ AKShare
+→ yfinance
+→ Local
+
+MT5 如果本机连接了 MetaTrader 5 终端，就优先使用券商实际 feed；否则它会直接报告 unavailable，然后自动继续往 AKShare、yfinance 走。源码特别注明 MT5 主要是 Windows 本地终端方案。
+
+不同方案的特点
+
+可以把这些 loader 大致分成五类。
+
+第一类：公开网页/HTTP 行情源。 例如 Tencent、Eastmoney、Yahoo、Sina、Stooq。优点是免费、无需 key、开箱即用；缺点是接口不是正式面向量化程序长期稳定服务的，可能改版、限流或封 IP。仓库因此把“封 IP 风险”直接作为 fallback 排序的重要依据。
+
+第二类：直接或本地行情生态。 例如 mootdx、pykrx、MT5、Futu、Longbridge。这类通常更接近某个交易市场或券商原生环境，比如 mootdx 对接通达信生态，MT5 接本地券商 feed。优点通常是数据更贴近真实交易环境；缺点是往往需要额外软件、Python 包、本地终端或账号环境。
+
+第三类：聚合器。 典型是 AKShare、CCXT、yfinance。它们给开发者一个统一接口，但底下还是依赖其他数据源。优点是开发极其方便、覆盖面广；缺点是底层 provider 一变，它也可能跟着坏。因此适合作为非常实用的中间兜底层。
+
+第四类：正式 API 服务。 例如 Tushare、Tiingo、FMP、Finnhub、Alpha Vantage。优点是接口规范、字段相对稳定，有些还能提供更丰富的基本面和专业数据；缺点是通常需要 API key、积分、订阅或严格限频。所以 Vibe-Trading 很多时候故意把它们排在免费公共源后面。
+
+第五类：Local。 也就是用户自己的 CSV、Parquet、数据库等。它通常放最后兜底，但有一点很特殊：如果用户明确指定 local，仓库不会偷偷退化到网络源，因为这样会掩盖本地数据配置错误。源码专门把 local 列进 “never silently fall through to network” 的名单。
