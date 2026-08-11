@@ -1,0 +1,12 @@
+Benchmark	时间	核心特点
+InvestorBench	2024/2025	股票、ETF、Crypto；较早系统化评测 financial decision-making agent 的 benchmark
+StockBench	2025	多只美股、连续数月交易；price + fundamentals + news；强调 contamination-free
+LiveTradeBench	2025	Live 市场；美股 + prediction market；连续 portfolio allocation
+AMA / When Agents Trade	2025	Live multi-market；重点比较不同 Agent architecture，而不只是不同 LLM
+AI-Trader	2025	Live；美股+A股+Crypto；只给最少信息，让 Agent 自己搜索、验证、分析
+TradeTrap	2025	不主要测“赚多少”，而是故意攻击 market intelligence、strategy、portfolio、execution 等模块，看 Agent 会不会崩
+TraderBench	2026	Crypto + Options；既测 reasoning，又测 adversarial market 下的实际交易鲁棒性
+KTD-Fin	2026	CSI300；ticker/date masking 防历史记忆，并对收益做 market/style/stock-selection alpha attribution
+PortBench	2026	偏 Portfolio Agent；六类资产，专门加入 cross-asset correlation 和完整 portfolio pipeline
+CLQT	2026	偏 Portfolio Agent；closed-loop + transaction cost + temporal gate + memory + process-level diagnostics
+PolyBench	2026	Polymarket；order book + news + liquidity，评价 prediction 与真正 simulated trading return

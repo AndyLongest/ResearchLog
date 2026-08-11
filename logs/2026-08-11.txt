@@ -1,0 +1,36 @@
+1）AlphaSchema
+	a）Motivation 
+		研究者靠经济假设人工挖因子，效率有限 → 把因子当公式，语法树来搜索，只看数学组合，没有经济逻辑 → 用 LLM，搜索空间隐式，多样性没法测，搜索方向不好控，难复现，			还特别吃大模型
+	b）Method
+		AlphaSchema Search负责：“做什么因子？”→ LLM负责：“这个想法具体怎么写？”→ Backtest负责：“写出来的东西到底好不好？”
+
+		AlphaSchema 里的一个 schema plan，本质上就是一个“多栏选择题”，其中Event       单选题
+																		   Context     单选题
+																		   Quality     多选题
+																		   Direction   单选题
+																		   Output      单选题
+		为了让搜索空间变成一个可以被程序稳定操作的离散空间，首先给每个都分配了一个编号
+		Explore：去尝试以前很少选过的答案组合
+		Exploit：根据过去哪些答案组合得分高，预测新的哪套答案组合可能也高
+		Mutation：拿一张过去高分答卷，只改其中一道题的答案
+
+2）Trading Agent
+	首先，这个 trading agent 表述成一个完整研究对象，Trading Agent = 接收市场研究结果 → 形成交易决策 → 把决策变成可执行策略 → 用真实交易结果评价。
+	输入 —— Research insight，Research Agent 已经完成的最直接的上游输入。
+			       市场数据，K线数据，OHLC 之类的
+			       Trading parameter，risk tolerance这样的（同一个市场判断，并不唯一确定交易行为）
+		（论文是比较明确地把输入概括成了这几个格式，我们自己做不一定要这样）
+
+3）Benchmark
+	理解成 Gym environment
+	那么我们可以从哪些角度评价不同 benchmark
+	a）交易什么市场 / 资产，如单股票，股票池，期权，单资产多资产之类的
+	b）Observation Space，price ？news ？
+	c）Action Space，Agent 要输出什么，BUY ? HOLD ? increase ？
+	d）Environment / Excecution Rule ，environment 要如何处理 agent 给出的 action
+	e）Evaluation Protocol（评测协议 / 实验协议），如何评价表现
+
+	但是不同benchmark比如说输入输出就不一样，那同一个 benchmark 如何用来评价不同 agent？
+	答案是做一个 adaptor 
+
+4）主流 Benchmark 按照这几个特征，分类到 TradingAgentBenchmark.txt
