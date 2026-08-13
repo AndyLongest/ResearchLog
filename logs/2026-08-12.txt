@@ -1,0 +1,40 @@
+1）vibe trading 中的 agent swarm
+如果用户输入：
+“MA20上穿MA60买入，下穿卖出”
+策略已经确定，那么 swarm 几乎没意义：
+策略 → 写代码 → 回测
+就行。
+但如果用户输入：
+“帮我找一个低回撤、收益高的A股策略”
+策略没有确定，这时 swarm 才开始发挥作用：
+研究股票
++ 找因子
++ 设计策略
++ 回测
++ 风险检查
+→ 最后把策略“研究出来”
+因此 Vibe-Trading 里的 multi-agent 不是 trading policy，而是 automated research team。
+
+2）TrustTrade: Human-Inspired Selective Consensus Reduces Decision Uncertainty in LLM Trading Agents
+	不同 agent 之间的信息要如何处理？
+	a）Selective Consensus
+		不同 agent 对同一个 domain 的信息会输出自己的 insight，做了一个聚类，然后判断哪些信息应该进入最终决策。
+		聚类方法 —— 自然语言 → atomic claims（也就是结构化自然语言报告），然后对用语义一致性和数字一致性得到不同 claims 的距离，形成不同 consensus group，每个 group 算 support（里面又几个支持点） 和 cohesion（支持点的观点多一致）
+	b）专门加入一个完全不靠 LLM 的 deterministic temporal module，其实是只根据数值特征输出分数，如纯根据股价判断牛 / 熊市
+		因为LLM 特别容易被：
+		新闻
+		情绪
+		Narrative
+		带着跑
+	c）Memory + Reflection
+TrustTrade 每次交易以后，会保存：
+日期
+BUY / SELL / HOLD
+仓位比例
+交易数量
+成交价
+交易前portfolio value
+并且随着未来真实市场逐渐发生，再补充：
+1日后收益
+7日后收益
+...
