@@ -1,0 +1,28 @@
+1）TiMi ，ICLR 2026—— 最终形成一个交易程序，实现分钟级交易
+	a）Motivation：实盘每个 action 都调用 LLM，慢贵不稳定；
+					强行通过人格提示词容易把 multiple agents 退化成角色扮演，即它们会去抓自己角色的证据，但这并不是个问题吧，就像一个公司里有不同性格的人，应该刚好中和，效果更好才对。事实上，每个 agent 有自己比较明确的倾向是很多论文的 motivation，如TradingAgents AAAI 2025。这篇文章真正的 cocern 是伪多样性，不同 agent 输入相同时，你以为的 debate 一点用也没有，因为它们高度相关。 → 一个研究问题：Personality diversity 到底是不是 trading multi-agent 的有效 inductive bias？在其他条件完全相同的情况下，人为引入稳定的人格/风险偏好差异，能否使多个 LLM trading agents 形成互补的交易策略，并通过集成提升风险调整后表现？
+
+	b）Method：Macro Analysis Agent（很多 OHLCV → python 统计程序 → 许多  资产 * 时间尺度 * 指标 的结果 → LLM → general strategy，这里的 strategy 是结构化的策略描述，有点像 skill 了）
+        					↓
+				Strategy Adaptation Agent（有了 general strategy 再去看 specific 的资产怎么配置参数）
+       						↓
+				Bot Evolution Agent
+        					↓
+					第一版Bot
+        					↓ simulation
+				Feedback Reflection Agent（失败案例 → 找 parameter constraints → 在可行参数区间中优化，而不是简单用LLM）
+        					↓
+				Bot Evolution Agent
+        					↓
+					改进Bot
+
+	参考输入
+
+2）CTA
+	涨了就做多，跌了就做空；但是每个市场按照风险而不是金额来分仓。
+	a）Trend Signal ：判断每个资产的趋势方向
+		可以判断 ① P_t / P_t-252 & 1 ② MA_20 & MA_100 ③ Breakout 价格是否 突破/跌破 过去 N 天最低价
+		还可以提取多个时间尺度的趋势信息，然后做加权组合
+	b）Volatility Scaling
+		经典 CTA 正相关于 趋势信号/波动率
+	c）Portfolio Volatility Target : 如果预期波动率和目标不符，通过加杠杆或减仓位调整波动率
